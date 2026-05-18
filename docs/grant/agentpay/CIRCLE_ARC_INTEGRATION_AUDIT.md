@@ -21,7 +21,7 @@ Determine which Circle/Arc integrations are actually implemented and verifiable 
 | App Kit Send | **CURRENT_VERIFIED** | Live verification executed via `npm run appkit:send:arc:usdc` with `APPKIT_DRY_RUN=false` on `Arc_Testnet` sending `USDC` amount `0.01`; tx hash: `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb` ([ArcScan](https://testnet.arcscan.app/tx/0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb)); script used isolated `.env.appkit.local`; private key was not printed | Runtime path now verifiably executed and confirmed |
 | Bridge / CCTP | **CURRENT_VERIFIED** | Live verification executed via `npm run appkit:bridge:usdc:arc` with `APPKIT_BRIDGE_DRY_RUN=false` using `CCTPV2BridgingProvider`, route `Ethereum_Sepolia -> Arc_Testnet`, token `USDC`, amount `0.01`; bridge result state `success`, transfer speed `FAST`; approve tx `0xf13ff448e95e9503ac1b621f6cb967bb18538e5ce21330288a8756ffcb5da9dd`, burn tx `0x561c32dc76a3a4e927cd05e1a12c8048637b9342f487f98faa7db002fd14dde9`, mint tx `0x6edee61d50e090c9047ec7ee606253be91fd90dcd48849f943ba216e13d87436`; isolated `.env.appkit.local`; private key not printed | Runtime path now verifiably executed and confirmed |
 | Gateway / Unified Balance | **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** | Live deposit executed via `npm run appkit:ub:deposit` with `APPKIT_UB_DEPOSIT_DRY_RUN=false` using `kit.unifiedBalance.deposit(params)` in deposit-self mode on `Ethereum_Sepolia` for `USDC` amount `0.01`; depositor/deposited-to `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`; tx `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a` (https://sepolia.etherscan.io/tx/0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a). Post-deposit check via `npm run appkit:ub:check` (`token=USDC`, `includePending=true`) returned `totalConfirmedBalance: 0.010000 USDC`, `totalPendingBalance: 0.000000 USDC`, `Ethereum_Sepolia confirmedBalance: 0.010000`, `Ethereum_Sepolia pendingBalance: 0.000000`; private key not printed. Spend estimate executed via `npm run appkit:ub:spend:arc` in dry-run mode (`APPKIT_UB_DRY_RUN=true`) with `from=Ethereum_Sepolia`, `to=Arc_Testnet`, recipient `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`, amount `0.01`, token `USDC`, `useForwarder=true`; estimate output: `gasFee: 1.203595 USDC`, gas allocation `Ethereum_Sepolia, 1.203595 USDC`, forwarder fee `0.203594 USDC`; live spend not executed because dry-run stops after estimate. | Deposit + confirmed-balance + spend-estimate proof captured; remains below CURRENT_VERIFIED until live spend proof |
-| Circle Wallets (Developer-Controlled / Programmable) | **NOT_CLAIMED** | MVP demo uses user wallets; no verified Circle Wallets runtime integration path | Not implemented/verified |
+| Circle Wallets (Developer-Controlled / Programmable) | **NOT_CLAIMED** | Discovery completed in `docs/grant/agentpay/CIRCLE_WALLETS_DISCOVERY.md`: official Circle docs list `ARC-TESTNET` support, but this repo has no verified Circle Wallets runtime proof (wallet creation/sign/send) and no approved server-only credential path yet | Not implemented/verified; blocked for verification until founder provides Circle Console credentials + backend approval |
 | Paymaster / gas sponsorship | **NOT_CLAIMED** | No paymaster configuration or runtime sponsorship flow | Not implemented/verified |
 
 ## 4) Blocked state policy
@@ -124,3 +124,15 @@ Spend estimate verification update:
   - gas allocation: `Ethereum_Sepolia, 1.203595 USDC`
   - forwarder fee: `0.203594 USDC`
 - Live spend was intentionally not executed because fee estimate is high relative to `0.01 USDC`, and dry-run stops after estimate.
+
+## 8) Circle Wallets discovery update (Master Prompt #10)
+
+- Discovery artifact added: `docs/grant/agentpay/CIRCLE_WALLETS_DISCOVERY.md`
+- Classification from discovery: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
+- Additional gating condition: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secret handling)
+- Current claim status remains: **NOT_CLAIMED**
+- Reason for not claiming:
+  1. No Circle wallet creation proof in repo
+  2. No Circle signing/send proof in repo
+  3. Required Circle credentials (`API key` + entity secret flow) are not provisioned in this sprint
+  4. Safe integration requires founder-approved backend/server-only scope

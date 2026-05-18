@@ -126,6 +126,13 @@ Allowed current claims:
 - Circle Wallets (developer-controlled): **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
+Circle Wallets discovery note:
+
+- See `docs/grant/agentpay/CIRCLE_WALLETS_DISCOVERY.md`
+- Discovery classification: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
+- Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only credential handling)
+- Arc Testnet support appears in official Circle Wallets chain support docs, but no in-repo Circle Wallet create/sign/send proof exists.
+
 Note: App Kit Send live send verified via `npm run appkit:send:arc:usdc` with `APPKIT_DRY_RUN=false` on Arc Testnet USDC (`0.01`), tx `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb`.
 
 Bridge/CCTP verification note: `docs/grant/agentpay/APP_KIT_BRIDGE_CCTP_DISCOVERY.md` confirms official SDK/docs support and Arc Testnet compatibility, and live bridge verification is now completed, so Bridge/CCTP is **CURRENT_VERIFIED**.
@@ -291,6 +298,17 @@ Spend estimate verification update:
 - [ ] ArcScan backup links saved for fallback
 - [ ] `/jobs` and `/payments` show indexed data in selected range
 - [ ] Claims in narration match implemented scope only
+
+## 17) Circle Wallets founder approval gate (no implementation in this sprint)
+
+Before any Circle Wallets implementation or verification run:
+
+1. Founder confirms Circle Developer Console readiness.
+2. Founder approves backend/server-only scope for Circle secrets.
+3. Founder provisions Circle API key + entity secret flow out-of-band (never in chat, never in client code).
+4. Founder approves minimal verification sequence (wallet create/sign/send with artifact capture).
+
+Until the above is complete, Circle Wallets remains **NOT_CLAIMED**.
 
 ---
 

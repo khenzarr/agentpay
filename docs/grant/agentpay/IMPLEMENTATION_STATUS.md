@@ -186,6 +186,14 @@ Notes:
 - Circle Wallets (developer-controlled): **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
+Circle Wallets discovery status (Master Prompt #10):
+
+- Discovery report: `docs/grant/agentpay/CIRCLE_WALLETS_DISCOVERY.md`
+- Feasibility classification: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
+- Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secrets and backend approval)
+- Arc Testnet support is documented in official Circle Wallets supported-blockchains docs, but no in-repo Circle Wallet create/sign/send runtime proof exists yet.
+- Therefore Circle Wallets remains **NOT_CLAIMED** for grant/demo scope in this sprint.
+
 Reason: App Kit Send and Bridge/CCTP now have verified live-execution evidence; other Circle products remain unimplemented/unverified in this repo.
 
 Bridge/CCTP discovery was completed in `docs/grant/agentpay/APP_KIT_BRIDGE_CCTP_DISCOVERY.md` and found feasible API support (`bridge`, `estimateBridge`, `Arc_Testnet`). Live verification has now been executed successfully, so status is **CURRENT_VERIFIED**.
@@ -286,6 +294,13 @@ Spend estimate verification update:
 5. (Optional but recommended for recording) Set `NEXT_PUBLIC_ERC8183_INDEXING_TO_BLOCK`
 6. Run end-to-end dry-run and capture fallback tx links
 7. Record video using `docs/grant/agentpay/DEMO_READINESS.md`
+
+Circle Wallets-specific founder gate before any implementation:
+
+8. Provide Circle Developer Console readiness (account/project)
+9. Approve server-only backend scope for Circle credentials
+10. Provision Circle API key + entity secret flow out-of-band (do not paste secrets in chat)
+11. Approve minimal verification runbook (wallet create/sign/send proof capture)
 
 ---
 

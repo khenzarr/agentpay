@@ -21,7 +21,7 @@
 | App Kit Send | **CURRENT_VERIFIED** | Live send verified via `npm run appkit:send:arc:usdc` with `APPKIT_DRY_RUN=false` on Arc Testnet (`Arc_Testnet`), token `USDC`, amount `0.01`; tx `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb`; isolated `.env.appkit.local`; private key not printed | Claim allowed |
 | Bridge / CCTP | **CURRENT_VERIFIED** | Live verification executed via `npm run appkit:bridge:usdc:arc` with `APPKIT_BRIDGE_DRY_RUN=false` using `CCTPV2BridgingProvider`; route `Ethereum_Sepolia -> Arc_Testnet`; token `USDC`; amount `0.01`; result state `success`; transfer speed `FAST`; approve/burn/mint tx proofs recorded; isolated `.env.appkit.local`; private key not printed | Claim allowed |
 | Gateway / Unified Balance | **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** | Live deposit executed via `npm run appkit:ub:deposit` with `APPKIT_UB_DEPOSIT_DRY_RUN=false` using `kit.unifiedBalance.deposit(params)` in deposit-self mode on `Ethereum_Sepolia` for `USDC` amount `0.01`; depositor/deposited-to `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`; tx `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a` (https://sepolia.etherscan.io/tx/0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a); post-deposit check via `npm run appkit:ub:check` (`token=USDC`, `includePending=true`) returned `totalConfirmedBalance: 0.010000 USDC`, `totalPendingBalance: 0.000000 USDC`, `Ethereum_Sepolia confirmedBalance: 0.010000`, `Ethereum_Sepolia pendingBalance: 0.000000`; private key not printed. Spend estimate executed via `npm run appkit:ub:spend:arc` in dry-run mode (`APPKIT_UB_DRY_RUN=true`) with `from=Ethereum_Sepolia`, `to=Arc_Testnet`, recipient `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`, amount `0.01`, token `USDC`, `useForwarder=true`; estimate output: `gasFee: 1.203595 USDC`, gas allocation `Ethereum_Sepolia, 1.203595 USDC`, forwarder fee `0.203594 USDC`; live spend not executed because dry-run stops after estimate. | Do not claim CURRENT_VERIFIED until live spend proof is captured |
-| Circle Wallets (Developer-Controlled) | **NOT_CLAIMED** | MVP flow uses user wallets; no verified Circle Wallets integration path | Do not claim |
+| Circle Wallets (Developer-Controlled) | **NOT_CLAIMED** | Discovery documented in `docs/grant/agentpay/CIRCLE_WALLETS_DISCOVERY.md`: official docs indicate `ARC-TESTNET` support, but no in-repo Circle Wallets runtime proof (wallet create/sign/send) exists and no approved server-only credential path is implemented | Do not claim; verification blocked until founder provides Circle Console credentials and approves backend scope |
 | Paymaster / gas sponsorship | **NOT_CLAIMED** | No paymaster runtime integration | Do not claim |
 | Full ERC-8183 compliance | **NOT_CLAIMED** | Tutorial-subset integration only | Do not claim |
 | Full ERC-8004 compliance | **NOT_CLAIMED** | No full ERC-8004 implementation/compliance proof in MVP | Do not claim |
@@ -38,6 +38,12 @@ Only the following are currently claimable:
 6. App Kit Bridge/CCTP on Arc Testnet
 
 Everything else above remains **NOT_CLAIMED** until implemented and re-verified.
+
+Circle Wallets discovery classification note:
+
+- **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
+- Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secrets)
+- Current public/demo status remains **NOT_CLAIMED** until live Circle Wallet proof exists.
 
 Gateway / Unified Balance implementation status for this sprint: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**.
 
