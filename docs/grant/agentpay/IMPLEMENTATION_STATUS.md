@@ -186,6 +186,14 @@ Notes:
 - Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation only)**
 - Paymaster: **NOT_CLAIMED**
 
+Paymaster discovery update (Master Prompt #11B):
+
+- Discovery report: `docs/grant/agentpay/PAYMASTER_DISCOVERY.md`
+- Feasibility classification: **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**
+- Arc Testnet support: documented
+- Current claim status: **NOT_CLAIMED**
+- Reason: no real sponsored/gasless transaction proof exists yet; Circle Wallets signing/send transaction flow must be implemented and verified first, and gasless proof likely requires an SCA/ERC-4337-capable account path.
+
 Circle Wallets discovery status (Master Prompt #10):
 
 - Discovery report: `docs/grant/agentpay/CIRCLE_WALLETS_DISCOVERY.md`
@@ -240,6 +248,10 @@ Strict claim boundary:
 
 - ✅ Allowed: Circle Developer-Controlled Wallet creation verified on ARC-TESTNET
 - ❌ Not yet verified: signing, token transfer/send, gasless transactions, paymaster
+
+Paymaster-specific claim guardrail:
+
+- Paymaster is feasible in principle, but must remain **NOT_CLAIMED** until a real sponsored/gasless transaction proof artifact is captured.
 
 Reason: App Kit Send and Bridge/CCTP now have verified live-execution evidence; other Circle products remain unimplemented/unverified in this repo.
 

@@ -22,7 +22,7 @@ Determine which Circle/Arc integrations are actually implemented and verifiable 
 | Bridge / CCTP | **CURRENT_VERIFIED** | Live verification executed via `npm run appkit:bridge:usdc:arc` with `APPKIT_BRIDGE_DRY_RUN=false` using `CCTPV2BridgingProvider`, route `Ethereum_Sepolia -> Arc_Testnet`, token `USDC`, amount `0.01`; bridge result state `success`, transfer speed `FAST`; approve tx `0xf13ff448e95e9503ac1b621f6cb967bb18538e5ce21330288a8756ffcb5da9dd`, burn tx `0x561c32dc76a3a4e927cd05e1a12c8048637b9342f487f98faa7db002fd14dde9`, mint tx `0x6edee61d50e090c9047ec7ee606253be91fd90dcd48849f943ba216e13d87436`; isolated `.env.appkit.local`; private key not printed | Runtime path now verifiably executed and confirmed |
 | Gateway / Unified Balance | **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** | Live deposit executed via `npm run appkit:ub:deposit` with `APPKIT_UB_DEPOSIT_DRY_RUN=false` using `kit.unifiedBalance.deposit(params)` in deposit-self mode on `Ethereum_Sepolia` for `USDC` amount `0.01`; depositor/deposited-to `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`; tx `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a` (https://sepolia.etherscan.io/tx/0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a). Post-deposit check via `npm run appkit:ub:check` (`token=USDC`, `includePending=true`) returned `totalConfirmedBalance: 0.010000 USDC`, `totalPendingBalance: 0.000000 USDC`, `Ethereum_Sepolia confirmedBalance: 0.010000`, `Ethereum_Sepolia pendingBalance: 0.000000`; private key not printed. Spend estimate executed via `npm run appkit:ub:spend:arc` in dry-run mode (`APPKIT_UB_DRY_RUN=true`) with `from=Ethereum_Sepolia`, `to=Arc_Testnet`, recipient `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`, amount `0.01`, token `USDC`, `useForwarder=true`; estimate output: `gasFee: 1.203595 USDC`, gas allocation `Ethereum_Sepolia, 1.203595 USDC`, forwarder fee `0.203594 USDC`; live spend not executed because dry-run stops after estimate. | Deposit + confirmed-balance + spend-estimate proof captured; remains below CURRENT_VERIFIED until live spend proof |
 | Circle Wallets (Developer-Controlled / Programmable) | **CURRENT_VERIFIED (wallet creation only)** | Founder-run server-only flow verified: entity secret registration succeeded, readiness passed, and live wallet creation on `ARC-TESTNET` succeeded via `npm run circle:wallets:create:arc`; proof: `walletSetId=70d4bdf1-74a3-5098-8b37-5c573641e764`, `walletId=d99113e2-2e24-5d3f-ab6d-7b8c49367566`, `walletAddress=0x156c37d9a28b67588720116a13fba1ff7a5275f8`; `.env.circle.local`/`.circle-recovery` git-ignored; no secrets committed | Claim allowed only for wallet creation on ARC-TESTNET; signing/send/gasless/paymaster remain unverified |
-| Paymaster / gas sponsorship | **NOT_CLAIMED** | No paymaster configuration or runtime sponsorship flow | Not implemented/verified |
+| Paymaster / gas sponsorship | **NOT_CLAIMED** | Discovery in `docs/grant/agentpay/PAYMASTER_DISCOVERY.md` classifies paymaster as **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**; Arc Testnet support is documented, but no real sponsored/gasless transaction proof exists yet | Do not claim until Circle Wallets signing/send gasless flow is implemented and sponsorship proof is captured (likely SCA/ERC-4337-capable account path) |
 
 ## 4) Blocked state policy
 
@@ -135,7 +135,15 @@ Spend estimate verification update:
   1. Circle Wallet signing proof is not captured
   2. Circle Wallet token transfer/send proof is not captured
   3. Circle Wallet gasless transaction proof is not captured
-  4. Paymaster/gas sponsorship proof is not captured
+  4. Paymaster/gas sponsorship proof is not captured; paymaster remains **NOT_CLAIMED** despite feasibility until real sponsored/gasless tx proof exists
+
+Paymaster discovery status update (Master Prompt #11B):
+
+- Discovery artifact: `docs/grant/agentpay/PAYMASTER_DISCOVERY.md`
+- Feasibility classification: **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**
+- Arc Testnet support: documented
+- Current claim status: **NOT_CLAIMED**
+- Reason: Circle Wallets signing/send transaction flow and real gas sponsorship proof are not yet verified in-repo; gasless path likely requires SCA/ERC-4337-capable account flow evidence.
 
 ## 9) Circle Wallets server-only readiness scaffold update (Master Prompt #10B)
 

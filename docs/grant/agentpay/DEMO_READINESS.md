@@ -133,6 +133,14 @@ Circle Wallets discovery note:
 - Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only credential handling)
 - Arc Testnet support appears in official Circle Wallets chain support docs, and founder-run server-only wallet creation proof is now captured.
 
+Paymaster discovery note:
+
+- See `docs/grant/agentpay/PAYMASTER_DISCOVERY.md`
+- Classification: **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**
+- Arc Testnet support: documented
+- Current Paymaster status: **NOT_CLAIMED**
+- Claim rule: do not claim paymaster until a real sponsored/gasless transaction proof exists from a verified Circle Wallets signing/send flow (likely requiring an SCA/ERC-4337-capable account path).
+
 Circle Wallets server-only readiness scaffold note (Master Prompt #10B):
 
 - Setup/runbook added: `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`
@@ -344,6 +352,8 @@ Wallet creation is verified. For any next Circle Wallets step (sign/send/gasless
 
 Current status boundary: **CURRENT_VERIFIED (wallet creation only)**.
 Unverified: signing, token transfer/send, gasless, paymaster.
+
+Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real sponsored/gasless tx proof captured yet).
 
 ---
 

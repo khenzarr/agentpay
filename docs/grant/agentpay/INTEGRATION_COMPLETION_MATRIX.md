@@ -22,7 +22,7 @@
 | Bridge / CCTP | **CURRENT_VERIFIED** | Live verification executed via `npm run appkit:bridge:usdc:arc` with `APPKIT_BRIDGE_DRY_RUN=false` using `CCTPV2BridgingProvider`; route `Ethereum_Sepolia -> Arc_Testnet`; token `USDC`; amount `0.01`; result state `success`; transfer speed `FAST`; approve/burn/mint tx proofs recorded; isolated `.env.appkit.local`; private key not printed | Claim allowed |
 | Gateway / Unified Balance | **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** | Live deposit executed via `npm run appkit:ub:deposit` with `APPKIT_UB_DEPOSIT_DRY_RUN=false` using `kit.unifiedBalance.deposit(params)` in deposit-self mode on `Ethereum_Sepolia` for `USDC` amount `0.01`; depositor/deposited-to `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`; tx `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a` (https://sepolia.etherscan.io/tx/0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a); post-deposit check via `npm run appkit:ub:check` (`token=USDC`, `includePending=true`) returned `totalConfirmedBalance: 0.010000 USDC`, `totalPendingBalance: 0.000000 USDC`, `Ethereum_Sepolia confirmedBalance: 0.010000`, `Ethereum_Sepolia pendingBalance: 0.000000`; private key not printed. Spend estimate executed via `npm run appkit:ub:spend:arc` in dry-run mode (`APPKIT_UB_DRY_RUN=true`) with `from=Ethereum_Sepolia`, `to=Arc_Testnet`, recipient `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`, amount `0.01`, token `USDC`, `useForwarder=true`; estimate output: `gasFee: 1.203595 USDC`, gas allocation `Ethereum_Sepolia, 1.203595 USDC`, forwarder fee `0.203594 USDC`; live spend not executed because dry-run stops after estimate. | Do not claim CURRENT_VERIFIED until live spend proof is captured |
 | Circle Wallets (Developer-Controlled) | **CURRENT_VERIFIED (wallet creation only)** | Founder-run server-only proof captured: entity secret registration succeeded, readiness passed, and `npm run circle:wallets:create:arc` created an ARC-TESTNET wallet; `walletSetId=70d4bdf1-74a3-5098-8b37-5c573641e764`, `walletId=d99113e2-2e24-5d3f-ab6d-7b8c49367566`, `walletAddress=0x156c37d9a28b67588720116a13fba1ff7a5275f8`; `.env.circle.local` + `.circle-recovery` git-ignored; no secrets committed | Claim allowed only for wallet creation on ARC-TESTNET; signing/send/gasless/paymaster remain unverified |
-| Paymaster / gas sponsorship | **NOT_CLAIMED** | No paymaster runtime integration | Do not claim |
+| Paymaster / gas sponsorship | **NOT_CLAIMED** | Discovery in `docs/grant/agentpay/PAYMASTER_DISCOVERY.md` classifies paymaster as **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**; Arc Testnet support is documented; no real sponsored/gasless transaction proof captured yet | Do not claim until Circle Wallets signing/send gasless flow is verified with sponsorship proof (likely SCA/ERC-4337-capable account path) |
 | Full ERC-8183 compliance | **NOT_CLAIMED** | Tutorial-subset integration only | Do not claim |
 | Full ERC-8004 compliance | **NOT_CLAIMED** | No full ERC-8004 implementation/compliance proof in MVP | Do not claim |
 
@@ -46,6 +46,14 @@ Circle Wallets discovery/readiness classification note:
 - Additional gate remains server-only backend handling for secrets and approval-controlled runtime verification.
 - Internal readiness scaffold status: **CURRENT_VERIFIED** (wallet creation only)
 - Current public/demo status: **CURRENT_VERIFIED (wallet creation only)** with strict boundary; signing/send/gasless/paymaster remain unverified.
+
+Paymaster discovery classification note:
+
+- Discovery report: `docs/grant/agentpay/PAYMASTER_DISCOVERY.md`
+- Classification: **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**
+- Arc Testnet support: documented
+- Current claim status: **NOT_CLAIMED**
+- Claim gate: do not claim paymaster until a real sponsored/gasless transaction proof exists from a verified Circle Wallets signing/send flow.
 
 Circle Wallets server-only scaffold artifacts (Master Prompt #10B):
 
