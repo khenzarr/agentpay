@@ -1,0 +1,39 @@
+{
+  "name": "agentpay",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=18 <=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "appkit:send:arc:usdc": "tsx --env-file=.env.appkit.local scripts/appkit-send-arc-usdc.ts"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.99.0",
+    "@wagmi/connectors": "^8.0.1",
+    "next": "16.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "viem": "^2.47.18",
+    "wagmi": "^3.6.1"
+  },
+  "devDependencies": {
+    "@circle-fin/adapter-viem-v2": "^1.11.0",
+    "@circle-fin/app-kit": "^1.5.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.3",
+    "tailwindcss": "^4",
+    "tsx": "^4.22.1",
+    "typescript": "^5"
+  }
+}
