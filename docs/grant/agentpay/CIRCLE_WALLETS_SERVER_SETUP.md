@@ -146,7 +146,17 @@ Claim boundary (strict):
 - ✅ Allowed: Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
 - ❌ Not allowed yet: signing verification, token transfer verification, gasless transaction verification, paymaster verification
 - ✅ Transfer estimate claim allowed: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED` (non-mutating estimate proof captured)
-- ❌ Signing/send claim remains NOT_CLAIMED until live signing/send proof is captured and verified
+- ✅ Message signing claim allowed: `CURRENT_VERIFIED` (server-only benign message signing proof)
+- ❌ Send/transfer claim remains NOT_CLAIMED until live transfer proof is captured and verified
+
+Message-signing proof evidence (no funds movement):
+
+- Command: `npm run circle:wallets:sign-message`
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `message: AgentPay Circle Wallets signing proof on ARC-TESTNET`
+- `signature: 0x78d2d1364b64fb0be9b053b78abe519890dfb82e0ab3d52125675ada7e4913533f54e056b33121a95a886a4446bfb2db3a864a2a328314bf3e66f00b651f5aee1c`
+- `status: 200`
+- No transfer created; no funds moved.
 
 Additional verified proof (non-mutating):
 

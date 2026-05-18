@@ -185,7 +185,9 @@ Notes:
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
 - Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read only)**
 - Circle Wallets transfer estimate path: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
-- Circle Wallets signing/send/gasless: **NOT_CLAIMED**
+- Circle Wallets signing: **CURRENT_VERIFIED** (message signing only)
+- Circle Wallets send/transfer: **NOT_CLAIMED**
+- Circle Wallets gasless: **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
 Paymaster discovery update (Master Prompt #11B):

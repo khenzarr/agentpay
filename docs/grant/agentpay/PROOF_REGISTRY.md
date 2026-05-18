@@ -79,8 +79,23 @@ High:
 
 No live transfer was executed.
 
+### Message signing proof (server-only, non-fund-moving)
+
+Command: `npm run circle:wallets:sign-message`
+
+Result: message signing succeeded.
+
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `message: AgentPay Circle Wallets signing proof on ARC-TESTNET`
+- `signature: 0x78d2d1364b64fb0be9b053b78abe519890dfb82e0ab3d52125675ada7e4913533f54e056b33121a95a886a4446bfb2db3a864a2a328314bf3e66f00b651f5aee1c`
+- `status: 200`
+- No funds moved.
+- No transfer created.
+
 ### Classification guardrail
 
 - Circle Wallets transfer estimate path: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED`
-- Circle Wallets signing/send/gasless: `NOT_CLAIMED`
+- Circle Wallets signing: `CURRENT_VERIFIED` (message signing only)
+- Circle Wallets send/transfer: `NOT_CLAIMED`
+- Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`

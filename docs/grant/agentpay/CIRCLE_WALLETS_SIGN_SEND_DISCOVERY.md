@@ -184,10 +184,21 @@ Recommended **server-only**, staged, conservative path:
 ## 10) What is the correct claim status now?
 
 - Circle Wallets overall: **CURRENT_VERIFIED (wallet creation + metadata read only)**.
-- Circle Wallets signing/send/gasless: **NOT_CLAIMED**.
+- Circle Wallets signing: **CURRENT_VERIFIED** (message signing only).
+- Circle Wallets send/transfer: **NOT_CLAIMED**.
+- Circle Wallets gasless: **NOT_CLAIMED**.
 - Paymaster: **NOT_CLAIMED**.
 - Circle Wallets transfer estimate path is now **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**.
-- Signing/send remain **NOT_CLAIMED** until explicit runtime signing/send proof artifacts are captured and verified.
+- Message signing is now verified from server-only benign-message proof; send/transfer remains **NOT_CLAIMED** until explicit runtime transfer proof artifacts are captured and verified.
+
+Message-signing proof artifact (server-only, non-fund-moving):
+
+- Command: `npm run circle:wallets:sign-message`
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `message: AgentPay Circle Wallets signing proof on ARC-TESTNET`
+- `signature: 0x78d2d1364b64fb0be9b053b78abe519890dfb82e0ab3d52125675ada7e4913533f54e056b33121a95a886a4446bfb2db3a864a2a328314bf3e66f00b651f5aee1c`
+- `status: 200`
+- No funds moved; no transfer created.
 
 Conservative claim classification for this discovery:
 
