@@ -48,7 +48,7 @@ AgentPay frontend now supports an end-to-end Arc Testnet MVP demo path with real
 
 - Full ERC-8183 compliance
 - Full ERC-8004 compliance
-- Gateway integrated
+- Gateway / Unified Balance live spend verified
 - Circle Wallets signing/transfers/gasless/paymaster integrated
 - Paymaster integrated
 

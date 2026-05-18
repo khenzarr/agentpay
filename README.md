@@ -33,4 +33,14 @@ Planning and status: `docs/grant/agentpay/`
 
 ## Honesty
 
-Designed to evolve toward ERC-8004 / ERC-8183 compatible workflows. App Kit, CCTP, Gateway, and Circle Wallets are **not** integrated in this MVP scaffold.
+Current claim boundary for this repo snapshot:
+
+- Live on Arc Testnet
+- Mainnet-ready architecture, waiting for Arc mainnet availability
+- ERC-8183 tutorial ABI lifecycle subset
+- App Kit Send: CURRENT_VERIFIED
+- Bridge / CCTP: CURRENT_VERIFIED
+- Gateway / Unified Balance: implemented through supported-chain check, live deposit, confirmed balance, and spend estimate; live spend not executed due to high fee relative to test amount
+- Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
+- Paymaster is feasible in principle, but remains NOT_CLAIMED until sponsored/gasless transaction proof exists
+- Full ERC-8183 and full ERC-8004 compliance are NOT_CLAIMED

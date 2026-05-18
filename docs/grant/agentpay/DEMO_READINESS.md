@@ -116,7 +116,7 @@ Allowed current claims:
 - USDC escrow on Arc Testnet
 - ERC-8183 tutorial ABI integration
 - Built for Arc’s agentic economy
-- Designed to evolve toward ERC-8004 / ERC-8183 compatible workflows
+- Mainnet-ready architecture, waiting for Arc mainnet availability
 
 ## 12) Circle product claim boundary (strict)
 
@@ -344,7 +344,22 @@ Spend estimate verification update:
   - forwarder fee: `0.203594 USDC`
 - Live spend was intentionally not executed because fee estimate is high relative to `0.01 USDC`, and dry-run stops after estimate.
 
-## 14) Final pre-recording checklist
+## 14) Final recording checklist
+
+- [ ] `npm run lint`
+- [ ] `npm run typecheck`
+- [ ] `npm run build`
+- [ ] `npm run dev`
+- [ ] Check `/jobs`
+- [ ] Check `/payments`
+- [ ] Show docs/evidence briefly
+- [ ] Avoid overclaims in narration/captions
+- [ ] Keep recording under 5 minutes if required
+- [ ] Include a codebase walkthrough
+- [ ] Show current Circle product usage
+- [ ] Show integration demonstration
+
+## 15) Pre-recording operational checklist
 
 - [ ] Client and agent wallets funded
 - [ ] `.env.local` set with correct demo agent + indexing range (`fromBlock` and optional `toBlock`)
@@ -354,7 +369,7 @@ Spend estimate verification update:
 - [ ] `/jobs` and `/payments` show indexed data in selected range
 - [ ] Claims in narration match implemented scope only
 
-## 17) Circle Wallets founder safety gate (post-wallet-creation proof)
+## 16) Circle Wallets founder safety gate (post-wallet-creation proof)
 
 Wallet creation is verified. For any next Circle Wallets step (sign/send/gasless), keep these gates:
 
@@ -370,7 +385,7 @@ Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real s
 
 ---
 
-## 15) Latest verified rehearsal note (Master Prompt #4)
+## 17) Latest verified rehearsal note (Master Prompt #4)
 
 - Preflight completed and green:
   - `npm run lint` ✅
@@ -388,7 +403,7 @@ Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real s
 
 ---
 
-## 16) Unified Balance deposit-path readiness update (Master Prompt #9A)
+## 18) Unified Balance deposit-path readiness update (Master Prompt #9A)
 
 - Deposit discovery completed and recorded in:
   - `docs/grant/agentpay/APP_KIT_GATEWAY_UNIFIED_BALANCE_DEPOSIT_DISCOVERY.md`

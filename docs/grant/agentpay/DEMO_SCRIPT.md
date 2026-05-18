@@ -39,27 +39,32 @@
 
 **Show (30 sec each):**
 
-1. `deployments/arc_testnet.json` or env — USDC + escrow addresses  
-2. `frontend/src/lib/abis/` — ERC-8183 ABI  
-3. `frontend/src/app/jobs/[id]/` — lifecycle UI  
+1. `src/config/contracts.ts` or env-configured addresses — USDC + ERC-8183 reference contract  
+2. `src/abi/erc8183AgenticCommerce.ts` — ERC-8183 tutorial ABI subset  
+3. `src/app/jobs/[id]/page.tsx` + `src/components/agentpay/JobDetailPanel.tsx` — lifecycle UI  
 
-**Do not say:** “We integrated Bridge Kit / Gateway” unless shown in code.
+**Do not overclaim:** Only state verified statuses shown in docs/evidence.
 
 ---
 
-## Minute 1:15–1:45 — Circle product usage
+## Minute 1:15–1:45 — Circle product usage + verified evidence
 
 **Screen:** Split: app + ArcScan
 
 **Say:**
 
-> “This demo uses **Circle USDC** on Arc Testnet and **smart contract** settlement. We’re not claiming CCTP or Wallets yet—those are on our roadmap.”
+> “This demo uses **Circle USDC** on Arc Testnet and smart-contract settlement. Beyond the core escrow flow, we have separate verified evidence for App Kit Send, Bridge/CCTP, Gateway/Unified Balance deposit+estimate path, and Circle Wallets wallet creation + metadata read. We do not claim Wallet signing/send/gasless or Paymaster.”
 
 **Show:**
 
 - USDC balance in wallet  
 - Contract address on ArcScan (escrow)  
 - USDC token contract `0x3600…0000`  
+- Briefly show evidence docs for:
+  - App Kit Send tx `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb`
+  - Bridge/CCTP approve/burn/mint tx set
+  - Gateway UB deposit tx `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a` + spend estimate
+  - Circle Wallets ARC-TESTNET wallet creation + metadata read proof
 
 ---
 
@@ -117,7 +122,7 @@
 
 **Say:**
 
-> “AgentPay is the settlement layer for agents on Arc—built by the team behind **ArcNS**. Today: USDC escrow on testnet. Next: **ERC-8004** agent identity, **Circle App Kit** for cross-chain funding, and **CCTP** for multichain treasuries. Arc isn’t just where agents run—it’s where they get paid.”
+> “AgentPay is the settlement layer for agents on Arc—built by the team behind **ArcNS**. Today we demonstrate verified Arc Testnet escrow lifecycle plus verified Circle integration evidence with strict claim boundaries. Architecture is mainnet-ready, waiting for Arc mainnet availability.”
 
 **End card:** GitHub URL · ArcScan contract · arcns-app.vercel.app (sister project)
 
@@ -148,6 +153,7 @@
 
 | Question | Answer |
 |----------|--------|
-| Is this ERC-8183 compliant? | We integrate Arc’s reference implementation; full compliance is validated against their ABI and our test suite. |
-| Why not Circle Wallets? | MVP uses MetaMask for reviewer accessibility; Wallets on roadmap for autonomous agents. |
+| Is this fully ERC-8183 compliant? | No claim of full compliance. We implement and verify the ERC-8183 tutorial ABI lifecycle subset on Arc Testnet. |
+| What is Circle Wallets status? | Circle Developer-Controlled Wallet creation + metadata read is verified on ARC-TESTNET; signing/send/gasless are not claimed. |
+| Is Paymaster integrated? | No. Paymaster is feasible in principle but remains NOT_CLAIMED until real sponsored/gasless tx proof exists. |
 | Relation to ArcNS? | ArcNS = identity; AgentPay = settlement. Complementary. |
