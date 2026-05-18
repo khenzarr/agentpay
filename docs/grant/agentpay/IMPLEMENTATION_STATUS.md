@@ -183,7 +183,7 @@ Notes:
 - App Kit Send: **CURRENT_VERIFIED**
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
-- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation only)**
+- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read only)**
 - Paymaster: **NOT_CLAIMED**
 
 Paymaster discovery update (Master Prompt #11B):
@@ -200,7 +200,7 @@ Circle Wallets discovery status (Master Prompt #10):
 - Feasibility classification: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
 - Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secrets and backend approval)
 - Arc Testnet support is documented in official Circle Wallets supported-blockchains docs, and founder-run in-repo wallet creation runtime proof is captured.
-- Circle Wallets is **CURRENT_VERIFIED (wallet creation only)** for grant/demo scope in this sprint.
+- Circle Wallets is **CURRENT_VERIFIED (wallet creation + metadata read only)** for grant/demo scope in this sprint.
 
 Circle Wallets server-only readiness scaffold status (Master Prompt #10B):
 
@@ -221,8 +221,8 @@ Circle Wallets server-only readiness scaffold status (Master Prompt #10B):
   - `CIRCLE_WALLET_ACCOUNT_TYPE=EOA`
 - Added explicit `.gitignore` entries for `.env.circle.local` patterns.
 - Dependency decision: official Circle SDK dependency added (`@circle-fin/developer-controlled-wallets`).
-- Internal readiness status: **CURRENT_VERIFIED** (wallet creation only).
-- Product/public claim status: **CURRENT_VERIFIED (wallet creation only)**.
+- Internal readiness status: **CURRENT_VERIFIED** (wallet creation + metadata read only).
+- Product/public claim status: **CURRENT_VERIFIED (wallet creation + metadata read only)**.
 - Classification gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**.
 - Founder-run live Circle wallet creation executed and verified in this sprint.
 
@@ -232,13 +232,26 @@ Circle Wallets verification evidence recorded:
 - Result: entity secret registered successfully
 - Recovery directory: `./.circle-recovery`
 - Command: `npm run circle:wallets:readiness`
-- Result: readiness checks passed (redacted secret output; no wallet mutation calls)
+- Result: readiness checks passed
+- `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
+- `CIRCLE_WALLETS_DRY_RUN=true`
+- secrets redacted
+- no live mutation performed by readiness
 - Command: `npm run circle:wallets:create:arc`
 - Result: wallet creation succeeded
 - `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
 - `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
 - `blockchain: ARC-TESTNET`
+- Command: `npm run circle:wallets:get-wallet`
+- Result: wallet metadata fetched
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `address: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+- `blockchain: ARC-TESTNET`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `accountType: EOA`
+- `custodyType: DEVELOPER`
+- `state: LIVE`
 - `.env.circle.local` remains git-ignored
 - `.circle-recovery` remains git-ignored
 - No secrets committed
@@ -246,7 +259,7 @@ Circle Wallets verification evidence recorded:
 
 Strict claim boundary:
 
-- ✅ Allowed: Circle Developer-Controlled Wallet creation verified on ARC-TESTNET
+- ✅ Allowed: Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
 - ❌ Not yet verified: signing, token transfer/send, gasless transactions, paymaster
 
 Paymaster-specific claim guardrail:

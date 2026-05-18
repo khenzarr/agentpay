@@ -123,7 +123,7 @@ Allowed current claims:
 - App Kit Send: **CURRENT_VERIFIED**
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
-- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation only)**
+- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read only)**
 - Paymaster: **NOT_CLAIMED**
 
 Circle Wallets discovery note:
@@ -152,8 +152,8 @@ Circle Wallets server-only readiness scaffold note (Master Prompt #10B):
   - `npm run circle:wallets:create:arc`
 - Circle env placeholders added to `.env.example` as server-only vars (no `NEXT_PUBLIC_*`)
 - `.gitignore` now explicitly covers `.env.circle.local` patterns
-- Internal readiness state: **CURRENT_VERIFIED** (wallet creation only)
-- Product claim: **CURRENT_VERIFIED (wallet creation only)**
+- Internal readiness state: **CURRENT_VERIFIED** (wallet creation + metadata read only)
+- Product claim: **CURRENT_VERIFIED (wallet creation + metadata read only)**
 - Classification gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
 - Founder-run live wallet creation proof captured in this sprint; signing/send remains unverified.
 
@@ -163,13 +163,26 @@ Circle Wallets verification evidence:
 - Result: entity secret registered successfully
 - Recovery directory: `./.circle-recovery`
 - Command: `npm run circle:wallets:readiness`
-- Result: readiness checks passed (redacted secret output; no wallet mutation calls)
+- Result: readiness checks passed
+- `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
+- `CIRCLE_WALLETS_DRY_RUN=true`
+- secrets redacted
+- no live mutation performed by readiness
 - Command: `npm run circle:wallets:create:arc`
 - Result: wallet creation succeeded
 - `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
 - `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
 - `blockchain: ARC-TESTNET`
+- Command: `npm run circle:wallets:get-wallet`
+- Result: wallet metadata fetched
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `address: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+- `blockchain: ARC-TESTNET`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `accountType: EOA`
+- `custodyType: DEVELOPER`
+- `state: LIVE`
 - `.env.circle.local` remains git-ignored
 - `.circle-recovery` remains git-ignored
 - No secrets committed
@@ -282,7 +295,7 @@ For App Kit Send private-key usage, run via isolated env file `.env.appkit.local
 | `/jobs` and `/payments` indexing | ✅ Implemented (demo-range) | Label as indexed demo block range only |
 | ArcNS resolution | 🟨 Optional/non-blocking | Show with `agentpayagent.circle` (agent) and `agentpayclient.arc` (client/evaluator); fallback to raw wallet if resolver fails |
 | App Kit Send | ✅ CURRENT_VERIFIED | Live send verified on Arc Testnet USDC with isolated `.env.appkit.local`; private key not printed |
-| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED (wallet creation only)**; Paymaster remains **NOT_CLAIMED** |
+| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED (wallet creation + metadata read only)**; Paymaster remains **NOT_CLAIMED** |
 
 Gateway / Unified Balance live deposit + confirmed-balance verification evidence recorded:
 
@@ -350,7 +363,7 @@ Wallet creation is verified. For any next Circle Wallets step (sign/send/gasless
 3. Founder approves each live mutation step explicitly (sign/send).
 4. Capture artifacts without exposing secrets.
 
-Current status boundary: **CURRENT_VERIFIED (wallet creation only)**.
+Current status boundary: **CURRENT_VERIFIED (wallet creation + metadata read only)**.
 Unverified: signing, token transfer/send, gasless, paymaster.
 
 Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real sponsored/gasless tx proof captured yet).

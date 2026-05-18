@@ -65,14 +65,58 @@ CIRCLE_WALLETS_DRY_RUN=false
 npm run circle:wallets:create:arc
 ```
 
+10. Read back verified wallet metadata (non-mutating):
+
+```bash
+npm run circle:wallets:get-wallet
+```
+
+11. Run transfer fee estimate only (non-mutating, no sign/send):
+
+```bash
+npm run circle:wallets:estimate-transfer
+```
+
+Required transfer-estimate env values in `.env.circle.local`:
+
+```bash
+CIRCLE_WALLET_ID=
+CIRCLE_WALLET_ADDRESS=
+CIRCLE_WALLET_TRANSFER_DESTINATION=
+CIRCLE_WALLET_TRANSFER_AMOUNT=0.001
+CIRCLE_WALLET_TRANSFER_TOKEN_ID=
+CIRCLE_WALLET_TRANSFER_DRY_RUN=true
+```
+
+Important:
+
+- Do not guess `CIRCLE_WALLET_TRANSFER_TOKEN_ID`.
+- If unknown, discover the correct token id for your ARC-TESTNET asset via Circle Console/API inventory and then set it explicitly.
+- The estimate script fails intentionally if token id is missing.
+
 ## Verified status and evidence (founder-run)
 
-Circle Wallets is now `CURRENT_VERIFIED` for **wallet creation on ARC-TESTNET only** after capturing real proof artifacts:
+Circle Wallets is now `CURRENT_VERIFIED` for **wallet creation + metadata read on ARC-TESTNET only** after capturing real proof artifacts:
 
 - `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
 - `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
 - `blockchain: ARC-TESTNET`
+- Command: `npm run circle:wallets:get-wallet`
+- Result: wallet metadata fetched
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `address: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+- `blockchain: ARC-TESTNET`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `accountType: EOA`
+- `custodyType: DEVELOPER`
+- `state: LIVE`
+- Command: `npm run circle:wallets:readiness`
+- Result: readiness checks passed
+- `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
+- `CIRCLE_WALLETS_DRY_RUN=true`
+- secrets redacted
+- no live mutation performed by readiness
 - Entity Secret registration succeeded
 - Recovery directory confirmed: `./.circle-recovery`
 - `.env.circle.local` and `.circle-recovery` remain git-ignored
@@ -80,7 +124,7 @@ Circle Wallets is now `CURRENT_VERIFIED` for **wallet creation on ARC-TESTNET on
 
 Claim boundary (strict):
 
-- ✅ Allowed: Circle Developer-Controlled Wallet creation verified on ARC-TESTNET
+- ✅ Allowed: Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
 - ❌ Not allowed yet: signing verification, token transfer verification, gasless transaction verification, paymaster verification
 
 Safety rule after any live wallet-creation run:

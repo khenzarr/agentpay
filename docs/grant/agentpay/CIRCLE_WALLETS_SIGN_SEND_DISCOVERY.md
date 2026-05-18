@@ -7,12 +7,24 @@
 - No live mutation proof is added in this sprint.
 - Secrets are intentionally excluded.
 
-Known verified wallet creation proof:
+Known verified Circle Wallets proof (non-mutating + creation):
 
 - `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
 - `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
 - `blockchain: ARC-TESTNET`
+
+Additional non-mutating metadata-read proof:
+
+- Command: `npm run circle:wallets:get-wallet`
+- Result: wallet metadata fetched
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `address: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+- `blockchain: ARC-TESTNET`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `accountType: EOA`
+- `custodyType: DEVELOPER`
+- `state: LIVE`
 
 ## Sources reviewed
 
@@ -41,7 +53,26 @@ Official Circle docs (targeted):
 Evidence:
 
 - SDK exposes `signMessage(...)` for developer-controlled wallets.
-- Existing repo proof covers wallet creation only; no signing proof artifact exists.
+- Existing repo proof covers wallet creation + metadata read only; no signing proof artifact exists.
+
+- Verified non-mutating metadata read proof recorded:
+  - Command: `npm run circle:wallets:get-wallet`
+  - Result: wallet metadata fetched
+  - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+  - `address: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+  - `blockchain: ARC-TESTNET`
+  - `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+  - `accountType: EOA`
+  - `custodyType: DEVELOPER`
+  - `state: LIVE`
+
+- Readiness non-mutation proof recorded:
+  - Command: `npm run circle:wallets:readiness`
+  - Result: readiness checks passed
+  - `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
+  - `CIRCLE_WALLETS_DRY_RUN=true`
+  - secrets redacted
+  - no live mutation performed by readiness
 
 Conservative decision: keep signing as **NOT_CLAIMED** until explicit proof is captured.
 
@@ -71,14 +102,12 @@ This is non-mutating and should be the first verification step before any future
 
 ## 4) Is the existing wallet EOA or SCA?
 
-**Most likely EOA** (not independently re-queried in this sprint).
+**Verified EOA** via direct non-mutating wallet metadata read.
 
 Evidence:
 
-- Wallet creation request in this repo does not provide explicit `accountType` override.
-- SDK type docs indicate `accountType` defaults to `EOA` when omitted on create-wallet request.
-
-Conservative statement: treat current proven wallet as EOA unless a direct wallet read proves otherwise.
+- `npm run circle:wallets:get-wallet` returned `accountType: EOA`.
+- Same read confirmed `custodyType: DEVELOPER` and `state: LIVE` on `ARC-TESTNET`.
 
 ## 5) Is SCA/ERC-4337 required for gasless/Paymaster?
 
@@ -136,7 +165,7 @@ Recommended **server-only**, staged, conservative path:
 
 ## 10) What is the correct claim status now?
 
-- Circle Wallets overall: **CURRENT_VERIFIED (wallet creation only)**.
+- Circle Wallets overall: **CURRENT_VERIFIED (wallet creation + metadata read only)**.
 - Circle Wallets signing/send/gasless: **NOT_CLAIMED**.
 - Paymaster: **NOT_CLAIMED**.
 
