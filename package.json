@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "appkit:send:arc:usdc": "tsx --env-file=.env.appkit.local scripts/appkit-send-arc-usdc.ts"
+    "appkit:send:arc:usdc": "tsx --env-file=.env.appkit.local scripts/appkit-send-arc-usdc.ts",
+    "appkit:bridge:usdc:arc": "tsx --env-file=.env.appkit.local scripts/appkit-bridge-usdc-to-arc.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.99.0",

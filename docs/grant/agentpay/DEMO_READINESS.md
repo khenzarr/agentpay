@@ -106,7 +106,6 @@ npm run build
 Do not claim:
 - Full ERC-8183 compliance
 - App Kit integrated
-- CCTP integrated
 - Gateway integrated
 - Circle Wallets integrated
 - Paymaster integrated
@@ -122,12 +121,104 @@ Allowed current claims:
 ## 12) Circle product claim boundary (strict)
 
 - App Kit Send: **CURRENT_VERIFIED**
-- Bridge/CCTP: **NOT_CLAIMED**
+- Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **NOT_CLAIMED**
 - Circle Wallets (developer-controlled): **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
 Note: App Kit Send live send verified via `npm run appkit:send:arc:usdc` with `APPKIT_DRY_RUN=false` on Arc Testnet USDC (`0.01`), tx `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb`.
+
+Bridge/CCTP verification note: `docs/grant/agentpay/APP_KIT_BRIDGE_CCTP_DISCOVERY.md` confirms official SDK/docs support and Arc Testnet compatibility, and live bridge verification is now completed, so Bridge/CCTP is **CURRENT_VERIFIED**.
+
+Bridge live verification evidence recorded:
+
+- Command: `npm run appkit:bridge:usdc:arc`
+- Env mode: `APPKIT_BRIDGE_DRY_RUN=false`
+- Provider: `CCTPV2BridgingProvider`
+- Source chain: `Ethereum_Sepolia`
+- Destination chain: `Arc_Testnet`
+- Source address: `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`
+- Recipient address: `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- Token: `USDC`
+- Amount: `0.01`
+- Estimate was shown before live execution.
+- Bridge result state: `success`
+- Transfer speed: `FAST`
+- `approve`: `0xf13ff448e95e9503ac1b621f6cb967bb18538e5ce21330288a8756ffcb5da9dd` (https://sepolia.etherscan.io/tx/0xf13ff448e95e9503ac1b621f6cb967bb18538e5ce21330288a8756ffcb5da9dd)
+- `burn`: `0x561c32dc76a3a4e927cd05e1a12c8048637b9342f487f98faa7db002fd14dde9` (https://sepolia.etherscan.io/tx/0x561c32dc76a3a4e927cd05e1a12c8048637b9342f487f98faa7db002fd14dde9)
+- `fetchAttestation`: state `success`, cctpVersion `2`, status `complete`, sourceDomain `0`, destinationDomain `26`
+- `mint`: `0x6edee61d50e090c9047ec7ee606253be91fd90dcd48849f943ba216e13d87436` (https://testnet.arcscan.app/tx/0x6edee61d50e090c9047ec7ee606253be91fd90dcd48849f943ba216e13d87436), Arc block `42834309`
+- Private key was not printed.
+- Script used isolated `.env.appkit.local` (git-ignored).
+
+### Bridge/CCTP pre-live execution checklist (founder runbook)
+
+> Scope guardrails: do **not** run live bridge until this checklist is satisfied; do **not** change ABI; do **not** downgrade App Kit Send.
+
+1. **Required source wallet balances (Ethereum_Sepolia)**
+   - USDC balance >= `0.01` USDC (bridge amount)
+   - USDC balance to cover fees observed in estimate:
+     - provider fee: `0.000001` USDC
+     - mint gas fee (quoted in USDC): `0.00498572012526` USDC
+   - ETH for source-chain tx gas >= approve + burn estimate:
+     - approve gas: `0.000034443320303273` ETH
+     - burn gas: `0.000128975023984196` ETH
+   - Practical buffer recommendation: keep extra ETH/USDC above estimate in case fees move.
+
+2. **Expected transaction stages**
+   - Stage A: `estimateBridge` preflight output
+   - Stage B: token approval (if allowance needed)
+   - Stage C: burn/bridge initiation on source chain
+   - Stage D: CCTP attestation/finalization wait
+   - Stage E: mint completion on destination (`Arc_Testnet`)
+
+3. **Output fields to capture (proof artifact set)**
+   - Command used and env mode (`APPKIT_BRIDGE_DRY_RUN=false`)
+   - Source chain + destination chain
+   - Source and recipient addresses
+   - Token + amount
+   - Full printed `bridge result` object from script
+   - Any operation IDs / tx hashes (approve, burn, mint/finalization) present in output
+   - Timestamp of execution
+
+4. **What counts as successful live proof**
+   - Script completes without `bridge failed` error
+   - `bridge result` indicates successful completion/finalization
+   - At least one verifiable on-chain artifact is recorded (tx hash/operation reference)
+  - Documentation reflects `CURRENT_VERIFIED` **only after** live proof is captured
+
+5. **Likely errors and recovery**
+   - Missing env vars / invalid key / invalid address / invalid amount
+     - Fix `.env.appkit.local` values and re-run
+   - Unsupported chain/token route
+     - Ensure `Ethereum_Sepolia -> Arc_Testnet` with `USDC`
+   - Insufficient USDC or insufficient ETH gas
+     - Top up source wallet, then retry
+   - Temporary attestation/finalization delay
+     - Wait and re-check before retrying duplicate bridge submission
+
+6. **Private key exposure check**
+   - Script does **not** log private key (only configuration fields: chain, recipient, amount, token, dry-run).
+
+7. **Attestation/finalization wait expectation**
+   - Yes. Live CCTP bridge may require asynchronous waiting between burn and destination mint finalization.
+
+8. **Exact live command**
+
+```bash
+npm run appkit:bridge:usdc:arc
+```
+
+Prerequisite in `.env.appkit.local`:
+
+```bash
+APPKIT_BRIDGE_DRY_RUN=false
+```
+
+9. **Exact docs to update after successful live proof**
+   - `docs/grant/agentpay/APP_KIT_BRIDGE_CCTP_DISCOVERY.md`
+   - `docs/grant/agentpay/DEMO_READINESS.md`
+   - Update status label to `CURRENT_VERIFIED` only with captured live proof artifacts.
 
 For App Kit Send private-key usage, run via isolated env file `.env.appkit.local` (through `npm run appkit:send:arc:usdc`). Keep frontend/demo runtime values in `.env.local` only.
 
@@ -142,7 +233,7 @@ For App Kit Send private-key usage, run via isolated env file `.env.appkit.local
 | `/jobs` and `/payments` indexing | ✅ Implemented (demo-range) | Label as indexed demo block range only |
 | ArcNS resolution | 🟨 Optional/non-blocking | Show with `agentpayagent.circle` (agent) and `agentpayclient.arc` (client/evaluator); fallback to raw wallet if resolver fails |
 | App Kit Send | ✅ CURRENT_VERIFIED | Live send verified on Arc Testnet USDC with isolated `.env.appkit.local`; private key not printed |
-| CCTP / Gateway / Wallets / Paymaster | ❌ NOT_CLAIMED | Not implemented/verified in this repo; do not claim in product demo |
+| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway/Wallets/Paymaster remain **NOT_CLAIMED** |
 
 ## 14) Final pre-recording checklist
 

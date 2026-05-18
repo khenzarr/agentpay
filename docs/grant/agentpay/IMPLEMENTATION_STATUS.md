@@ -24,6 +24,9 @@ AgentPay frontend now supports an end-to-end Arc Testnet MVP demo path with real
 - App Kit Send run command added (`package.json` → `appkit:send:arc:usdc`)
 - App Kit Send env placeholders added (`.env.example`)
 - App Kit Send script explicitly uses isolated env file: `.env.appkit.local` (not frontend `.env.local`)
+- App Kit Bridge/CCTP local script implemented with estimate-first and dry-run default (`scripts/appkit-bridge-usdc-to-arc.ts`)
+- App Kit Bridge/CCTP run command added (`package.json` → `appkit:bridge:usdc:arc`)
+- App Kit Bridge/CCTP env placeholders added (`.env.example`)
 
 ---
 
@@ -40,7 +43,6 @@ AgentPay frontend now supports an end-to-end Arc Testnet MVP demo path with real
 
 - Full ERC-8183 compliance
 - Full ERC-8004 compliance
-- CCTP integrated
 - Gateway integrated
 - Circle Wallets integrated
 - Paymaster integrated
@@ -89,6 +91,13 @@ Current `.env.example` includes:
 - `APPKIT_RECIPIENT_ADDRESS`
 - `APPKIT_AMOUNT`
 - `APPKIT_DRY_RUN` (default `true`)
+- `APPKIT_BRIDGE_PRIVATE_KEY`
+- `APPKIT_BRIDGE_FROM_CHAIN` (default `Ethereum_Sepolia`)
+- `APPKIT_BRIDGE_TO_CHAIN` (default `Arc_Testnet`)
+- `APPKIT_BRIDGE_RECIPIENT_ADDRESS`
+- `APPKIT_BRIDGE_AMOUNT` (default `0.01`)
+- `APPKIT_BRIDGE_TOKEN` (default `USDC`)
+- `APPKIT_BRIDGE_DRY_RUN` (default `true`)
 
 For App Kit Send private-key operations, use a separate local-only file:
 
@@ -126,6 +135,9 @@ When present, `NEXT_PUBLIC_ERC8183_INDEXING_TO_BLOCK` bounds indexing to a fixed
 - `.env.example`
 - `scripts/appkit-send-arc-usdc.ts`
 - `package.json` (script: `appkit:send:arc:usdc`)
+- `scripts/appkit-bridge-usdc-to-arc.ts`
+- `package.json` (script: `appkit:bridge:usdc:arc`)
+- `tsconfig.json` (includes `scripts/**/*.ts` and Node typings for script typecheck)
 
 ### Documentation / hygiene files
 
@@ -156,12 +168,35 @@ Notes:
 ## 6.1) Strict Circle integration classification
 
 - App Kit Send: **CURRENT_VERIFIED**
-- Bridge/CCTP: **NOT_CLAIMED**
+- Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **NOT_CLAIMED**
 - Circle Wallets (developer-controlled): **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
-Reason: App Kit Send now has verified live-send evidence; other Circle products remain unimplemented/unverified in this repo.
+Reason: App Kit Send and Bridge/CCTP now have verified live-execution evidence; other Circle products remain unimplemented/unverified in this repo.
+
+Bridge/CCTP discovery was completed in `docs/grant/agentpay/APP_KIT_BRIDGE_CCTP_DISCOVERY.md` and found feasible API support (`bridge`, `estimateBridge`, `Arc_Testnet`). Live verification has now been executed successfully, so status is **CURRENT_VERIFIED**.
+
+Live verification evidence recorded:
+
+1. Command: `npm run appkit:bridge:usdc:arc`
+2. Env mode: `APPKIT_BRIDGE_DRY_RUN=false`
+3. Provider: `CCTPV2BridgingProvider`
+4. Source chain: `Ethereum_Sepolia`
+5. Destination chain: `Arc_Testnet`
+6. Source address: `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`
+7. Recipient address: `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+8. Token: `USDC`
+9. Amount: `0.01`
+10. Estimate was shown before live execution.
+11. Bridge result state: `success`
+12. Transfer speed: `FAST`
+13. `approve` tx: `0xf13ff448e95e9503ac1b621f6cb967bb18538e5ce21330288a8756ffcb5da9dd`
+14. `burn` tx: `0x561c32dc76a3a4e927cd05e1a12c8048637b9342f487f98faa7db002fd14dde9`
+15. `fetchAttestation`: state `success`, cctpVersion `2`, status `complete`, sourceDomain `0`, destinationDomain `26`
+16. `mint` tx: `0x6edee61d50e090c9047ec7ee606253be91fd90dcd48849f943ba216e13d87436` (Arc block `42834309`)
+17. Private key was not printed.
+18. Script used isolated `.env.appkit.local` (git-ignored).
 
 ---
 
@@ -177,7 +212,7 @@ Reason: App Kit Send now has verified live-send evidence; other Circle products 
 ## 8) What still cannot be honestly demoed as implemented
 
 - Full ERC-8183 ABI/event coverage or full compliance claim
-- Circle App Kit/CCTP/Gateway/Wallets/Paymaster integration claims
+- Circle Gateway/Wallets/Paymaster integration claims
 - Protocol-wide analytics beyond indexed client-side demo range
 
 ---
