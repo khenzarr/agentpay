@@ -194,6 +194,25 @@ Circle Wallets discovery status (Master Prompt #10):
 - Arc Testnet support is documented in official Circle Wallets supported-blockchains docs, but no in-repo Circle Wallet create/sign/send runtime proof exists yet.
 - Therefore Circle Wallets remains **NOT_CLAIMED** for grant/demo scope in this sprint.
 
+Circle Wallets server-only readiness scaffold status (Master Prompt #10A):
+
+- Added setup doc: `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`
+- Added readiness script: `scripts/circle-wallets-readiness.ts`
+- Added command: `npm run circle:wallets:readiness`
+- Added `.env.example` server-only placeholders:
+  - `CIRCLE_API_KEY`
+  - `CIRCLE_ENTITY_SECRET`
+  - `CIRCLE_ENTITY_SECRET_CIPHERTEXT`
+  - `CIRCLE_WALLET_SET_ID`
+  - `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
+  - `CIRCLE_WALLETS_DRY_RUN=true`
+- Added explicit `.gitignore` entries for `.env.circle.local` patterns.
+- Dependency decision: no new Circle Wallets SDK dependency added in this sprint.
+- Internal readiness status: **CURRENT_CODE_IMPLEMENTED_PENDING_WALLET_PROOF**.
+- Product/public claim status remains: **NOT_CLAIMED**.
+- Classification gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**.
+- No live Circle wallet creation, signing, or sending executed in this sprint.
+
 Reason: App Kit Send and Bridge/CCTP now have verified live-execution evidence; other Circle products remain unimplemented/unverified in this repo.
 
 Bridge/CCTP discovery was completed in `docs/grant/agentpay/APP_KIT_BRIDGE_CCTP_DISCOVERY.md` and found feasible API support (`bridge`, `estimateBridge`, `Arc_Testnet`). Live verification has now been executed successfully, so status is **CURRENT_VERIFIED**.

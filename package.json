@@ -15,7 +15,8 @@
     "appkit:bridge:usdc:arc": "tsx --env-file=.env.appkit.local scripts/appkit-bridge-usdc-to-arc.ts",
     "appkit:ub:check": "tsx --env-file=.env.appkit.local scripts/appkit-unified-balance-check.ts",
     "appkit:ub:spend:arc": "tsx --env-file=.env.appkit.local scripts/appkit-unified-balance-spend-to-arc.ts",
-    "appkit:ub:deposit": "tsx --env-file=.env.appkit.local scripts/appkit-unified-balance-deposit.ts"
+    "appkit:ub:deposit": "tsx --env-file=.env.appkit.local scripts/appkit-unified-balance-deposit.ts",
+    "circle:wallets:readiness": "tsx --env-file=.env.circle.local scripts/circle-wallets-readiness.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.99.0",

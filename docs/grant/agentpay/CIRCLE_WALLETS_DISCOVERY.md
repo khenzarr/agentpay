@@ -103,6 +103,39 @@ Additional blockers in current repo state:
 - Keep Circle Wallets as **NOT_CLAIMED** in product/demo status docs.
 - Do not upgrade to `CURRENT_VERIFIED` until real Circle Wallet creation/sign/send proof exists.
 
+## 15) Server-only setup/readiness scaffold update (Master Prompt #10A)
+
+Implemented in this sprint:
+
+- `.gitignore` explicitly includes `.env.circle.local`, `.env*.circle.local`, `.env.*.circle.local`
+- `.env.example` now includes Circle Wallets server-only placeholders:
+  - `CIRCLE_API_KEY`
+  - `CIRCLE_ENTITY_SECRET`
+  - `CIRCLE_ENTITY_SECRET_CIPHERTEXT`
+  - `CIRCLE_WALLET_SET_ID`
+  - `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
+  - `CIRCLE_WALLETS_DRY_RUN=true`
+- New server-only setup doc:
+  - `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`
+- New local readiness script (no live mutation calls):
+  - `scripts/circle-wallets-readiness.ts`
+- New package command:
+  - `npm run circle:wallets:readiness`
+
+Dependency/API decision for this sprint:
+
+- No new Circle Wallets SDK dependency was added.
+- Readiness was implemented as a local env-validation scaffold only.
+- Live wallet create/sign/send API calls remain deferred until explicit founder approval and runtime verification scope.
+
+Current classification update:
+
+- Feasibility gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
+- Internal implementation/readiness: **CURRENT_CODE_IMPLEMENTED_PENDING_WALLET_PROOF**
+- Product/public claim status: **NOT_CLAIMED**
+
+No live wallet creation or signing/sending was executed in this sprint.
+
 ## Founder approval gate (stop condition)
 
 Before any Circle Wallets implementation:

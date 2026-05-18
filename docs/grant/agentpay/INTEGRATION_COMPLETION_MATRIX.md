@@ -39,11 +39,22 @@ Only the following are currently claimable:
 
 Everything else above remains **NOT_CLAIMED** until implemented and re-verified.
 
-Circle Wallets discovery classification note:
+Circle Wallets discovery/readiness classification note:
 
-- **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
-- Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secrets)
+- **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
+- Additional gate remains server-only backend handling for secrets and approval-controlled runtime verification.
+- Internal readiness scaffold status: **CURRENT_CODE_IMPLEMENTED_PENDING_WALLET_PROOF**
 - Current public/demo status remains **NOT_CLAIMED** until live Circle Wallet proof exists.
+
+Circle Wallets server-only scaffold artifacts (Master Prompt #10A):
+
+- `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`
+- `scripts/circle-wallets-readiness.ts`
+- `npm run circle:wallets:readiness`
+- `.env.example` Circle server-only placeholders
+- `.gitignore` explicit `.env.circle.local` coverage
+
+No live Circle wallet creation/sign/send proof was executed in this sprint.
 
 Gateway / Unified Balance implementation status for this sprint: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**.
 

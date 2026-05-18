@@ -136,3 +136,33 @@ Spend estimate verification update:
   2. No Circle signing/send proof in repo
   3. Required Circle credentials (`API key` + entity secret flow) are not provisioned in this sprint
   4. Safe integration requires founder-approved backend/server-only scope
+
+## 9) Circle Wallets server-only readiness scaffold update (Master Prompt #10A)
+
+- Added server-only setup guide:
+  - `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`
+- Added local readiness script:
+  - `scripts/circle-wallets-readiness.ts`
+- Added package command:
+  - `npm run circle:wallets:readiness`
+- Added `.env.example` placeholders for Circle Wallets (server-only, no `NEXT_PUBLIC_*`):
+  - `CIRCLE_API_KEY`
+  - `CIRCLE_ENTITY_SECRET`
+  - `CIRCLE_ENTITY_SECRET_CIPHERTEXT`
+  - `CIRCLE_WALLET_SET_ID`
+  - `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
+  - `CIRCLE_WALLETS_DRY_RUN=true`
+- Added explicit `.gitignore` protection for `.env.circle.local` patterns.
+
+Dependency decision:
+
+- No additional Circle Wallets SDK dependency was installed in this sprint.
+- This sprint is limited to secure server-only readiness scaffolding and docs, with no wallet mutation calls.
+
+Status policy after this scaffold:
+
+- Circle Wallets product claim remains **NOT_CLAIMED**.
+- Classification now tracked as **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**.
+- Internal readiness implementation state: **CURRENT_CODE_IMPLEMENTED_PENDING_WALLET_PROOF**.
+
+No live Circle wallet creation, signing, or transaction sending was executed in this sprint.
