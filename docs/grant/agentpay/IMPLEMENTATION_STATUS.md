@@ -27,6 +27,11 @@ AgentPay frontend now supports an end-to-end Arc Testnet MVP demo path with real
 - App Kit Bridge/CCTP local script implemented with estimate-first and dry-run default (`scripts/appkit-bridge-usdc-to-arc.ts`)
 - App Kit Bridge/CCTP run command added (`package.json` → `appkit:bridge:usdc:arc`)
 - App Kit Bridge/CCTP env placeholders added (`.env.example`)
+- App Kit Gateway / Unified Balance discovery completed with official docs + installed SDK type confirmation (`docs/grant/agentpay/APP_KIT_GATEWAY_UNIFIED_BALANCE_DISCOVERY.md`)
+- App Kit Gateway / Unified Balance local check script implemented (`scripts/appkit-unified-balance-check.ts`)
+- App Kit Gateway / Unified Balance local spend-to-Arc script implemented with estimate-first + dry-run default (`scripts/appkit-unified-balance-spend-to-arc.ts`)
+- App Kit Gateway / Unified Balance run commands added (`package.json` → `appkit:ub:check`, `appkit:ub:spend:arc`)
+- App Kit Gateway / Unified Balance env placeholders added (`.env.example`)
 
 ---
 
@@ -98,6 +103,14 @@ Current `.env.example` includes:
 - `APPKIT_BRIDGE_AMOUNT` (default `0.01`)
 - `APPKIT_BRIDGE_TOKEN` (default `USDC`)
 - `APPKIT_BRIDGE_DRY_RUN` (default `true`)
+- `APPKIT_UB_PRIVATE_KEY`
+- `APPKIT_UB_SOURCE_CHAINS` (default `Ethereum_Sepolia`)
+- `APPKIT_UB_DESTINATION_CHAIN` (default `Arc_Testnet`)
+- `APPKIT_UB_RECIPIENT_ADDRESS`
+- `APPKIT_UB_AMOUNT` (default `0.01`)
+- `APPKIT_UB_TOKEN` (default `USDC`)
+- `APPKIT_UB_DRY_RUN` (default `true`)
+- `APPKIT_UB_INCLUDE_PENDING` (default `true`)
 
 For App Kit Send private-key operations, use a separate local-only file:
 
@@ -169,7 +182,7 @@ Notes:
 
 - App Kit Send: **CURRENT_VERIFIED**
 - Bridge/CCTP: **CURRENT_VERIFIED**
-- Gateway / Unified Balance: **NOT_CLAIMED**
+- Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
 - Circle Wallets (developer-controlled): **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
@@ -208,6 +221,53 @@ Live verification evidence recorded:
 - Show indexed jobs dashboard and demo-range stats from real logs
 - Show `/payments` derived activity from indexed job states
 - Use ArcScan links for transparency and fallback
+
+Gateway / Unified Balance live deposit + pending-balance verification evidence recorded:
+
+1. Command: `npm run appkit:ub:check`
+2. Token: `USDC`
+3. `includePending`: `true`
+4. Supported chains included: Arc Testnet, Ethereum Sepolia, Base Sepolia, Arbitrum Sepolia, Polygon Amoy, Optimism Sepolia, Avalanche Fuji, Sonic Testnet, World Chain Sepolia, Sei Testnet, HyperEVM Testnet, Unichain Sepolia
+5. `totalConfirmedBalance: 0.010000 USDC`
+6. `totalPendingBalance: 0.000000 USDC`
+7. `Ethereum_Sepolia confirmedBalance: 0.010000`
+8. `Ethereum_Sepolia pendingBalance: 0.000000`
+9. `Arc_Testnet confirmedBalance: 0.000000`
+
+Live deposit evidence:
+
+12. Command: `npm run appkit:ub:deposit`
+13. Env mode: `APPKIT_UB_DEPOSIT_DRY_RUN=false`
+14. Deposit API: `kit.unifiedBalance.deposit(params)`
+15. Deposit mode: `deposit self`
+16. Deposit chain: `Ethereum_Sepolia`
+17. Token: `USDC`
+18. Amount: `0.01`
+19. Depositor: `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`
+20. Deposited to: `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`
+21. Tx hash: `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a`
+22. Explorer: https://sepolia.etherscan.io/tx/0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a
+23. Private key was not printed.
+
+Gateway / Unified Balance remains below **CURRENT_VERIFIED** until all are captured:
+
+1. Live spend proof is captured.
+
+Spend estimate verification update:
+
+- Command: `npm run appkit:ub:spend:arc`
+- Dry-run mode: `APPKIT_UB_DRY_RUN=true`
+- Source chains: `Ethereum_Sepolia`
+- Destination chain: `Arc_Testnet`
+- Recipient: `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- Amount: `0.01`
+- Token: `USDC`
+- Forwarder: `true`
+- Estimate output:
+  - `gasFee: 1.203595 USDC`
+  - gas allocation: `Ethereum_Sepolia, 1.203595 USDC`
+  - forwarder fee: `0.203594 USDC`
+- Live spend was intentionally not executed because fee estimate is high relative to `0.01 USDC`, and dry-run stops after estimate.
 
 ## 8) What still cannot be honestly demoed as implemented
 

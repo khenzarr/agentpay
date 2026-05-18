@@ -20,7 +20,7 @@
 | ArcNS identity display/resolution | **VERIFIED (OPTIONAL/NON-BLOCKING)** | `AddressIdentity.tsx`, `ArcnsResolutionBadge.tsx`, resolver hooks/config | Claim allowed only as optional/non-blocking |
 | App Kit Send | **CURRENT_VERIFIED** | Live send verified via `npm run appkit:send:arc:usdc` with `APPKIT_DRY_RUN=false` on Arc Testnet (`Arc_Testnet`), token `USDC`, amount `0.01`; tx `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb`; isolated `.env.appkit.local`; private key not printed | Claim allowed |
 | Bridge / CCTP | **CURRENT_VERIFIED** | Live verification executed via `npm run appkit:bridge:usdc:arc` with `APPKIT_BRIDGE_DRY_RUN=false` using `CCTPV2BridgingProvider`; route `Ethereum_Sepolia -> Arc_Testnet`; token `USDC`; amount `0.01`; result state `success`; transfer speed `FAST`; approve/burn/mint tx proofs recorded; isolated `.env.appkit.local`; private key not printed | Claim allowed |
-| Gateway / Unified Balance | **NOT_CLAIMED** | No Gateway/Unified Balance integration in repo/runtime | Do not claim |
+| Gateway / Unified Balance | **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** | Live deposit executed via `npm run appkit:ub:deposit` with `APPKIT_UB_DEPOSIT_DRY_RUN=false` using `kit.unifiedBalance.deposit(params)` in deposit-self mode on `Ethereum_Sepolia` for `USDC` amount `0.01`; depositor/deposited-to `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`; tx `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a` (https://sepolia.etherscan.io/tx/0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a); post-deposit check via `npm run appkit:ub:check` (`token=USDC`, `includePending=true`) returned `totalConfirmedBalance: 0.010000 USDC`, `totalPendingBalance: 0.000000 USDC`, `Ethereum_Sepolia confirmedBalance: 0.010000`, `Ethereum_Sepolia pendingBalance: 0.000000`; private key not printed. Spend estimate executed via `npm run appkit:ub:spend:arc` in dry-run mode (`APPKIT_UB_DRY_RUN=true`) with `from=Ethereum_Sepolia`, `to=Arc_Testnet`, recipient `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`, amount `0.01`, token `USDC`, `useForwarder=true`; estimate output: `gasFee: 1.203595 USDC`, gas allocation `Ethereum_Sepolia, 1.203595 USDC`, forwarder fee `0.203594 USDC`; live spend not executed because dry-run stops after estimate. | Do not claim CURRENT_VERIFIED until live spend proof is captured |
 | Circle Wallets (Developer-Controlled) | **NOT_CLAIMED** | MVP flow uses user wallets; no verified Circle Wallets integration path | Do not claim |
 | Paymaster / gas sponsorship | **NOT_CLAIMED** | No paymaster runtime integration | Do not claim |
 | Full ERC-8183 compliance | **NOT_CLAIMED** | Tutorial-subset integration only | Do not claim |
@@ -38,6 +38,62 @@ Only the following are currently claimable:
 6. App Kit Bridge/CCTP on Arc Testnet
 
 Everything else above remains **NOT_CLAIMED** until implemented and re-verified.
+
+Gateway / Unified Balance implementation status for this sprint: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**.
+
+Deposit-path implementation update (Master Prompt #9A):
+
+- Added discovery: `docs/grant/agentpay/APP_KIT_GATEWAY_UNIFIED_BALANCE_DEPOSIT_DISCOVERY.md`
+- Added script: `scripts/appkit-unified-balance-deposit.ts`
+- Added command: `npm run appkit:ub:deposit`
+- Added `.env.example` deposit vars (`APPKIT_UB_DEPOSIT_*`, optional `APPKIT_UB_DEPOSIT_ACCOUNT`)
+- Deposit confirmed-balance proof and spend estimate proof captured in this sprint; status is now **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**.
+
+Deposit pending evidence recorded:
+
+- Command: `npm run appkit:ub:deposit`
+- Env mode: `APPKIT_UB_DEPOSIT_DRY_RUN=false`
+- Deposit API: `kit.unifiedBalance.deposit(params)`
+- Mode: `deposit self`
+- Chain: `Ethereum_Sepolia`
+- Token: `USDC`
+- Amount: `0.01`
+- Depositor: `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`
+- Deposited to: `0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`
+- Tx hash: `0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a`
+- Explorer: https://sepolia.etherscan.io/tx/0x9538a056ddde900acd019e6ecff651fee43115a3ae08584f2d61180a483afc1a
+- Private key was not printed.
+
+Post-deposit check evidence:
+
+- Command: `npm run appkit:ub:check`
+- Token: `USDC`
+- `includePending`: `true`
+- `totalConfirmedBalance: 0.010000`
+- `totalPendingBalance: 0.000000`
+- `Ethereum_Sepolia confirmedBalance: 0.010000`
+- `Ethereum_Sepolia pendingBalance: 0.000000`
+- `Arc_Testnet confirmedBalance: 0.000000`
+
+Gateway / Unified Balance remains below **CURRENT_VERIFIED** until all are captured:
+
+1. Live spend proof is captured.
+
+Spend estimate verification status:
+
+- Command: `npm run appkit:ub:spend:arc`
+- Dry-run mode: `APPKIT_UB_DRY_RUN=true`
+- Source chains: `Ethereum_Sepolia`
+- Destination chain: `Arc_Testnet`
+- Recipient: `0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- Amount: `0.01`
+- Token: `USDC`
+- Forwarder: `true`
+- Estimate output:
+  - `gasFee: 1.203595 USDC`
+  - gas allocation: `Ethereum_Sepolia, 1.203595 USDC`
+  - forwarder fee: `0.203594 USDC`
+- Live spend was intentionally not executed because fee estimate is high relative to `0.01 USDC`, and dry-run stops after estimate.
 
 Bridge/CCTP implementation status for this sprint: **CURRENT_VERIFIED**.
 
