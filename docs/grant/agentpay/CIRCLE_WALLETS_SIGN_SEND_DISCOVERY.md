@@ -100,6 +100,13 @@ Evidence:
 
 This is non-mutating and should be the first verification step before any future send attempts.
 
+Token ID requirement boundary:
+
+- `CIRCLE_WALLET_TRANSFER_TOKEN_ID` is required for transfer estimate.
+- Token ID must **not** be guessed.
+- Added server-only helper: `npm run circle:wallets:token-lookup` (`scripts/circle-wallets-token-lookup.ts`) to inspect non-mutating SDK read paths (`getToken` by optional id, `listMonitoredTokens`, optional wallet balance token listing).
+- If lookup cannot surface ARC-TESTNET USDC token id from available SDK data, next action is Circle Console/API token inventory/supported-token endpoint.
+
 ## 4) Is the existing wallet EOA or SCA?
 
 **Verified EOA** via direct non-mutating wallet metadata read.
@@ -168,6 +175,7 @@ Recommended **server-only**, staged, conservative path:
 - Circle Wallets overall: **CURRENT_VERIFIED (wallet creation + metadata read only)**.
 - Circle Wallets signing/send/gasless: **NOT_CLAIMED**.
 - Paymaster: **NOT_CLAIMED**.
+- Signing/send remain **NOT_CLAIMED** unless estimate/send proof artifacts are captured and verified.
 
 Conservative claim classification for this discovery:
 

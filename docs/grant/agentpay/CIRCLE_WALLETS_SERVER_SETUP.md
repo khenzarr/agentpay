@@ -77,6 +77,12 @@ npm run circle:wallets:get-wallet
 npm run circle:wallets:estimate-transfer
 ```
 
+11.5. Run token lookup helper (non-mutating, server-only):
+
+```bash
+npm run circle:wallets:token-lookup
+```
+
 Required transfer-estimate env values in `.env.circle.local`:
 
 ```bash
@@ -86,13 +92,18 @@ CIRCLE_WALLET_TRANSFER_DESTINATION=
 CIRCLE_WALLET_TRANSFER_AMOUNT=0.001
 CIRCLE_WALLET_TRANSFER_TOKEN_ID=
 CIRCLE_WALLET_TRANSFER_DRY_RUN=true
+CIRCLE_TOKEN_LOOKUP_BLOCKCHAIN=ARC-TESTNET
+CIRCLE_TOKEN_LOOKUP_SYMBOL=USDC
+CIRCLE_TOKEN_LOOKUP_TOKEN_ID=
 ```
 
 Important:
 
 - Do not guess `CIRCLE_WALLET_TRANSFER_TOKEN_ID`.
+- `CIRCLE_WALLET_TRANSFER_TOKEN_ID` is required for transfer estimate.
 - If unknown, discover the correct token id for your ARC-TESTNET asset via Circle Console/API inventory and then set it explicitly.
 - The estimate script fails intentionally if token id is missing.
+- Token lookup script (`circle:wallets:token-lookup`) is non-mutating and server-only; if it cannot resolve a token id from available SDK read endpoints, use Circle Console/API supported-token inventory as source of truth.
 
 ## Verified status and evidence (founder-run)
 
@@ -126,6 +137,7 @@ Claim boundary (strict):
 
 - ✅ Allowed: Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
 - ❌ Not allowed yet: signing verification, token transfer verification, gasless transaction verification, paymaster verification
+- ❌ Signing/send claim remains NOT_CLAIMED until transfer estimate/send proof is captured and verified
 
 Safety rule after any live wallet-creation run:
 
