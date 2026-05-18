@@ -83,6 +83,12 @@ npm run circle:wallets:estimate-transfer
 npm run circle:wallets:token-lookup
 ```
 
+11.6. Run wallet balances helper (non-mutating, server-only):
+
+```bash
+npm run circle:wallets:list-balances
+```
+
 Required transfer-estimate env values in `.env.circle.local`:
 
 ```bash
@@ -104,6 +110,8 @@ Important:
 - If unknown, discover the correct token id for your ARC-TESTNET asset via Circle Console/API inventory and then set it explicitly.
 - The estimate script fails intentionally if token id is missing.
 - Token lookup script (`circle:wallets:token-lookup`) is non-mutating and server-only; if it cannot resolve a token id from available SDK read endpoints, use Circle Console/API supported-token inventory as source of truth.
+- Wallet balance script (`circle:wallets:list-balances`) is non-mutating and server-only; it may reveal token IDs once the wallet actually holds the target token.
+- Current discovery classification: `BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID` (see `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`).
 
 ## Verified status and evidence (founder-run)
 

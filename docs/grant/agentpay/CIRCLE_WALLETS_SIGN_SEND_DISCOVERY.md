@@ -105,12 +105,14 @@ Token ID requirement boundary:
 - `CIRCLE_WALLET_TRANSFER_TOKEN_ID` is required for transfer estimate.
 - Token ID must **not** be guessed.
 - Added server-only helper: `npm run circle:wallets:token-lookup` (`scripts/circle-wallets-token-lookup.ts`) to inspect non-mutating SDK read paths (`getToken` by optional id, `listMonitoredTokens`, optional wallet balance token listing).
+- Added server-only helper: `npm run circle:wallets:list-balances` (`scripts/circle-wallets-list-balances.ts`) for explicit wallet token-balance/token-id listing via non-mutating SDK read path.
 - Discovery result for `lookupBlockchain=ARC-TESTNET` and `lookupSymbol=USDC`: `candidateCount=0`.
 - Installed Wallets SDK type surface does **not** expose a reverse resolver like `getTokenId(blockchain+symbol/address)`.
 - `getToken({ id })` is id->details only (requires pre-known token id).
 - `listMonitoredTokens(...)` is a monitored-token view, not a guaranteed global supported-token inventory for Wallets token IDs.
 - Blocker: no official programmatic reverse lookup was found in installed SDK types for deriving ARC-TESTNET USDC token UUID from blockchain+symbol/address alone.
 - Safe next action: founder obtains ARC-TESTNET USDC token UUID from Circle Console token inventory / official supported-token source, then sets `CIRCLE_WALLET_TRANSFER_TOKEN_ID` explicitly.
+- Current formal classification for token-id resolution sprint: `BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID` (see `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`).
 
 ## 4) Is the existing wallet EOA or SCA?
 

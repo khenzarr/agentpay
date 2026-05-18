@@ -22,7 +22,8 @@
     "circle:wallets:create:arc": "tsx --env-file=.env.circle.local scripts/circle-wallets-create-arc-wallet.ts",
     "circle:wallets:get-wallet": "tsx --env-file=.env.circle.local scripts/circle-wallets-get-wallet.ts",
     "circle:wallets:estimate-transfer": "tsx --env-file=.env.circle.local scripts/circle-wallets-estimate-transfer.ts",
-    "circle:wallets:token-lookup": "tsx --env-file=.env.circle.local scripts/circle-wallets-token-lookup.ts"
+    "circle:wallets:token-lookup": "tsx --env-file=.env.circle.local scripts/circle-wallets-token-lookup.ts",
+    "circle:wallets:list-balances": "tsx --env-file=.env.circle.local scripts/circle-wallets-list-balances.ts"
   },
   "dependencies": {
     "@circle-fin/developer-controlled-wallets": "^10.3.1",

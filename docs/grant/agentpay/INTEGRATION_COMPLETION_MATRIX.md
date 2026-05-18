@@ -46,6 +46,9 @@ Circle Wallets discovery/readiness classification note:
 - Additional gate remains server-only backend handling for secrets and approval-controlled runtime verification.
 - Internal readiness scaffold status: **CURRENT_VERIFIED** (wallet creation + metadata read only)
 - Current public/demo status: **CURRENT_VERIFIED (wallet creation + metadata read only)** with strict boundary; signing/send/gasless/paymaster remain unverified.
+- Token-ID resolution discovery (Master Prompt #16): `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`
+- Current token-ID blocker classification: **BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID**
+- Added non-mutating helper: `npm run circle:wallets:list-balances` to surface wallet token IDs if/when token balance exists.
 
 Paymaster discovery classification note:
 

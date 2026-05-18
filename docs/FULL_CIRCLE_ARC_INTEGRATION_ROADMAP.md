@@ -35,6 +35,9 @@ This roadmap represents active implementation direction. Product/grant claims re
 - implemented path exists
 - blocked on official ARC-TESTNET USDC Circle Wallet token ID
 - token ID is unresolved in current lookup surface
+- token-id resolution discovery document added: `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`
+- current classification: `BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID`
+- non-mutating balance helper added: `npm run circle:wallets:list-balances`
 - signing/send/gasless remains NOT_CLAIMED
 
 ## 5) Not-yet-verified integrations
