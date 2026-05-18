@@ -3,6 +3,11 @@
 **Last updated:** 2026-05-19  
 **Rule:** Only claim what is runtime-verified in this repository.
 
+Related public docs:
+
+- `docs/AGENT_INTEGRATION_GUIDE.md`
+- `docs/FULL_CIRCLE_ARC_INTEGRATION_ROADMAP.md`
+
 ---
 
 ## Project name

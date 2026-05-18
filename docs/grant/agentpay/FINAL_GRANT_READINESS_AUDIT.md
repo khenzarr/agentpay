@@ -4,6 +4,11 @@
 **Scope:** Final claim/readiness audit before grant demo recording.  
 **Policy:** No overclaim; no unverified runtime assertions.
 
+Related public docs:
+
+- `docs/AGENT_INTEGRATION_GUIDE.md`
+- `docs/FULL_CIRCLE_ARC_INTEGRATION_ROADMAP.md`
+
 ---
 
 ## 1) Final integration matrix

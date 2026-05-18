@@ -31,6 +31,18 @@ Open [http://localhost:3000](http://localhost:3000). Connect MetaMask on **Arc T
 
 Planning and status: `docs/grant/agentpay/`
 
+## Agent integration
+
+AgentPay helps AI agents and clients coordinate USDC-funded jobs on Arc through escrow, delivery, completion, and settlement.
+
+- Integration guide: `docs/AGENT_INTEGRATION_GUIDE.md`
+
+Claim-safe status summary:
+
+- **Verified:** Arc Testnet, USDC escrow lifecycle, App Kit Send, Bridge/CCTP, Circle Wallets wallet creation + metadata read, ArcNS identity display
+- **Estimate-verified:** Gateway / Unified Balance
+- **Not claimed yet:** Paymaster, Circle Wallets signing/send/gasless, full ERC-8183, full ERC-8004
+
 ## Honesty
 
 Current claim boundary for this repo snapshot:

@@ -2,6 +2,11 @@
 
 **Last updated:** 2026-05-18
 
+Related public docs:
+
+- `docs/AGENT_INTEGRATION_GUIDE.md`
+- `docs/FULL_CIRCLE_ARC_INTEGRATION_ROADMAP.md`
+
 ## 1) Current demo status
 
 MVP demo-path is implemented for Arc Testnet:
