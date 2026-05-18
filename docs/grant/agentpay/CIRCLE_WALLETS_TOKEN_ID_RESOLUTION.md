@@ -1,7 +1,7 @@
-# Circle Wallets Token ID Resolution — ARC-TESTNET USDC (Discovery-Only)
+# Circle Wallets Token ID Resolution — ARC-TESTNET USDC (Verified)
 
 Date: 2026-05-19  
-Mode: discovery + safe non-mutating implementation only
+Mode: verified non-mutating discovery + verified transfer estimate
 
 ## Scope and constraints
 
@@ -52,37 +52,84 @@ From installed `@circle-fin/developer-controlled-wallets` type surface (`dist/ty
    - If wallet holds no ARC-TESTNET USDC, wallet-balance-driven discovery may return no token entries.
    - Funding wallet with ARC-TESTNET USDC, then querying wallet balances, is the safest next official path to attempt token ID discovery without guessing.
 
-## Classification
+## Verified token ID proof
 
-**BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID**
+Command:
 
-Rationale:
+- `npm run circle:wallets:list-balances`
 
-- No official ARC-TESTNET USDC token ID was returned from current non-mutating lookup surface.
-- SDK confirms wallet-balance and monitored-token read surfaces, but no proven reverse resolver from `(chain,symbol)` to token ID.
-- Next safe path is to fund wallet and inspect wallet token balances for token IDs.
+Result:
 
-## Funding path (non-mutating follow-up sequencing)
+- `returnedTokenBalanceCount: 1`
+- `filteredCount: 1`
+- `filterBlockchain: ARC-TESTNET`
+- `filterSymbol: USDC`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `symbol: USDC`
+- `name: USDC`
+- `blockchain: ARC-TESTNET`
+- `decimals: 18`
+- `amount: 20`
 
-Fund target wallet (external manual action, outside this sprint’s mutations):
+Command:
 
-- walletAddress: `0x156c37d9a28b67588720116a13fba1ff7a5275f8`
-- chain: `ARC-TESTNET`
-- token: `USDC`
+- `npm run circle:wallets:token-lookup`
 
-Then run non-mutating discovery:
+Result:
 
-1. `npm run circle:wallets:get-wallet`
-2. `npm run circle:wallets:list-balances`
-3. `npm run circle:wallets:token-lookup`
+- `lookupBlockchain: ARC-TESTNET`
+- `lookupSymbol: USDC`
+- `candidateCount: 1`
+- `source: getWalletTokenBalance`
+- `id: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `symbol: USDC`
+- `name: USDC`
+- `blockchain: ARC-TESTNET`
+- `decimals: 18`
 
-Expected outcome if funding path works:
+## Transfer estimate proof (non-mutating)
 
-- Wallet balance output includes token entries and token IDs.
-- Token ID can be set explicitly in `CIRCLE_WALLET_TRANSFER_TOKEN_ID`.
+Env used:
+
+- `CIRCLE_WALLET_TRANSFER_TOKEN_ID=15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`
+
+Command:
+
+- `npm run circle:wallets:estimate-transfer`
+
+Result:
+
+- transfer estimate succeeded.
+
+Latest successful estimate output:
+
+- low:
+  - `gasLimit: 21000`
+  - `networkFee: 0.000897567715086`
+  - `networkFeeRaw: 0.000477567715086`
+  - `baseFee: 20`
+  - `priorityFee: 2.741319766`
+  - `maxFee: 42.741319766`
+- medium:
+  - `gasLimit: 21000`
+  - `networkFee: 0.000911224445355`
+  - `networkFeeRaw: 0.000491224445355`
+  - `baseFee: 20`
+  - `priorityFee: 3.391640255`
+  - `maxFee: 43.391640255`
+- high:
+  - `gasLimit: 21000`
+  - `networkFee: 0.000933483353355`
+  - `networkFeeRaw: 0.000513483353355`
+  - `baseFee: 20`
+  - `priorityFee: 4.451588255`
+  - `maxFee: 44.451588255`
+
+No live transfer was executed.
 
 ## Claim boundary status
 
-- Circle Wallets transfer estimate: **NOT_CLAIMED** (still blocked pending token-ID resolution + successful estimate proof).
+- Circle Wallets transfer estimate: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**.
 - Circle Wallets signing/send/gasless: **NOT_CLAIMED**.
 - Paymaster: **NOT_CLAIMED**.

@@ -129,6 +129,8 @@ Allowed current claims:
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
 - Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read only)**
+- Circle Wallets transfer estimate path: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
+- Circle Wallets signing/send/gasless: **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
 Circle Wallets discovery note:
@@ -192,6 +194,19 @@ Circle Wallets verification evidence:
 - `.circle-recovery` remains git-ignored
 - No secrets committed
 - Safety follow-up: set/restore `CIRCLE_WALLETS_DRY_RUN=true` after live proof
+
+Circle Wallets transfer-estimate verification evidence (non-mutating):
+
+- Command: `npm run circle:wallets:list-balances`
+- Result: returned ARC-TESTNET `USDC` wallet balance with token id
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `symbol: USDC`, `name: USDC`, `blockchain: ARC-TESTNET`, `decimals: 18`, `amount: 20`
+- Command: `npm run circle:wallets:token-lookup`
+- Result: `candidateCount: 1`, `source: getWalletTokenBalance`, `id: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- Command: `npm run circle:wallets:estimate-transfer`
+- Env: `CIRCLE_WALLET_TRANSFER_TOKEN_ID=15dc2b5d-0994-58b0-bf8c-3a0501148ee8`, `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`
+- Result: transfer estimate succeeded (low/medium/high fee tiers recorded)
+- No live transfer was executed.
 
 Note: App Kit Send live send verified via `npm run appkit:send:arc:usdc` with `APPKIT_DRY_RUN=false` on Arc Testnet USDC (`0.01`), tx `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb`.
 

@@ -111,7 +111,7 @@ Important:
 - The estimate script fails intentionally if token id is missing.
 - Token lookup script (`circle:wallets:token-lookup`) is non-mutating and server-only; if it cannot resolve a token id from available SDK read endpoints, use Circle Console/API supported-token inventory as source of truth.
 - Wallet balance script (`circle:wallets:list-balances`) is non-mutating and server-only; it may reveal token IDs once the wallet actually holds the target token.
-- Current discovery classification: `BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID` (see `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`).
+- Current transfer-estimate classification: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED` (see `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`).
 
 ## Verified status and evidence (founder-run)
 
@@ -145,7 +145,21 @@ Claim boundary (strict):
 
 - ✅ Allowed: Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
 - ❌ Not allowed yet: signing verification, token transfer verification, gasless transaction verification, paymaster verification
-- ❌ Signing/send claim remains NOT_CLAIMED until transfer estimate/send proof is captured and verified
+- ✅ Transfer estimate claim allowed: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED` (non-mutating estimate proof captured)
+- ❌ Signing/send claim remains NOT_CLAIMED until live signing/send proof is captured and verified
+
+Additional verified proof (non-mutating):
+
+- Command: `npm run circle:wallets:list-balances`
+- Result: ARC-TESTNET USDC token ID resolved from wallet balance
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `symbol: USDC`, `blockchain: ARC-TESTNET`, `decimals: 18`, `amount: 20`
+- Command: `npm run circle:wallets:token-lookup`
+- Result: `candidateCount: 1`, `source: getWalletTokenBalance`, `id: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- Command: `npm run circle:wallets:estimate-transfer`
+- Env: `CIRCLE_WALLET_TRANSFER_TOKEN_ID=15dc2b5d-0994-58b0-bf8c-3a0501148ee8`, `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`
+- Result: transfer estimate succeeded (low/medium/high tiers recorded)
+- No live transfer was executed.
 
 Safety rule after any live wallet-creation run:
 

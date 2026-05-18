@@ -47,8 +47,12 @@ Circle Wallets discovery/readiness classification note:
 - Internal readiness scaffold status: **CURRENT_VERIFIED** (wallet creation + metadata read only)
 - Current public/demo status: **CURRENT_VERIFIED (wallet creation + metadata read only)** with strict boundary; signing/send/gasless/paymaster remain unverified.
 - Token-ID resolution discovery (Master Prompt #16): `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`
-- Current token-ID blocker classification: **BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID**
-- Added non-mutating helper: `npm run circle:wallets:list-balances` to surface wallet token IDs if/when token balance exists.
+- Token ID resolution proof now recorded via wallet balance and token lookup:
+  - `npm run circle:wallets:list-balances` → `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8` (`USDC`, `ARC-TESTNET`)
+  - `npm run circle:wallets:token-lookup` → `candidateCount: 1`, `source: getWalletTokenBalance`
+- Circle Wallets transfer estimate status: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
+- Transfer estimate proof: `npm run circle:wallets:estimate-transfer` with `CIRCLE_WALLET_TRANSFER_DRY_RUN=true` and explicit token id succeeded (low/medium/high tiers recorded).
+- No live transfer was executed.
 
 Paymaster discovery classification note:
 

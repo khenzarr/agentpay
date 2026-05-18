@@ -184,6 +184,8 @@ Notes:
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
 - Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read only)**
+- Circle Wallets transfer estimate path: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
+- Circle Wallets signing/send/gasless: **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
 Paymaster discovery update (Master Prompt #11B):
@@ -256,6 +258,21 @@ Circle Wallets verification evidence recorded:
 - `.circle-recovery` remains git-ignored
 - No secrets committed
 - Safety follow-up: set/restore `CIRCLE_WALLETS_DRY_RUN=true` after live proof
+
+Circle Wallets transfer-estimate verification evidence recorded:
+
+- Command: `npm run circle:wallets:list-balances`
+- Result: `returnedTokenBalanceCount=1`, `filteredCount=1`, `filterBlockchain=ARC-TESTNET`, `filterSymbol=USDC`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`, `symbol: USDC`, `name: USDC`, `blockchain: ARC-TESTNET`, `decimals: 18`, `amount: 20`
+- Command: `npm run circle:wallets:token-lookup`
+- Result: `lookupBlockchain=ARC-TESTNET`, `lookupSymbol=USDC`, `candidateCount=1`, `source=getWalletTokenBalance`, `id=15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- Command: `npm run circle:wallets:estimate-transfer`
+- Env: `CIRCLE_WALLET_TRANSFER_TOKEN_ID=15dc2b5d-0994-58b0-bf8c-3a0501148ee8`, `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`
+- Result: transfer estimate succeeded
+- Low tier: `gasLimit=21000`, `networkFee=0.000897567715086`, `networkFeeRaw=0.000477567715086`, `baseFee=20`, `priorityFee=2.741319766`, `maxFee=42.741319766`
+- Medium tier: `gasLimit=21000`, `networkFee=0.000911224445355`, `networkFeeRaw=0.000491224445355`, `baseFee=20`, `priorityFee=3.391640255`, `maxFee=43.391640255`
+- High tier: `gasLimit=21000`, `networkFee=0.000933483353355`, `networkFeeRaw=0.000513483353355`, `baseFee=20`, `priorityFee=4.451588255`, `maxFee=44.451588255`
+- No live transfer was executed.
 
 Strict claim boundary:
 

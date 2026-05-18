@@ -28,15 +28,15 @@ This roadmap represents active implementation direction. Product/grant claims re
 - spend estimate succeeded
 - live spend not executed due to high fee relative to test amount
 
-## 4) Implemented but blocked integrations
+## 4) Estimate-verified integrations (additional)
 
 11. Circle Wallets transfer estimate path
 
 - implemented path exists
-- blocked on official ARC-TESTNET USDC Circle Wallet token ID
-- token ID is unresolved in current lookup surface
+- ARC-TESTNET USDC token ID resolved from wallet balance discovery
+- transfer estimate verified in non-mutating mode
 - token-id resolution discovery document added: `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`
-- current classification: `BLOCKED_NEEDS_WALLET_FUNDING_TO_REVEAL_TOKEN_ID`
+- current classification: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED`
 - non-mutating balance helper added: `npm run circle:wallets:list-balances`
 - signing/send/gasless remains NOT_CLAIMED
 
@@ -49,15 +49,13 @@ This roadmap represents active implementation direction. Product/grant claims re
 
 ## 6) Next technical sprints
 
-1. Circle Wallets token ID resolution
-2. Circle Wallets transfer estimate verification
-3. Circle Wallets signing proof
-4. Circle Wallets send/transfer proof
-5. Circle Wallets gasless transaction proof
-6. Paymaster / Gas Station proof
-7. Gateway live spend decision (execute vs defer with rationale)
-8. Full ERC-8183 compatibility expansion
-9. ERC-8004 compatibility layer for identity/reputation evolution
+1. Circle Wallets signing proof
+2. Circle Wallets send/transfer proof
+3. Circle Wallets gasless transaction proof
+4. Paymaster / Gas Station proof
+5. Gateway live spend decision (execute vs defer with rationale)
+6. Full ERC-8183 compatibility expansion
+7. ERC-8004 compatibility layer for identity/reputation evolution
 
 ## 7) Proof rule
 
@@ -76,7 +74,6 @@ Roadmap targets are implementation goals, not shipped-status statements.
 
 ## 9) Risks and blockers
 
-- Official token ID blocker for Circle Wallets ARC-TESTNET USDC transfer estimate path
 - Gasless flow may require SCA/ERC-4337-compatible account path
 - Circle policy/permissions setup requirements for transaction operations
 - Fee economics (e.g., Gateway live spend cost vs test amount)

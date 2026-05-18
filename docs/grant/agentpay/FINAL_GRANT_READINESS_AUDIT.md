@@ -25,7 +25,7 @@ Related public docs:
 | 8 | Bridge / CCTP | CURRENT_VERIFIED | Claimable with approve/burn/mint proofs |
 | 9 | Circle Wallets (Developer-Controlled) | CURRENT_VERIFIED (wallet creation + metadata read only) | Signing/send/gasless NOT_CLAIMED |
 | 10 | Gateway / Unified Balance | CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED | Below CURRENT_VERIFIED; live spend not executed |
-| 11 | Circle Wallets transfer estimate path | IMPLEMENTED / BLOCKED | Blocked on official ARC-TESTNET USDC token ID |
+| 11 | Circle Wallets transfer estimate path | CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED | Non-mutating transfer estimate verified with resolved ARC-TESTNET USDC token ID |
 | 12 | Circle Wallets signing/send/gasless | NOT_CLAIMED | No runtime proof |
 | 13 | Paymaster | NOT_CLAIMED | Feasible in principle only |
 | 14 | Full ERC-8183 compliance | NOT_CLAIMED | Tutorial subset only |
@@ -86,10 +86,16 @@ Related public docs:
 
 ## 5) Remaining blockers
 
-1. Official `CIRCLE_WALLET_TRANSFER_TOKEN_ID` for ARC-TESTNET USDC is unresolved from installed SDK lookup surface (`candidateCount=0`).
-2. Circle Wallets signing/send/gasless runtime proof not captured.
-3. Paymaster runtime sponsored/gasless proof not captured.
-4. Gateway / Unified Balance live spend intentionally not executed (fee too high relative to test amount).
+1. Circle Wallets signing/send/gasless runtime proof not captured.
+2. Paymaster runtime sponsored/gasless proof not captured.
+3. Gateway / Unified Balance live spend intentionally not executed (fee too high relative to test amount).
+
+Circle Wallets transfer-estimate proof addendum:
+
+- `npm run circle:wallets:list-balances` returned ARC-TESTNET `USDC` token balance with `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`.
+- `npm run circle:wallets:token-lookup` returned `candidateCount: 1`, `source: getWalletTokenBalance`, `id: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`.
+- `npm run circle:wallets:estimate-transfer` succeeded using `CIRCLE_WALLET_TRANSFER_TOKEN_ID=15dc2b5d-0994-58b0-bf8c-3a0501148ee8` and `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`.
+- No live transfer was executed.
 
 ---
 
