@@ -107,7 +107,7 @@ Do not claim:
 - Full ERC-8183 compliance
 - App Kit integrated
 - Gateway integrated
-- Circle Wallets integrated
+- Circle Wallets signing/send/gasless/paymaster integrated
 - Paymaster integrated
 
 ## 11) Circle product claims allowed now
@@ -123,7 +123,7 @@ Allowed current claims:
 - App Kit Send: **CURRENT_VERIFIED**
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
-- Circle Wallets (developer-controlled): **NOT_CLAIMED**
+- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation only)**
 - Paymaster: **NOT_CLAIMED**
 
 Circle Wallets discovery note:
@@ -131,19 +131,41 @@ Circle Wallets discovery note:
 - See `docs/grant/agentpay/CIRCLE_WALLETS_DISCOVERY.md`
 - Discovery classification: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
 - Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only credential handling)
-- Arc Testnet support appears in official Circle Wallets chain support docs, but no in-repo Circle Wallet create/sign/send proof exists.
+- Arc Testnet support appears in official Circle Wallets chain support docs, and founder-run server-only wallet creation proof is now captured.
 
-Circle Wallets server-only readiness scaffold note (Master Prompt #10A):
+Circle Wallets server-only readiness scaffold note (Master Prompt #10B):
 
 - Setup/runbook added: `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`
 - Local readiness script added: `scripts/circle-wallets-readiness.ts`
 - Readiness command added: `npm run circle:wallets:readiness`
+- Setup commands added:
+  - `npm run circle:wallets:generate-entity-secret`
+  - `npm run circle:wallets:register-entity-secret`
+  - `npm run circle:wallets:create:arc`
 - Circle env placeholders added to `.env.example` as server-only vars (no `NEXT_PUBLIC_*`)
 - `.gitignore` now explicitly covers `.env.circle.local` patterns
-- Internal readiness state: **CURRENT_CODE_IMPLEMENTED_PENDING_WALLET_PROOF**
-- Product claim remains: **NOT_CLAIMED**
+- Internal readiness state: **CURRENT_VERIFIED** (wallet creation only)
+- Product claim: **CURRENT_VERIFIED (wallet creation only)**
 - Classification gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
-- No live wallet creation/sign/send executed in this sprint.
+- Founder-run live wallet creation proof captured in this sprint; signing/send remains unverified.
+
+Circle Wallets verification evidence:
+
+- Command: `npm run circle:wallets:register-entity-secret`
+- Result: entity secret registered successfully
+- Recovery directory: `./.circle-recovery`
+- Command: `npm run circle:wallets:readiness`
+- Result: readiness checks passed (redacted secret output; no wallet mutation calls)
+- Command: `npm run circle:wallets:create:arc`
+- Result: wallet creation succeeded
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+- `blockchain: ARC-TESTNET`
+- `.env.circle.local` remains git-ignored
+- `.circle-recovery` remains git-ignored
+- No secrets committed
+- Safety follow-up: set/restore `CIRCLE_WALLETS_DRY_RUN=true` after live proof
 
 Note: App Kit Send live send verified via `npm run appkit:send:arc:usdc` with `APPKIT_DRY_RUN=false` on Arc Testnet USDC (`0.01`), tx `0x88866008ae2a9c71d9b868d33dae5df88995b57e06c8dfb22074f6406eef6fbb`.
 
@@ -252,7 +274,7 @@ For App Kit Send private-key usage, run via isolated env file `.env.appkit.local
 | `/jobs` and `/payments` indexing | ✅ Implemented (demo-range) | Label as indexed demo block range only |
 | ArcNS resolution | 🟨 Optional/non-blocking | Show with `agentpayagent.circle` (agent) and `agentpayclient.arc` (client/evaluator); fallback to raw wallet if resolver fails |
 | App Kit Send | ✅ CURRENT_VERIFIED | Live send verified on Arc Testnet USDC with isolated `.env.appkit.local`; private key not printed |
-| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets/Paymaster remain **NOT_CLAIMED** |
+| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED (wallet creation only)**; Paymaster remains **NOT_CLAIMED** |
 
 Gateway / Unified Balance live deposit + confirmed-balance verification evidence recorded:
 
@@ -311,16 +333,17 @@ Spend estimate verification update:
 - [ ] `/jobs` and `/payments` show indexed data in selected range
 - [ ] Claims in narration match implemented scope only
 
-## 17) Circle Wallets founder approval gate (no implementation in this sprint)
+## 17) Circle Wallets founder safety gate (post-wallet-creation proof)
 
-Before any Circle Wallets implementation or verification run:
+Wallet creation is verified. For any next Circle Wallets step (sign/send/gasless), keep these gates:
 
 1. Founder confirms Circle Developer Console readiness.
-2. Founder approves backend/server-only scope for Circle secrets.
-3. Founder provisions Circle API key + entity secret flow out-of-band (never in chat, never in client code).
-4. Founder approves minimal verification sequence (wallet create/sign/send with artifact capture).
+2. Founder keeps Circle secrets server-only and out-of-chat/client scope.
+3. Founder approves each live mutation step explicitly (sign/send).
+4. Capture artifacts without exposing secrets.
 
-Until the above is complete, Circle Wallets remains **NOT_CLAIMED**.
+Current status boundary: **CURRENT_VERIFIED (wallet creation only)**.
+Unverified: signing, token transfer/send, gasless, paymaster.
 
 ---
 

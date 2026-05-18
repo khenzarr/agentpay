@@ -1,7 +1,7 @@
 # Circle Wallets Discovery — AgentPay (Master Prompt #10)
 
 **Date:** 2026-05-18  
-**Scope:** Discovery-first feasibility only. No Circle Wallets product code was implemented in this sprint.
+**Scope:** Discovery-to-verification documentation for Circle Developer-Controlled Wallets on Arc Testnet.
 
 ## 1) Official docs used
 
@@ -46,7 +46,7 @@ Official supported-blockchains docs list **Arc Testnet (`ARC-TESTNET`)** for Cir
 
 ## 6) Is Arc Testnet supported?
 
-**Yes (documentation-level support).** Arc Testnet appears in official Circle Wallets supported-blockchains documentation.
+**Yes.** Arc Testnet appears in official Circle Wallets supported-blockchains documentation, and founder-run wallet creation was verified on `ARC-TESTNET` in this repo.
 
 ## 7) Is USDC on Arc Testnet supported?
 
@@ -54,15 +54,15 @@ Official supported-blockchains docs list **Arc Testnet (`ARC-TESTNET`)** for Cir
 
 ## 8) Is wallet creation possible now?
 
-**Not in this repo right now** without founder-provided Circle Console credentials and secret setup.
+**Yes (verified).** Founder-run server-only flow completed wallet creation on `ARC-TESTNET` with captured artifacts.
 
 ## 9) Is transaction signing/sending possible now?
 
-**Not in this repo right now** for Circle Wallets due to missing Circle credentials/secret configuration and absent dedicated backend/server integration path.
+**Not yet verified in this repo.** Wallet creation is verified, but Circle Wallets signing/sending runtime proof has not been captured yet for claim purposes.
 
 ## 10) Is minimal verification possible now?
 
-**No (hard-stop).** Minimal Circle Wallets verification requires real Circle credentials and server-side execution.
+**Yes (for wallet creation only).** Minimal Circle Wallets verification has been completed for developer-controlled wallet creation using real Circle credentials in a server-only flow.
 
 ## 11) Security model
 
@@ -91,19 +91,15 @@ Minimal safe path:
 
 ### Final classification
 
-**FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
-
-Additional blockers in current repo state:
-
-- **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secret handling path not yet scoped/approved)
-- Potential account/setup prerequisites in Circle Console before live wallet operations
+- Operational continuation gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
+- Product/public status: **CURRENT_VERIFIED (wallet creation only)**
 
 ### Status guidance for grant claims now
 
-- Keep Circle Wallets as **NOT_CLAIMED** in product/demo status docs.
-- Do not upgrade to `CURRENT_VERIFIED` until real Circle Wallet creation/sign/send proof exists.
+- Keep Circle Wallets claim at **CURRENT_VERIFIED (wallet creation only)**.
+- Do not upgrade to broader `CURRENT_VERIFIED` for signing/send/gasless/paymaster until separate runtime proofs exist.
 
-## 15) Server-only setup/readiness scaffold update (Master Prompt #10A)
+## 15) Server-only setup/readiness scaffold update (Master Prompt #10B)
 
 Implemented in this sprint:
 
@@ -111,36 +107,65 @@ Implemented in this sprint:
 - `.env.example` now includes Circle Wallets server-only placeholders:
   - `CIRCLE_API_KEY`
   - `CIRCLE_ENTITY_SECRET`
-  - `CIRCLE_ENTITY_SECRET_CIPHERTEXT`
   - `CIRCLE_WALLET_SET_ID`
   - `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
   - `CIRCLE_WALLETS_DRY_RUN=true`
+  - `CIRCLE_WALLET_SET_NAME=AgentPay Arc Testnet Wallet Set`
+  - `CIRCLE_WALLET_ACCOUNT_TYPE=EOA`
 - New server-only setup doc:
   - `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`
 - New local readiness script (no live mutation calls):
   - `scripts/circle-wallets-readiness.ts`
 - New package command:
   - `npm run circle:wallets:readiness`
+- New local entity-secret and wallet scripts:
+  - `npm run circle:wallets:generate-entity-secret`
+  - `npm run circle:wallets:register-entity-secret`
+  - `npm run circle:wallets:create:arc`
 
 Dependency/API decision for this sprint:
 
-- No new Circle Wallets SDK dependency was added.
-- Readiness was implemented as a local env-validation scaffold only.
-- Live wallet create/sign/send API calls remain deferred until explicit founder approval and runtime verification scope.
+- Official Circle SDK is used: `@circle-fin/developer-controlled-wallets`.
+- Readiness + secure setup scripts were implemented server-side only.
+- Live wallet create/sign/send remains deferred until explicit founder-run command with `CIRCLE_WALLETS_DRY_RUN=false`.
 
 Current classification update:
 
 - Feasibility gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
-- Internal implementation/readiness: **CURRENT_CODE_IMPLEMENTED_PENDING_WALLET_PROOF**
-- Product/public claim status: **NOT_CLAIMED**
+- Internal implementation/readiness: **CURRENT_VERIFIED** (wallet creation on ARC-TESTNET)
+- Product/public claim status: **CURRENT_VERIFIED (wallet creation only)**
 
-No live wallet creation or signing/sending was executed in this sprint.
+## 16) Verification update — live founder-run proof captured
 
-## Founder approval gate (stop condition)
+Verified in founder-run server-only flow:
 
-Before any Circle Wallets implementation:
+- Entity Secret registered successfully (`npm run circle:wallets:register-entity-secret`)
+- Recovery directory: `./.circle-recovery`
+- Readiness passed (`npm run circle:wallets:readiness`) with redacted secret output and no wallet mutation calls
+- Wallet set created/reused successfully
+- ARC-TESTNET wallet created successfully (`npm run circle:wallets:create:arc`)
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+- `blockchain: ARC-TESTNET`
+- `.env.circle.local` remains git-ignored
+- `.circle-recovery` remains git-ignored
+- No secrets committed
 
-1. Founder confirms Circle Developer Console access and account readiness.
-2. Founder provisions required API credentials and entity-secret setup.
-3. Founder approves backend/server-only scope for secrets.
-4. Founder approves verification runbook (no live value transfer unless explicitly approved).
+Claim boundary (strict):
+
+- ✅ Allowed claim: **Circle Developer-Controlled Wallet creation verified on ARC-TESTNET**
+- ❌ Not yet verified/claimable: Circle Wallets signing, token transfer, gasless transaction, paymaster
+
+Safety reminder after live proof:
+
+- Set/restore `CIRCLE_WALLETS_DRY_RUN=true` to prevent accidental duplicate wallet creation.
+
+## Founder approval gate (continuation safety)
+
+Before any next Circle Wallets live mutation beyond wallet creation:
+
+1. Founder confirms Circle Developer Console/project readiness remains valid.
+2. Founder keeps API credentials and entity-secret materials server-only.
+3. Founder approves each additional live step explicitly (sign/send/gasless).
+4. Founder restores `CIRCLE_WALLETS_DRY_RUN=true` after any live wallet-creation run to prevent accidental duplicates.

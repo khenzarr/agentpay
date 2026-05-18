@@ -1,83 +1,88 @@
-# Circle Wallets Server-Only Setup — AgentPay (Master Prompt #10A)
+# Circle Wallets Server Setup — Developer-Controlled Wallets (Arc Testnet)
 
 **Date:** 2026-05-18  
-**Scope:** Server-only readiness scaffold for Circle Wallets (Developer-Controlled Wallets). No live wallet creation/sign/send in this sprint.
+**Scope:** Server-only setup path for Circle Developer-Controlled Wallets. No automatic live wallet creation.
 
-## 1) Why Developer-Controlled Wallets are relevant to AgentPay
+## Security rules
 
-AgentPay’s autonomous agent flows require backend-controlled automation points for wallet lifecycle and transaction orchestration. Circle Developer-Controlled Wallets align with this model by keeping sensitive signing/auth flows in trusted backend execution paths.
+- Never expose Circle secrets in client code.
+- Never use `NEXT_PUBLIC_*` for Circle credentials.
+- Never commit `.env.circle.local` or recovery artifacts.
+- Never paste API key/entity secret in chat.
 
-## 2) Why secrets must be server-only
+## Required env file
 
-Circle Wallets credentials are sensitive and must never be exposed in browser bundles.
+Use `.env.circle.local` only:
 
-- Never use `NEXT_PUBLIC_*` for Circle secrets.
-- Never place Circle secrets in client components or frontend env files.
-- Use server-only execution contexts (local server script/API route/worker) with redacted logs.
+```bash
+CIRCLE_API_KEY=
+CIRCLE_ENTITY_SECRET=
+CIRCLE_WALLET_SET_ID=
+CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET
+CIRCLE_WALLETS_DRY_RUN=true
+CIRCLE_WALLET_SET_NAME=AgentPay Arc Testnet Wallet Set
+CIRCLE_WALLET_ACCOUNT_TYPE=EOA
+```
 
-## 3) Required Circle Console assets
+`CIRCLE_ENTITY_SECRET_CIPHERTEXT` is optional and only relevant for direct REST paths. It is not required for the official SDK quickstart flow used here.
 
-For readiness and later wallet operations:
+## Founder runbook (manual)
 
-1. Circle API Key
-2. Entity Secret
-3. `entitySecretCiphertext` (for relevant request flows)
-4. Wallet Set ID (required for wallet creation flow)
+1. Create Circle API key in Circle Console.
+2. Generate entity secret locally:
 
-## 4) Required local env file
+```bash
+npm run circle:wallets:generate-entity-secret
+```
 
-- `.env.circle.local` (local-only, git-ignored)
+3. Store entity secret in a password manager.
+4. Add `CIRCLE_API_KEY` and `CIRCLE_ENTITY_SECRET` to `.env.circle.local`.
+5. Register entity secret and download recovery file:
 
-Do not place Circle secrets in `.env.local`.
+```bash
+npm run circle:wallets:register-entity-secret
+```
 
-## 5) Exact env variable names
+6. Secure recovery artifact from `.circle-recovery/`.
+7. Run readiness checks:
 
-- `CIRCLE_API_KEY`
-- `CIRCLE_ENTITY_SECRET`
-- `CIRCLE_ENTITY_SECRET_CIPHERTEXT`
-- `CIRCLE_WALLET_SET_ID`
-- `CIRCLE_TESTNET_BLOCKCHAIN=ARC-TESTNET`
-- `CIRCLE_WALLETS_DRY_RUN=true`
+```bash
+npm run circle:wallets:readiness
+```
 
-## 6) What is safe to commit vs not safe
+8. Dry-run wallet creation (safe mode by default):
 
-Safe to commit:
+```bash
+npm run circle:wallets:create:arc
+```
 
-- Placeholder names in `.env.example`
-- Server-only readiness script code without real secrets
-- Documentation and status updates
+9. Live creation only after explicit approval and env change:
 
-Not safe to commit:
+```bash
+# in .env.circle.local
+CIRCLE_WALLETS_DRY_RUN=false
 
-- `.env.circle.local`
-- Real API keys, entity secret values, or raw ciphertext values
+npm run circle:wallets:create:arc
+```
 
-## 7) Arc testnet target
+## Verified status and evidence (founder-run)
 
-- Circle Wallets target chain for this integration path: `ARC-TESTNET`
+Circle Wallets is now `CURRENT_VERIFIED` for **wallet creation on ARC-TESTNET only** after capturing real proof artifacts:
 
-## 8) Readiness checklist
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
+- `blockchain: ARC-TESTNET`
+- Entity Secret registration succeeded
+- Recovery directory confirmed: `./.circle-recovery`
+- `.env.circle.local` and `.circle-recovery` remain git-ignored
+- No secrets committed
 
-- [ ] `.env.circle.local` created locally
-- [ ] Required Circle env vars populated (server-only)
-- [ ] `npm run circle:wallets:readiness` passes
-- [ ] Secrets are redacted in logs
-- [ ] No client-side secret usage
+Claim boundary (strict):
 
-## 9) What counts as proof in later sprint
+- ✅ Allowed: Circle Developer-Controlled Wallet creation verified on ARC-TESTNET
+- ❌ Not allowed yet: signing verification, token transfer verification, gasless transaction verification, paymaster verification
 
-Circle Wallets can be upgraded only after runtime artifacts are captured:
+Safety rule after any live wallet-creation run:
 
-1. Wallet set created or identified
-2. Wallet created on `ARC-TESTNET`
-3. Wallet address recorded as artifact
-4. Optional: test transaction/signing artifact (if explicitly approved)
-
-## 10) Current status policy
-
-- Current implementation in this sprint: server-only readiness scaffold
-- Circle Wallets claim status: **NOT_CLAIMED**
-- Classification: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
-- Internal scaffold status: **CURRENT_CODE_IMPLEMENTED_PENDING_WALLET_PROOF**
-
-No live wallet creation/sign/send was run in this sprint.
+- Set/restore `CIRCLE_WALLETS_DRY_RUN=true` in `.env.circle.local` to prevent accidental duplicate wallet creation.

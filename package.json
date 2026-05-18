@@ -16,9 +16,13 @@
     "appkit:ub:check": "tsx --env-file=.env.appkit.local scripts/appkit-unified-balance-check.ts",
     "appkit:ub:spend:arc": "tsx --env-file=.env.appkit.local scripts/appkit-unified-balance-spend-to-arc.ts",
     "appkit:ub:deposit": "tsx --env-file=.env.appkit.local scripts/appkit-unified-balance-deposit.ts",
-    "circle:wallets:readiness": "tsx --env-file=.env.circle.local scripts/circle-wallets-readiness.ts"
+    "circle:wallets:readiness": "tsx --env-file=.env.circle.local scripts/circle-wallets-readiness.ts",
+    "circle:wallets:generate-entity-secret": "tsx scripts/circle-wallets-generate-entity-secret.ts",
+    "circle:wallets:register-entity-secret": "tsx --env-file=.env.circle.local scripts/circle-wallets-register-entity-secret.ts",
+    "circle:wallets:create:arc": "tsx --env-file=.env.circle.local scripts/circle-wallets-create-arc-wallet.ts"
   },
   "dependencies": {
+    "@circle-fin/developer-controlled-wallets": "^10.3.1",
     "@tanstack/react-query": "^5.99.0",
     "@wagmi/connectors": "^8.0.1",
     "next": "16.2.3",
