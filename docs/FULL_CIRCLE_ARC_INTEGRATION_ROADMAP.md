@@ -132,6 +132,13 @@ Remaining blockers to verification:
 - Keep estimate-verified and blocked items explicitly labeled.
 - Present this roadmap as active implementation direction, not completed status.
 
+## Circle Paymaster / Gasless chain-aware support labeling
+
+- Circle Paymaster / Gasless is chain-aware in AgentPay.
+- Available on Circle Paymaster-supported networks.
+- Unsupported on Arc Testnet until Circle Paymaster support/deployment is available.
+- Client-side readiness is complete, but Arc Testnet live proof remains NOT_CLAIMED.
+
 ## 11) Master Prompt #30E docs revision (Circle Paymaster quickstart path)
 
 Official quickstart findings now recorded in roadmap context:
@@ -266,4 +273,5 @@ Classification:
 - BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
 - READINESS_COMPLETE_CLIENT_SIDE
 - DO_NOT_CLAIM
+
 

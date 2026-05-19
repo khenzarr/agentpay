@@ -485,3 +485,11 @@ Classification:
 - READINESS_COMPLETE_CLIENT_SIDE
 - DO_NOT_CLAIM
 
+## Chain-aware Circle Paymaster / Gasless labeling
+
+- Circle Paymaster / Gasless is chain-aware in AgentPay.
+- Available on Circle Paymaster-supported networks.
+- Unsupported on Arc Testnet until Circle Paymaster support/deployment is available.
+- Client-side readiness is complete, but Arc Testnet live proof remains NOT_CLAIMED.
+
+
