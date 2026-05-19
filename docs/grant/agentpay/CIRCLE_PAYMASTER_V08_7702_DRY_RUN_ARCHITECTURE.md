@@ -196,3 +196,30 @@ Claim boundary unchanged:
 
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
+
+---
+
+## 13. Owner signer readiness checkpoint (Master Prompt #33)
+
+- Added script: `scripts/circle-paymaster-v08-7702-owner-readiness.ts`
+- Added command: `npm run circle:paymaster:v08-7702:owner-readiness`
+- Added doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_OWNER_READINESS.md`
+
+Owner readiness scope in this checkpoint:
+
+- server-only
+- no network calls
+- no signing
+- no userOperation submission
+- no transactions
+
+Recorded owner findings:
+
+- future owner helper: `privateKeyToAccount` from `viem/accounts`
+- owner address derivation from private key can be local/offline
+- dry-run guardrail enforced by `PAYMASTER_7702_OWNER_DRY_RUN=true`
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`

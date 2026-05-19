@@ -123,3 +123,30 @@ Status remains unchanged:
 4. execute one approved tiny sponsored userOp
 5. capture deterministic artifacts (`userOpHash`, receipt, `txHash`, paymaster evidence)
 6. re-evaluate claim boundary
+
+---
+
+## 10. Owner signer readiness checkpoint (Master Prompt #33)
+
+- Added script: `scripts/circle-paymaster-v08-7702-owner-readiness.ts`
+- Added command: `npm run circle:paymaster:v08-7702:owner-readiness`
+- Added doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_OWNER_READINESS.md`
+
+Safety posture in this checkpoint:
+
+- no network calls
+- no signing
+- no userOperation submission
+- no transactions
+
+Owner-readiness findings recorded:
+
+- owner account helper: `privateKeyToAccount` from `viem/accounts`
+- owner address can be derived locally from private key without signing
+- script enforces `PAYMASTER_7702_OWNER_DRY_RUN=true`
+- script rejects placeholder/private-key mismatch scenarios
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`

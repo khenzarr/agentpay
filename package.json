@@ -33,6 +33,7 @@
     "circle:paymaster:sponsored-transfer": "tsx --env-file=.env.circle.local scripts/circle-paymaster-sponsored-transfer.ts",
     "circle:paymaster:v08-7702:dry-run": "tsx --env-file=.env.circle.local scripts/circle-paymaster-v08-7702-dry-run.ts",
     "circle:paymaster:v08-7702:account-dry-run": "tsx scripts/circle-paymaster-v08-7702-account-dry-run.ts",
+    "circle:paymaster:v08-7702:owner-readiness": "tsx --env-file=.env.circle.local scripts/circle-paymaster-v08-7702-owner-readiness.ts",
     "paymaster:proof-path:inspect": "tsx scripts/paymaster-proof-path-inspect.ts",
     "appkit:paymaster:surface": "tsx scripts/appkit-paymaster-surface-inspect.ts",
     "raw-erc4337:infra:readiness": "tsx --env-file=.env.circle.local scripts/raw-erc4337-infra-readiness.ts"

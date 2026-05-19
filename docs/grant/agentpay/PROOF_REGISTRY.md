@@ -273,6 +273,35 @@ Status unchanged:
 - paymasterStatus=`NOT_CLAIMED`
 - gaslessStatus=`NOT_CLAIMED`
 
+## Master Prompt #33 — Circle Paymaster v0.8 7702 owner signer readiness (server-only)
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-v08-7702-owner-readiness.ts`
+- Command: `npm run circle:paymaster:v08-7702:owner-readiness`
+- Doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_OWNER_READINESS.md`
+
+Recorded findings:
+
+- owner helper for future 7702 path: `privateKeyToAccount` from `viem/accounts`
+- owner public address can be derived from private key locally without signing
+- enforced guardrails:
+  - `PAYMASTER_7702_OWNER_DRY_RUN` must be true
+  - placeholder/all-zero keys are rejected
+  - expected-address mismatch is rejected when configured
+
+Checkpoint safety boundary:
+
+- no network calls
+- no signing
+- no userOperation submission
+- no token transfers
+- no wallet creation
+
+Status unchanged:
+
+- paymasterStatus=`NOT_CLAIMED`
+- gaslessStatus=`NOT_CLAIMED`
+
 ## Master Prompt #26 — Live sponsored-transfer attempt failure checkpoint
 
 - Date: 2026-05-19
