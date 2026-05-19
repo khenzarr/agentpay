@@ -147,3 +147,28 @@ Status unchanged:
 
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+## 14. SCA wallet creation verification update (Master Prompt #24)
+
+Developer-Controlled SCA wallet creation is now runtime-verified on `ARC-TESTNET`:
+
+- Command: `npm run circle:wallets:create-sca:arc`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `walletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `accountType: SCA`
+- `state: LIVE`
+- `responseStatus: success`
+
+Allowed claim update:
+
+- Circle Developer-Controlled SCA wallet creation verified on ARC-TESTNET.
+
+Boundary remains strict:
+
+- No sponsored transaction was executed.
+- No Paymaster userOperation was executed.
+- No gasless flow was executed.
+- No token transfer was executed in this SCA creation step.
+- No secrets were printed.

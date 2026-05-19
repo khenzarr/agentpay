@@ -15,9 +15,22 @@ This document is discovery + planning only.
 - App Kit Send: `CURRENT_VERIFIED`
 - Bridge/CCTP: `CURRENT_VERIFIED`
 - Circle Wallets wallet creation/read: `CURRENT_VERIFIED`
+- Circle Wallets SCA wallet creation: `CURRENT_VERIFIED` (Developer-Controlled SCA wallet created on ARC-TESTNET)
 - Circle Wallets message signing: `CURRENT_VERIFIED`
 - Circle Wallets live tiny transfer/send: `CURRENT_VERIFIED`
 - Gateway/Unified Balance: `CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED`
+
+SCA creation proof (wallet creation only; no sponsorship flow):
+
+- Command: `npm run circle:wallets:create-sca:arc`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `walletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `accountType: SCA`
+- `state: LIVE`
+- `responseStatus: success`
+- No sponsored transaction executed, no Paymaster userOp executed, no token transfer executed, no secrets printed.
 
 Unchanged boundaries:
 
@@ -64,7 +77,14 @@ For claimable paymaster proof, treat **SCA as required** path.
 - Most direct continuation from existing Circle Wallets integration.
 - Likely depends on Console paymaster/gas station policy eligibility.
 
-Status now: `FEASIBLE_BUT_NEEDS_SCA_WALLET_CREATION`
+Status now: `CURRENT_VERIFIED` for SCA wallet creation only.
+
+Important boundary:
+
+- This does **not** verify Paymaster.
+- This does **not** verify gasless transaction flow.
+- This does **not** verify sponsored userOperation execution.
+- This does **not** verify full ERC-4337 integration.
 
 ### B) App Kit path
 

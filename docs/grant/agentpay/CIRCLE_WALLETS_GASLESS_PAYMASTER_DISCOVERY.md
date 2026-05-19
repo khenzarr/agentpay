@@ -30,6 +30,17 @@ Existing verified wallet:
 - `custodyType: DEVELOPER`
 - `state: LIVE`
 
+Additional verified wallet creation proof (SCA):
+
+- Command: `npm run circle:wallets:create-sca:arc`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `walletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `accountType: SCA`
+- `state: LIVE`
+- `responseStatus: success`
+
 Finding:
 
 - Existing wallet is **EOA** and is already verified for metadata read, message signing, estimate transfer, and tiny live transfer/send.
@@ -169,6 +180,15 @@ This is **documentation-level confirmation only** and does not change claim stat
 
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+Master Prompt #24 update (runtime wallet-creation proof only):
+
+- Circle Developer-Controlled SCA wallet creation is now `CURRENT_VERIFIED` on ARC-TESTNET.
+- No sponsored transaction executed.
+- No Paymaster userOperation executed.
+- No gasless flow executed.
+- No token transfer executed in this SCA wallet creation step.
+- No secrets printed.
 
 Reference analysis document:
 

@@ -31,7 +31,20 @@ This roadmap represents active implementation direction. Product/grant claims re
 6. ArcNS optional identity display/resolution support
 7. App Kit Send
 8. Bridge / CCTP
-9. Circle Wallets — Developer-Controlled wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send proof
+9. Circle Wallets — Developer-Controlled EOA wallet creation/read + SCA wallet creation (ARC-TESTNET) + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send proof
+
+SCA wallet creation proof update:
+
+- Command: `npm run circle:wallets:create-sca:arc`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `walletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `accountType: SCA`
+- `state: LIVE`
+- `responseStatus: success`
+- Allowed claim: Circle Developer-Controlled SCA wallet creation verified on ARC-TESTNET.
+- Boundary: no sponsored transaction executed, no Paymaster userOperation executed, no token transfer executed in this SCA creation step.
 
 ## 3) Estimate-verified integrations
 

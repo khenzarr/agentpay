@@ -23,7 +23,7 @@ Related public docs:
 | 6 | ArcNS identity display/resolution | CURRENT_VERIFIED (optional) | Optional/non-blocking |
 | 7 | App Kit Send | CURRENT_VERIFIED | Claimable with tx proof |
 | 8 | Bridge / CCTP | CURRENT_VERIFIED | Claimable with approve/burn/mint proofs |
-| 9 | Circle Wallets (Developer-Controlled) | CURRENT_VERIFIED (wallet creation + metadata read + token ID resolution + transfer estimate + message signing + tiny transfer/send) | Gasless remains NOT_CLAIMED |
+| 9 | Circle Wallets (Developer-Controlled) | CURRENT_VERIFIED (EOA wallet creation/read + SCA wallet creation + token ID resolution + transfer estimate + message signing + tiny transfer/send) | Gasless remains NOT_CLAIMED |
 | 10 | Gateway / Unified Balance | CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED | Below CURRENT_VERIFIED; live spend not executed |
 | 11 | Circle Wallets transfer estimate path | CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED | Non-mutating transfer estimate verified with resolved ARC-TESTNET USDC token ID |
 | 12 | Circle Wallets gasless | NOT_CLAIMED | No gasless runtime proof |
@@ -81,6 +81,12 @@ Related public docs:
 - walletId: `d99113e2-2e24-5d3f-ab6d-7b8c49367566`
 - walletAddress: `0x156c37d9a28b67588720116a13fba1ff7a5275f8`
 - blockchain: `ARC-TESTNET`, accountType: `EOA`, custodyType: `DEVELOPER`, state: `LIVE`
+- SCA creation command: `npm run circle:wallets:create-sca:arc`
+- SCA walletId: `494ad75a-4d03-5021-9ddb-0c70cf566954`
+- SCA walletAddress: `0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- SCA blockchain/accountType/state: `ARC-TESTNET` / `SCA` / `LIVE`
+- SCA creation responseStatus: `success`
+- Boundary for SCA creation proof: no sponsored transaction, no Paymaster userOperation, no token transfer, no secrets printed.
 - message signing command: `npm run circle:wallets:sign-message`
 - message: `AgentPay Circle Wallets signing proof on ARC-TESTNET`
 - signature captured (server-only benign message signing), status: `200`
@@ -136,7 +142,7 @@ Circle Wallets transfer-estimate proof addendum:
 - Use: **“mainnet-ready; waiting for Arc mainnet availability.”**
 - Use: **“not claimed until runtime proof exists.”**
 - Keep Gateway wording at: **implemented + deposit/balance/estimate verified; live spend not executed**.
-- Keep Circle Wallets wording at: **wallet creation, metadata read, token ID resolution, transfer estimate, message signing, tiny transfer/send verified; gasless NOT_CLAIMED**.
+- Keep Circle Wallets wording at: **EOA wallet creation/read + SCA wallet creation verified on ARC-TESTNET, plus metadata read, token ID resolution, transfer estimate, message signing, tiny transfer/send verified; gasless NOT_CLAIMED**.
 - Keep Paymaster wording at: **feasible in principle, NOT_CLAIMED**.
 
 ---

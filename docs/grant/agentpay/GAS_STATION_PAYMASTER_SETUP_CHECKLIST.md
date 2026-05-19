@@ -34,6 +34,7 @@ Claim boundary reminder:
 Circle Wallets base scope on `ARC-TESTNET` is already verified (non-gasless path):
 
 - Wallet creation + metadata read: `CURRENT_VERIFIED`
+- SCA wallet creation (developer-controlled): `CURRENT_VERIFIED`
 - Message signing: `CURRENT_VERIFIED`
 - Transfer estimate: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED`
 - Tiny live transfer/send: `CURRENT_VERIFIED`
@@ -47,6 +48,18 @@ Known wallet proof:
 - `accountType: EOA`
 - `custodyType: DEVELOPER`
 - `state: LIVE`
+
+Known SCA wallet creation proof:
+
+- Command: `npm run circle:wallets:create-sca:arc`
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `walletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `accountType: SCA`
+- `state: LIVE`
+- `responseStatus: success`
+- No sponsored transaction executed; no Paymaster userOperation executed; no token transfer executed in this SCA creation step.
 
 Known live transfer proof:
 

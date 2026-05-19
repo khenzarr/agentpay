@@ -128,7 +128,7 @@ Allowed current claims:
 - App Kit Send: **CURRENT_VERIFIED**
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
-- Circle Wallets (developer-controlled): **CURRENT_VERIFIED** (wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
+- Circle Wallets (developer-controlled): **CURRENT_VERIFIED** (EOA wallet creation/read + SCA wallet creation on ARC-TESTNET + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
 - Circle Wallets transfer estimate path: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
 - Circle Wallets signing: **CURRENT_VERIFIED** (message signing only)
 - Circle Wallets send/transfer: **CURRENT_VERIFIED** (live tiny transfer/send on ARC-TESTNET)
@@ -167,8 +167,8 @@ Circle Wallets server-only readiness scaffold note (Master Prompt #10B):
   - `npm run circle:wallets:create:arc`
 - Circle env placeholders added to `.env.example` as server-only vars (no `NEXT_PUBLIC_*`)
 - `.gitignore` now explicitly covers `.env.circle.local` patterns
-- Internal readiness state: **CURRENT_VERIFIED** (wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
-- Product claim: **CURRENT_VERIFIED** (wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
+- Internal readiness state: **CURRENT_VERIFIED** (EOA wallet creation/read + SCA wallet creation on ARC-TESTNET + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
+- Product claim: **CURRENT_VERIFIED** (EOA wallet creation/read + SCA wallet creation on ARC-TESTNET + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
 - Classification gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
 - Founder-run live wallet creation proof and tiny live transfer/send finality proof captured in this sprint; gasless/paymaster remain unverified.
 
@@ -189,6 +189,16 @@ Circle Wallets verification evidence:
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
 - `walletAddress: 0x156c37d9a28b67588720116a13fba1ff7a5275f8`
 - `blockchain: ARC-TESTNET`
+- Command: `npm run circle:wallets:create-sca:arc`
+- Result: SCA wallet creation succeeded
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `walletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `accountType: SCA`
+- `state: LIVE`
+- `responseStatus: success`
+- No sponsored transaction executed; no Paymaster userOperation executed; no token transfer executed in this SCA creation step; no secrets printed.
 - Command: `npm run circle:wallets:get-wallet`
 - Result: wallet metadata fetched
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
@@ -323,7 +333,7 @@ For App Kit Send private-key usage, run via isolated env file `.env.appkit.local
 | `/jobs` and `/payments` indexing | ✅ Implemented (demo-range) | Label as indexed demo block range only |
 | ArcNS resolution | 🟨 Optional/non-blocking | Show with `agentpayagent.circle` (agent) and `agentpayclient.arc` (client/evaluator); fallback to raw wallet if resolver fails |
 | App Kit Send | ✅ CURRENT_VERIFIED | Live send verified on Arc Testnet USDC with isolated `.env.appkit.local`; private key not printed |
-| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED** for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send; Paymaster remains **NOT_CLAIMED** |
+| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED** for EOA wallet creation/read, SCA wallet creation on ARC-TESTNET, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send; Paymaster remains **NOT_CLAIMED** |
 
 Gateway / Unified Balance live deposit + confirmed-balance verification evidence recorded:
 
@@ -406,7 +416,7 @@ Wallet creation is verified. For any next Circle Wallets step (sign/send/gasless
 3. Founder approves each live mutation step explicitly (sign/send).
 4. Capture artifacts without exposing secrets.
 
-Current status boundary: **CURRENT_VERIFIED** for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send.
+Current status boundary: **CURRENT_VERIFIED** for EOA wallet creation/read, SCA wallet creation on ARC-TESTNET, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send.
 Unverified: gasless, paymaster.
 
 Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real sponsored/gasless tx proof captured yet).

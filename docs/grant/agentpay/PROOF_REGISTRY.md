@@ -28,6 +28,25 @@
 - `custodyType: DEVELOPER`
 - `state: LIVE`
 
+### SCA wallet creation proof (developer-controlled, ARC-TESTNET)
+
+Command: `npm run circle:wallets:create-sca:arc`
+
+- `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
+- `walletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `walletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `accountType: SCA`
+- `state: LIVE`
+- `responseStatus: success`
+
+Boundary for this proof step:
+
+- No sponsored transaction was executed.
+- No Paymaster userOp was executed.
+- No token transfer was executed in this SCA wallet creation step.
+- No secrets were printed.
+
 ### Token ID resolution proof (non-mutating)
 
 Command: `npm run circle:wallets:list-balances`
@@ -136,6 +155,7 @@ Finality check command (non-mutating): `npm run circle:wallets:get-transaction`
 - Circle Wallets transfer estimate path: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED`
 - Circle Wallets signing: `CURRENT_VERIFIED` (message signing only)
 - Circle Wallets send/transfer: `CURRENT_VERIFIED` (live tiny transfer/send verified on ARC-TESTNET)
+- Circle Wallets SCA wallet creation: `CURRENT_VERIFIED` (developer-controlled SCA wallet creation verified on ARC-TESTNET)
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 

@@ -183,7 +183,7 @@ Notes:
 - App Kit Send: **CURRENT_VERIFIED**
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
-- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read only)**
+- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (EOA wallet creation/read + SCA wallet creation + token ID resolution + transfer estimate + message signing + live tiny transfer/send)**
 - Circle Wallets transfer estimate path: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
 - Circle Wallets signing: **CURRENT_VERIFIED** (message signing only)
 - Circle Wallets send/transfer: **CURRENT_VERIFIED** (live tiny transfer/send verified on ARC-TESTNET)
@@ -211,7 +211,7 @@ Circle Wallets discovery status (Master Prompt #10):
 - Feasibility classification: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
 - Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secrets and backend approval)
 - Arc Testnet support is documented in official Circle Wallets supported-blockchains docs, and founder-run in-repo wallet creation runtime proof is captured.
-- Circle Wallets is **CURRENT_VERIFIED** for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send for grant/demo scope in this sprint.
+- Circle Wallets is **CURRENT_VERIFIED** for EOA wallet creation/read, Developer-Controlled SCA wallet creation (ARC-TESTNET), ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send for grant/demo scope in this sprint.
 
 Circle Wallets server-only readiness scaffold status (Master Prompt #10B):
 
