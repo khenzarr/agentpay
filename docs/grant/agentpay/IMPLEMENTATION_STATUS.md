@@ -49,7 +49,7 @@ AgentPay frontend now supports an end-to-end Arc Testnet MVP demo path with real
 - Full ERC-8183 compliance
 - Full ERC-8004 compliance
 - Gateway / Unified Balance live spend verified
-- Circle Wallets signing/transfers/gasless/paymaster integrated
+- Circle Wallets gasless/paymaster integrated
 - Paymaster integrated
 
 ### App Kit Send status
@@ -186,7 +186,7 @@ Notes:
 - Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read only)**
 - Circle Wallets transfer estimate path: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
 - Circle Wallets signing: **CURRENT_VERIFIED** (message signing only)
-- Circle Wallets send/transfer: **NOT_CLAIMED**
+- Circle Wallets send/transfer: **CURRENT_VERIFIED** (live tiny transfer/send verified on ARC-TESTNET)
 - Circle Wallets gasless: **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
@@ -204,7 +204,7 @@ Circle Wallets discovery status (Master Prompt #10):
 - Feasibility classification: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY**
 - Additional gate: **FEASIBLE_BUT_NEEDS_BACKEND** (server-only secrets and backend approval)
 - Arc Testnet support is documented in official Circle Wallets supported-blockchains docs, and founder-run in-repo wallet creation runtime proof is captured.
-- Circle Wallets is **CURRENT_VERIFIED (wallet creation + metadata read only)** for grant/demo scope in this sprint.
+- Circle Wallets is **CURRENT_VERIFIED** for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send for grant/demo scope in this sprint.
 
 Circle Wallets server-only readiness scaffold status (Master Prompt #10B):
 
@@ -225,8 +225,8 @@ Circle Wallets server-only readiness scaffold status (Master Prompt #10B):
   - `CIRCLE_WALLET_ACCOUNT_TYPE=EOA`
 - Added explicit `.gitignore` entries for `.env.circle.local` patterns.
 - Dependency decision: official Circle SDK dependency added (`@circle-fin/developer-controlled-wallets`).
-- Internal readiness status: **CURRENT_VERIFIED** (wallet creation + metadata read only).
-- Product/public claim status: **CURRENT_VERIFIED (wallet creation + metadata read only)**.
+- Internal readiness status: **CURRENT_VERIFIED** (wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, tiny transfer/send).
+- Product/public claim status: **CURRENT_VERIFIED** (wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, tiny transfer/send).
 - Classification gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**.
 - Founder-run live Circle wallet creation executed and verified in this sprint.
 
@@ -278,8 +278,27 @@ Circle Wallets transfer-estimate verification evidence recorded:
 
 Strict claim boundary:
 
-- ✅ Allowed: Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
-- ❌ Not yet verified: signing, token transfer/send, gasless transactions, paymaster
+- ✅ Allowed: Circle Developer-Controlled Wallet live scope verified on ARC-TESTNET (wallet creation, metadata read, USDC token ID resolution, transfer estimate, message signing, tiny transfer/send)
+- ❌ Not yet verified: gasless transactions, paymaster
+
+Circle Wallets live tiny transfer/send proof (founder-run):
+
+- Command: `npm run circle:wallets:send-tiny-transfer`
+- Submitted `transactionId: 373289ce-27f9-55d7-8601-b853f8fd9cc2`
+- Initial state: `INITIATED`
+- `sourceWalletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `destinationAddress: 0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `amount: 0.001`
+- `blockchain: ARC-TESTNET`
+- Submission status: `201`
+- Finality check command: `npm run circle:wallets:get-transaction` (non-mutating)
+- Final state: `COMPLETE`
+- `txHash: 0x702c86b15ee071666327004e2ded60eb8ed065b9f153e52ba2bbcd60378e912e`
+- `finalityFieldsPresent: true`
+- `responseShape: response.data.transaction`
+- No secrets were printed.
+- No gasless/paymaster flow was run.
 
 Paymaster-specific claim guardrail:
 

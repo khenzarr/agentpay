@@ -16,7 +16,7 @@ This roadmap represents active implementation direction. Product/grant claims re
 6. ArcNS optional identity display/resolution support
 7. App Kit Send
 8. Bridge / CCTP
-9. Circle Wallets — Developer-Controlled Wallet creation + metadata read + message signing proof on ARC-TESTNET
+9. Circle Wallets — Developer-Controlled wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send proof
 
 ## 3) Estimate-verified integrations
 
@@ -38,23 +38,22 @@ This roadmap represents active implementation direction. Product/grant claims re
 - token-id resolution discovery document added: `docs/grant/agentpay/CIRCLE_WALLETS_TOKEN_ID_RESOLUTION.md`
 - current classification: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED`
 - non-mutating balance helper added: `npm run circle:wallets:list-balances`
-- send/transfer/gasless remains NOT_CLAIMED (message signing verified)
+- gasless remains NOT_CLAIMED (send/transfer now CURRENT_VERIFIED for tiny ARC-TESTNET proof transfer)
 
 ## 5) Not-yet-verified integrations
 
-12. Circle Wallets send/transfer/gasless
+12. Circle Wallets gasless
 13. Paymaster
 14. Full ERC-8183 compliance
 15. Full ERC-8004 compliance
 
 ## 6) Next technical sprints
 
-1. Circle Wallets send/transfer proof
-2. Circle Wallets gasless transaction proof
-3. Paymaster / Gas Station proof
-5. Gateway live spend decision (execute vs defer with rationale)
-6. Full ERC-8183 compatibility expansion
-7. ERC-8004 compatibility layer for identity/reputation evolution
+1. Circle Wallets gasless transaction proof
+2. Paymaster / Gas Station proof
+3. Gateway live spend decision (execute vs defer with rationale)
+4. Full ERC-8183 compatibility expansion
+5. ERC-8004 compatibility layer for identity/reputation evolution
 
 ## 7) Proof rule
 

@@ -2,7 +2,7 @@
 
 ## Circle Wallets (Developer-Controlled) — ARC-TESTNET
 
-### Wallet creation + metadata read (CURRENT_VERIFIED boundary)
+### Verified Circle Wallets live scope (CURRENT_VERIFIED boundary)
 
 - `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
@@ -92,10 +92,33 @@ Result: message signing succeeded.
 - No funds moved.
 - No transfer created.
 
+### Live tiny transfer/send proof (founder-run)
+
+Submitted command: `npm run circle:wallets:send-tiny-transfer`
+
+- `transactionId: 373289ce-27f9-55d7-8601-b853f8fd9cc2`
+- `state: INITIATED`
+- `sourceWalletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
+- `destinationAddress: 0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `amount: 0.001`
+- `blockchain: ARC-TESTNET`
+- `status: 201`
+
+Finality check command (non-mutating): `npm run circle:wallets:get-transaction`
+
+- `transactionId: 373289ce-27f9-55d7-8601-b853f8fd9cc2`
+- `state: COMPLETE`
+- `txHash: 0x702c86b15ee071666327004e2ded60eb8ed065b9f153e52ba2bbcd60378e912e`
+- `finalityFieldsPresent: true`
+- `responseShape: response.data.transaction`
+- No secrets were printed.
+- No gasless/paymaster flow was run.
+
 ### Classification guardrail
 
 - Circle Wallets transfer estimate path: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED`
 - Circle Wallets signing: `CURRENT_VERIFIED` (message signing only)
-- Circle Wallets send/transfer: `NOT_CLAIMED`
+- Circle Wallets send/transfer: `CURRENT_VERIFIED` (live tiny transfer/send verified on ARC-TESTNET)
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`

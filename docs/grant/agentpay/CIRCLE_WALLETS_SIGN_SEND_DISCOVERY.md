@@ -3,8 +3,8 @@
 ## Scope and safety
 
 - Scope: feasibility-only discovery for the already-created Circle Developer-Controlled wallet on `ARC-TESTNET`.
-- This document does **not** prove runtime signing/send/gasless execution.
-- No live mutation proof is added in this sprint.
+- This document now includes verified runtime tiny transfer/send proof on `ARC-TESTNET`.
+- Gasless/paymaster runtime proof is still not captured in this sprint.
 - Secrets are intentionally excluded.
 
 Known verified Circle Wallets proof (non-mutating + creation):
@@ -48,12 +48,12 @@ Official Circle docs (targeted):
 
 ## 1) Can the existing ARC-TESTNET wallet sign messages?
 
-**Feasibility:** Yes in principle, but **not verified here**.
+**Feasibility:** Yes, and now verified for benign message signing.
 
 Evidence:
 
 - SDK exposes `signMessage(...)` for developer-controlled wallets.
-- Existing repo proof covers wallet creation + metadata read only; no signing proof artifact exists.
+- Existing repo proof includes wallet creation, metadata read, and message-signing proof artifacts.
 
 - Verified non-mutating metadata read proof recorded:
   - Command: `npm run circle:wallets:get-wallet`
@@ -74,11 +74,11 @@ Evidence:
   - secrets redacted
   - no live mutation performed by readiness
 
-Conservative decision: keep signing as **NOT_CLAIMED** until explicit proof is captured.
+Conservative decision: keep signing claim limited to **CURRENT_VERIFIED (message signing only)**.
 
 ## 2) Can it create/send transfer transactions?
 
-**Feasibility:** Yes in API surface, but **not verified here**.
+**Feasibility:** Yes in API surface, and tiny live transfer/send is now verified in this repo.
 
 Evidence:
 
@@ -184,13 +184,14 @@ Recommended **server-only**, staged, conservative path:
 
 ## 10) What is the correct claim status now?
 
-- Circle Wallets overall: **CURRENT_VERIFIED (wallet creation + metadata read only)**.
+- Circle Wallets overall: **CURRENT_VERIFIED** for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send.
 - Circle Wallets signing: **CURRENT_VERIFIED** (message signing only).
-- Circle Wallets send/transfer: **NOT_CLAIMED**.
+- Circle Wallets send/transfer: **CURRENT_VERIFIED** (live tiny transfer/send on ARC-TESTNET).
 - Circle Wallets gasless: **NOT_CLAIMED**.
 - Paymaster: **NOT_CLAIMED**.
 - Circle Wallets transfer estimate path is now **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**.
-- Message signing is now verified from server-only benign-message proof; send/transfer remains **NOT_CLAIMED** until explicit runtime transfer proof artifacts are captured and verified.
+- Message signing is verified from server-only benign-message proof.
+- Send/transfer is now **CURRENT_VERIFIED** for tiny live transfer/send with finality proof captured.
 
 Message-signing proof artifact (server-only, non-fund-moving):
 
@@ -203,11 +204,18 @@ Message-signing proof artifact (server-only, non-fund-moving):
 
 Conservative claim classification for this discovery:
 
-- Signing/send today: **FEASIBLE_BUT_NEEDS_TRANSFER_ESTIMATE_FIRST**
-- If attempting live transfer afterward: **FEASIBLE_BUT_NEEDS_WALLET_FUNDING**
+- Signing: **CURRENT_VERIFIED** (message signing only)
+- Send/transfer: **CURRENT_VERIFIED** (tiny live ARC-TESTNET transfer/send with finality proof)
 - Gasless/paymaster path: **FEASIBLE_BUT_NEEDS_SCA_WALLET** + **FEASIBLE_BUT_NEEDS_GAS_STATION_POLICY**
-- Current overall status decision for this sprint: **DO_NOT_CLAIM** (for signing/send/gasless verification)
-- Tiny transfer live send remains **NOT_CLAIMED** until a non-dry-run tx proof exists.
+- Gasless and paymaster claim status for this sprint: **NOT_CLAIMED**
+
+Latest live-send checkpoint (proof finalized):
+
+- Command: `npm run circle:wallets:send-tiny-transfer`
+- Submitted `transactionId: 373289ce-27f9-55d7-8601-b853f8fd9cc2`
+- Initial state captured: `INITIATED`
+- Added non-mutating checker command: `npm run circle:wallets:get-transaction`
+- Final transaction status and tx hash/finality evidence were captured from the transaction read endpoint (`state=COMPLETE`, tx hash recorded), so send/transfer is now **CURRENT_VERIFIED** for the tiny ARC-TESTNET proof transaction.
 
 ---
 

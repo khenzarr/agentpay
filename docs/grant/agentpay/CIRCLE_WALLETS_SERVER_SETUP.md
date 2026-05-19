@@ -95,6 +95,12 @@ npm run circle:wallets:list-balances
 npm run circle:wallets:send-tiny-transfer
 ```
 
+11.8. Check a submitted transfer by transaction id (non-mutating, server-only):
+
+```bash
+npm run circle:wallets:get-transaction
+```
+
 Required transfer-estimate env values in `.env.circle.local`:
 
 ```bash
@@ -103,6 +109,7 @@ CIRCLE_WALLET_ADDRESS=
 CIRCLE_WALLET_TRANSFER_DESTINATION=
 CIRCLE_WALLET_TRANSFER_AMOUNT=0.001
 CIRCLE_WALLET_TRANSFER_TOKEN_ID=
+CIRCLE_WALLET_TRANSACTION_ID=
 CIRCLE_WALLET_TRANSFER_DRY_RUN=true
 CIRCLE_TOKEN_LOOKUP_BLOCKCHAIN=ARC-TESTNET
 CIRCLE_TOKEN_LOOKUP_SYMBOL=USDC
@@ -121,7 +128,7 @@ Important:
 
 ## Verified status and evidence (founder-run)
 
-Circle Wallets is now `CURRENT_VERIFIED` for **wallet creation + metadata read on ARC-TESTNET only** after capturing real proof artifacts:
+Circle Wallets is now `CURRENT_VERIFIED` for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send after capturing real proof artifacts:
 
 - `walletSetId: 70d4bdf1-74a3-5098-8b37-5c573641e764`
 - `walletId: d99113e2-2e24-5d3f-ab6d-7b8c49367566`
@@ -149,11 +156,11 @@ Circle Wallets is now `CURRENT_VERIFIED` for **wallet creation + metadata read o
 
 Claim boundary (strict):
 
-- ✅ Allowed: Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
-- ❌ Not allowed yet: signing verification, token transfer verification, gasless transaction verification, paymaster verification
+- ✅ Allowed: Circle Developer-Controlled Wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and tiny transfer/send verification on ARC-TESTNET
+- ❌ Not allowed yet: gasless transaction verification, paymaster verification
 - ✅ Transfer estimate claim allowed: `CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED` (non-mutating estimate proof captured)
 - ✅ Message signing claim allowed: `CURRENT_VERIFIED` (server-only benign message signing proof)
-- ❌ Send/transfer claim remains NOT_CLAIMED until live transfer proof is captured and verified
+- ✅ Send/transfer claim allowed: `CURRENT_VERIFIED` (live tiny transfer/send proof captured and finalized)
 
 Message-signing proof evidence (no funds movement):
 
@@ -182,7 +189,15 @@ Tiny transfer send script status:
 - Script added: `scripts/circle-wallets-send-tiny-transfer.ts`
 - Package command: `npm run circle:wallets:send-tiny-transfer`
 - Default safety gate: `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`
-- Live send remains **NOT_CLAIMED** until non-dry-run tx proof exists.
+- Live send is now **CURRENT_VERIFIED** for the captured tiny ARC-TESTNET proof transfer.
+
+Live transfer submission note (final proof captured):
+
+- Command used: `npm run circle:wallets:send-tiny-transfer`
+- Submitted `transactionId: 373289ce-27f9-55d7-8601-b853f8fd9cc2`
+- Captured initial state: `INITIATED`
+- Final transfer proof is captured from transaction read including final status and tx hash/finality evidence.
+- Send/transfer claim is now `CURRENT_VERIFIED` for the tiny ARC-TESTNET proof transaction.
 
 Safety rule after any live wallet-creation run:
 

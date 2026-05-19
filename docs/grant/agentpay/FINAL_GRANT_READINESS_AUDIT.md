@@ -23,10 +23,10 @@ Related public docs:
 | 6 | ArcNS identity display/resolution | CURRENT_VERIFIED (optional) | Optional/non-blocking |
 | 7 | App Kit Send | CURRENT_VERIFIED | Claimable with tx proof |
 | 8 | Bridge / CCTP | CURRENT_VERIFIED | Claimable with approve/burn/mint proofs |
-| 9 | Circle Wallets (Developer-Controlled) | CURRENT_VERIFIED (wallet creation + metadata read + message signing only) | Send/transfer/gasless NOT_CLAIMED |
+| 9 | Circle Wallets (Developer-Controlled) | CURRENT_VERIFIED (wallet creation + metadata read + token ID resolution + transfer estimate + message signing + tiny transfer/send) | Gasless remains NOT_CLAIMED |
 | 10 | Gateway / Unified Balance | CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED | Below CURRENT_VERIFIED; live spend not executed |
 | 11 | Circle Wallets transfer estimate path | CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED | Non-mutating transfer estimate verified with resolved ARC-TESTNET USDC token ID |
-| 12 | Circle Wallets send/transfer/gasless | NOT_CLAIMED | No transfer/gasless runtime proof |
+| 12 | Circle Wallets gasless | NOT_CLAIMED | No gasless runtime proof |
 | 13 | Paymaster | NOT_CLAIMED | Feasible in principle only |
 | 14 | Full ERC-8183 compliance | NOT_CLAIMED | Tutorial subset only |
 | 15 | Full ERC-8004 compliance | NOT_CLAIMED | Not fully implemented/verified |
@@ -41,7 +41,7 @@ Related public docs:
 - App Kit Send CURRENT_VERIFIED (tx proof available).
 - Bridge/CCTP CURRENT_VERIFIED (approve/burn/mint proofs available).
 - Gateway/Unified Balance verified through supported-chain check, live deposit, confirmed balance, and spend estimate; live spend not executed due high fee.
-- Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET.
+- Circle Developer-Controlled Wallet live tiny transfer/send verified on ARC-TESTNET.
 - Paymaster feasible in principle, not claimed.
 
 ---
@@ -52,7 +52,7 @@ Related public docs:
 - “Full ERC-8004 compliance.”
 - “Paymaster integrated.”
 - “Gasless transactions verified.”
-- “Circle Wallets send/transfer/gasless verified.”
+- “Circle Wallets gasless verified.”
 - “Gateway / Unified Balance live spend verified.”
 
 ---
@@ -84,13 +84,18 @@ Related public docs:
 - message signing command: `npm run circle:wallets:sign-message`
 - message: `AgentPay Circle Wallets signing proof on ARC-TESTNET`
 - signature captured (server-only benign message signing), status: `200`
-- no funds moved; no transfer created
+- tiny transfer/send command: `npm run circle:wallets:send-tiny-transfer`
+- submitted `transactionId: 373289ce-27f9-55d7-8601-b853f8fd9cc2` with initial state `INITIATED`
+- finality check command: `npm run circle:wallets:get-transaction` (non-mutating)
+- final state: `COMPLETE`
+- tx hash: `0x702c86b15ee071666327004e2ded60eb8ed065b9f153e52ba2bbcd60378e912e`
+- `finalityFieldsPresent: true`
 
 ---
 
 ## 5) Remaining blockers
 
-1. Circle Wallets send/transfer/gasless runtime proof not captured (message-signing proof is captured).
+1. Circle Wallets gasless runtime proof not captured.
 2. Paymaster runtime sponsored/gasless proof not captured.
 3. Gateway / Unified Balance live spend intentionally not executed (fee too high relative to test amount).
 
@@ -125,7 +130,7 @@ Circle Wallets transfer-estimate proof addendum:
 - Use: **“mainnet-ready; waiting for Arc mainnet availability.”**
 - Use: **“not claimed until runtime proof exists.”**
 - Keep Gateway wording at: **implemented + deposit/balance/estimate verified; live spend not executed**.
-- Keep Circle Wallets wording at: **wallet creation + metadata read + message signing only**.
+- Keep Circle Wallets wording at: **wallet creation, metadata read, token ID resolution, transfer estimate, message signing, tiny transfer/send verified; gasless NOT_CLAIMED**.
 - Keep Paymaster wording at: **feasible in principle, NOT_CLAIMED**.
 
 ---

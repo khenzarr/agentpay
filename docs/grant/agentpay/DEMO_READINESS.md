@@ -128,10 +128,10 @@ Allowed current claims:
 - App Kit Send: **CURRENT_VERIFIED**
 - Bridge/CCTP: **CURRENT_VERIFIED**
 - Gateway / Unified Balance: **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**
-- Circle Wallets (developer-controlled): **CURRENT_VERIFIED (wallet creation + metadata read + message signing only)**
+- Circle Wallets (developer-controlled): **CURRENT_VERIFIED** (wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
 - Circle Wallets transfer estimate path: **CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED**
 - Circle Wallets signing: **CURRENT_VERIFIED** (message signing only)
-- Circle Wallets send/transfer: **NOT_CLAIMED**
+- Circle Wallets send/transfer: **CURRENT_VERIFIED** (live tiny transfer/send on ARC-TESTNET)
 - Circle Wallets gasless: **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
@@ -161,10 +161,10 @@ Circle Wallets server-only readiness scaffold note (Master Prompt #10B):
   - `npm run circle:wallets:create:arc`
 - Circle env placeholders added to `.env.example` as server-only vars (no `NEXT_PUBLIC_*`)
 - `.gitignore` now explicitly covers `.env.circle.local` patterns
-- Internal readiness state: **CURRENT_VERIFIED** (wallet creation + metadata read + message signing only)
-- Product claim: **CURRENT_VERIFIED (wallet creation + metadata read + message signing only)**
+- Internal readiness state: **CURRENT_VERIFIED** (wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
+- Product claim: **CURRENT_VERIFIED** (wallet creation + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send)
 - Classification gate: **FEASIBLE_BUT_NEEDS_CIRCLE_CONSOLE_API_KEY_AND_ENTITY_SECRET**
-- Founder-run live wallet creation proof captured in this sprint; signing/send remains unverified.
+- Founder-run live wallet creation proof and tiny live transfer/send finality proof captured in this sprint; gasless/paymaster remain unverified.
 
 Circle Wallets verification evidence:
 
@@ -317,7 +317,7 @@ For App Kit Send private-key usage, run via isolated env file `.env.appkit.local
 | `/jobs` and `/payments` indexing | ✅ Implemented (demo-range) | Label as indexed demo block range only |
 | ArcNS resolution | 🟨 Optional/non-blocking | Show with `agentpayagent.circle` (agent) and `agentpayclient.arc` (client/evaluator); fallback to raw wallet if resolver fails |
 | App Kit Send | ✅ CURRENT_VERIFIED | Live send verified on Arc Testnet USDC with isolated `.env.appkit.local`; private key not printed |
-| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED (wallet creation + metadata read + message signing only)**; Paymaster remains **NOT_CLAIMED** |
+| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED** for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send; Paymaster remains **NOT_CLAIMED** |
 
 Gateway / Unified Balance live deposit + confirmed-balance verification evidence recorded:
 
@@ -400,8 +400,8 @@ Wallet creation is verified. For any next Circle Wallets step (sign/send/gasless
 3. Founder approves each live mutation step explicitly (sign/send).
 4. Capture artifacts without exposing secrets.
 
-Current status boundary: **CURRENT_VERIFIED (wallet creation + metadata read + message signing only)**.
-Unverified: token transfer/send, gasless, paymaster.
+Current status boundary: **CURRENT_VERIFIED** for wallet creation, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send.
+Unverified: gasless, paymaster.
 
 Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real sponsored/gasless tx proof captured yet).
 
