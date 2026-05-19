@@ -419,3 +419,26 @@ Boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 - `DO_NOT_CLAIM`
+
+---
+
+## Master Prompt #41 — Final live-proof readiness docs (checklist + runbook)
+
+Added final readiness docs before any live sponsored userOp attempt:
+
+1. `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_FINAL_CHECKLIST.md`
+2. `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_RUNBOOK.md`
+
+Checkpoint scope:
+
+- documentation + readiness only
+- no `sendUserOperation`
+- no userOp submission
+- no transaction broadcast
+- no token approval
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+- `DO_NOT_CLAIM`

@@ -468,6 +468,27 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
+## Master Prompt #41 — Circle Paymaster v0.8 live proof final readiness docs
+
+- Date: 2026-05-19
+- Scope: documentation + final readiness only (no live userOp submission)
+- New docs:
+  - `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_FINAL_CHECKLIST.md`
+  - `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_RUNBOOK.md`
+
+Hard non-actions in this checkpoint:
+
+- no `sendUserOperation`
+- no userOp submission
+- no broadcast transaction
+- no token approval
+- no wallet creation
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+
 ## Master Prompt #38 — Circle Paymaster v0.8 permit input readiness (read-only)
 
 - Date: 2026-05-19

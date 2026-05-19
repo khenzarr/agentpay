@@ -164,3 +164,19 @@ Recommended approved next sprint:
    - receipt success/finality
    - paymaster + EntryPoint correlation
 4. Re-evaluate claim boundary only if full artifact set is captured.
+
+---
+
+## 11. Final live-proof readiness docs
+
+Before any live submission attempt, use:
+
+1. `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_FINAL_CHECKLIST.md`
+2. `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_RUNBOOK.md`
+
+Hard boundary reminder:
+
+- live proof requires explicit founder approval
+- current status remains:
+  - Paymaster: `NOT_CLAIMED`
+  - Gasless: `NOT_CLAIMED`

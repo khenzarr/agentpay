@@ -197,3 +197,19 @@ Recommended next approved sprint:
 2. Capture deterministic artifacts (`userOpHash`, `txHash`, final receipt/logs).
 3. Correlate paymaster + EntryPoint + fee evidence in proof docs.
 4. Re-evaluate claim boundary only after full artifact capture.
+
+---
+
+## 12. Final live-proof readiness docs
+
+Before any live submission attempt, use:
+
+1. `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_FINAL_CHECKLIST.md`
+2. `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_LIVE_PROOF_RUNBOOK.md`
+
+Safety reminder:
+
+- live proof requires explicit founder approval
+- until full proof artifacts exist, status remains:
+  - Paymaster: `NOT_CLAIMED`
+  - Gasless: `NOT_CLAIMED`
