@@ -209,6 +209,36 @@ Boundary remains unchanged:
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 
+## 15) Master Prompt #25 dry-run sponsored transfer readiness update
+
+- Script added: `scripts/circle-paymaster-sponsored-transfer.ts`
+- Command: `npm run circle:paymaster:sponsored-transfer`
+- Executed mode: dry-run only (`CIRCLE_PAYMASTER_DRY_RUN=true`)
+- Mutation performed: none
+- Secrets printed: none
+
+Captured dry-run readiness fields:
+
+- `scaWalletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `scaWalletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `paymasterVersion: v0.8`
+- `paymasterAddress: 0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `destinationAddress: 0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- `amount: 0.001`
+- `gasStationPolicyIdPresent: no`
+
+Conservative conclusion unchanged:
+
+- Circle Wallets SCA path is the minimal continuity candidate for later live proof attempt.
+- Paymaster/gasless proof remains unverified until one real sponsored transaction is executed and evidence is captured.
+
+Claim boundary remains unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
+
 ## 13) Risk notes
 
 - Do not treat EOA signing/send verification as gasless/paymaster verification.

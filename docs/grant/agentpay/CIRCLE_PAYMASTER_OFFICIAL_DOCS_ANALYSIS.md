@@ -172,3 +172,34 @@ Boundary remains strict:
 - No gasless flow was executed.
 - No token transfer was executed in this SCA creation step.
 - No secrets were printed.
+
+## 15. Master Prompt #25 dry-run readiness checkpoint
+
+- New server-only script added: `scripts/circle-paymaster-sponsored-transfer.ts`
+- Command: `npm run circle:paymaster:sponsored-transfer`
+- Executed mode: dry-run (`CIRCLE_PAYMASTER_DRY_RUN=true`)
+- Mutation executed: none
+- Secrets printed: none
+
+Observed dry-run fields:
+
+- `scaWalletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `scaWalletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `paymasterVersion: v0.8`
+- `paymasterAddress: 0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `destinationAddress: 0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- `amount: 0.001`
+- `gasStationPolicyIdPresent: no`
+
+Conservative implementation conclusion remains:
+
+- Wallets SDK SCA transfer path is the minimal continuity path to attempt one sponsored proof transaction later.
+- SDK response surface does not explicitly guarantee paymaster/userOp evidence fields in all cases.
+- If required evidence is missing at runtime (`userOpHash`, explicit paymaster usage), fallback path remains raw ERC-4337 (`viem` bundler/paymaster flow).
+
+Status boundary unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

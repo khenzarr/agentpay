@@ -213,3 +213,35 @@ Boundary unchanged:
 
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+## Master Prompt #25 — Sponsored transfer dry-run readiness proof (no mutation)
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-sponsored-transfer.ts`
+- Command: `npm run circle:paymaster:sponsored-transfer`
+- Execution mode: `CIRCLE_PAYMASTER_DRY_RUN=true`
+- Mutation executed: none
+- Secrets printed: none
+
+Captured output fields:
+
+- `scaWalletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `scaWalletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `paymasterVersion: v0.8`
+- `paymasterAddress: 0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `destinationAddress: 0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- `amount: 0.001`
+- `gasStationPolicyIdPresent: no`
+
+Proof caveat:
+
+- This is readiness evidence only.
+- No sponsored transaction/userOperation was executed.
+- No `userOpHash` or sponsored tx hash was captured in this checkpoint.
+
+Claim boundary unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

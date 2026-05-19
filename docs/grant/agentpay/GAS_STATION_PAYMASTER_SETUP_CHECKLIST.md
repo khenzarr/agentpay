@@ -195,3 +195,24 @@ Status boundary unchanged:
 
 - Gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+## Master Prompt #25 dry-run readiness update
+
+- Script added: `scripts/circle-paymaster-sponsored-transfer.ts`
+- Command: `npm run circle:paymaster:sponsored-transfer`
+- Execution mode in this sprint: `CIRCLE_PAYMASTER_DRY_RUN=true`
+- Mutation executed: none
+- Secrets printed: none
+
+Dry-run checkpoint fields captured:
+
+- SCA wallet id/address confirmed
+- ARC-TESTNET confirmed
+- Paymaster version/address confirmed (`v0.8` / `0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`)
+- token/destination/amount confirmed
+- policy id env presence: `no`
+
+Boundary unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

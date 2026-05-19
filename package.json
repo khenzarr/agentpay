@@ -29,7 +29,8 @@
     "circle:wallets:token-lookup": "tsx --env-file=.env.circle.local scripts/circle-wallets-token-lookup.ts",
     "circle:wallets:list-balances": "tsx --env-file=.env.circle.local scripts/circle-wallets-list-balances.ts",
     "circle:gas-station:readiness": "tsx --env-file=.env.circle.local scripts/circle-gas-station-readiness.ts",
-    "circle:sca-paymaster:readiness": "tsx --env-file=.env.circle.local scripts/circle-sca-paymaster-readiness.ts"
+    "circle:sca-paymaster:readiness": "tsx --env-file=.env.circle.local scripts/circle-sca-paymaster-readiness.ts",
+    "circle:paymaster:sponsored-transfer": "tsx --env-file=.env.circle.local scripts/circle-paymaster-sponsored-transfer.ts"
   },
   "dependencies": {
     "@circle-fin/developer-controlled-wallets": "^10.3.1",

@@ -252,3 +252,36 @@ Until all are captured: remain `NOT_CLAIMED`.
 - `FEASIBLE_BUT_NEEDS_RAW_ERC4337_PATH`
 - `FEASIBLE_BUT_NEEDS_APP_KIT_PAYMASTER_PATH`
 - `DO_NOT_CLAIM`
+
+---
+
+## Master Prompt #25 update (dry-run readiness implemented)
+
+- New script: `scripts/circle-paymaster-sponsored-transfer.ts`
+- Command: `npm run circle:paymaster:sponsored-transfer`
+- Mode executed: dry-run only (`CIRCLE_PAYMASTER_DRY_RUN=true`)
+- Mutation performed: none
+- Secrets printed: none
+
+Dry-run output checkpoint:
+
+- `scaWalletId: 494ad75a-4d03-5021-9ddb-0c70cf566954`
+- `scaWalletAddress: 0x61df32dfe83e36bf54bd3e43181919bb2130ca72`
+- `blockchain: ARC-TESTNET`
+- `paymasterVersion: v0.8`
+- `paymasterAddress: 0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`
+- `destinationAddress: 0xCdc3735BCC1DE14c48704859715F835d0A5a7168`
+- `amount: 0.001`
+- `gasStationPolicyIdPresent: no`
+
+Safety boundary remains unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
+
+Reason:
+
+- No live sponsored transaction/userOperation proof captured yet.
+- Wallets SDK `createTransaction` response surface does not explicitly guarantee paymaster/userOp evidence fields.
+- Final proof still requires userOp/paymaster correlation (tx hash + userOpHash if present + onchain/console evidence).
