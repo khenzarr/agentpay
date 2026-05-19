@@ -367,3 +367,29 @@ Conservative classification baseline remains:
 - `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
 - `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
 - `DO_NOT_CLAIM`
+
+---
+
+## Master Prompt #36 — Bundler health probe (read-only)
+
+- Script: `scripts/circle-paymaster-v08-7702-bundler-health.ts`
+- Command: `npm run circle:paymaster:v08-7702:bundler-health`
+- Scope: read-only RPC health check for Arc Testnet bundler path
+
+Allowed calls only:
+
+- `eth_chainId`
+- `eth_supportedEntryPoints`
+- optional `web3_clientVersion`
+
+Forbidden in this checkpoint:
+
+- `eth_sendUserOperation`
+- `pimlico_sendUserOperation`
+- any send/mutation method
+
+Boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+- `DO_NOT_CLAIM`

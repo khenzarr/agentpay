@@ -126,3 +126,18 @@ Unchanged:
 3. execute exactly one explicitly approved tiny sponsored flow
 4. capture deterministic artifacts (`userOpHash`, receipt, `txHash`, paymaster correlation)
 5. re-evaluate claim posture only after complete evidence
+
+---
+
+## 11. Read-only bundler health checkpoint (Master Prompt #36)
+
+- Script: `scripts/circle-paymaster-v08-7702-bundler-health.ts`
+- Command: `npm run circle:paymaster:v08-7702:bundler-health`
+- Scope: read-only JSON-RPC health probe only
+- Allowed calls: `eth_chainId`, `eth_supportedEntryPoints`, optional `web3_clientVersion`
+- Forbidden calls: any send/mutation method, including `eth_sendUserOperation` and `pimlico_sendUserOperation`
+
+Boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`

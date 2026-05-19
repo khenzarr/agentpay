@@ -412,3 +412,30 @@ Claim boundary unchanged:
 
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+## Master Prompt #36 — v0.8 7702 bundler health (read-only)
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-v08-7702-bundler-health.ts`
+- Command: `npm run circle:paymaster:v08-7702:bundler-health`
+- Scope: read-only bundler RPC health probe
+
+Allowed JSON-RPC calls only:
+
+- `eth_chainId`
+- `eth_supportedEntryPoints`
+- `web3_clientVersion` (optional)
+
+Forbidden in this checkpoint:
+
+- `eth_sendUserOperation`
+- `pimlico_sendUserOperation`
+- any mutation/send method
+
+Boundary unchanged:
+
+- signing: `false`
+- userOps: `false`
+- transactions: `false`
+- paymasterStatus: `NOT_CLAIMED`
+- gaslessStatus: `NOT_CLAIMED`
