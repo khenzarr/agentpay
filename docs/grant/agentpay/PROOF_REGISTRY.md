@@ -468,6 +468,45 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
+## Master Prompt #42B — Circle Paymaster v0.8 controlled live proof attempt (single-run, failed)
+
+- Date: 2026-05-19
+- Command: `npm run circle:paymaster:v08:live-proof`
+- Attempt policy: `exactly_one`
+- Auto retry: `false`
+- Proof artifact: `docs/grant/agentpay/proofs/CIRCLE_PAYMASTER_V08_LIVE_PROOF_2026-05-19T21-43-31-730Z.md`
+
+Prechecks executed and passed before live run:
+
+1. `npm run circle:paymaster:v08-7702:owner-readiness`
+2. `npm run circle:paymaster:v08-7702:bundler-health`
+3. `npm run circle:paymaster:v08:permit-input-readiness`
+4. `npm run circle:paymaster:v08:userop-assembly-dry-run`
+
+Live attempt output summary:
+
+- `proofStatus=FAILED_BEFORE_USEROPHASH`
+- `userOpHash=N/A`
+- `txHash=N/A`
+- `receipt/finality=unavailable`
+- `logsCount=0`
+- `paymasterAddress=0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- `entryPointAddress=0x4337084D9E255Ff0702461CF8895CE9E3b5Ff108`
+- `network=ARC-TESTNET`
+
+Sanitized blocker classification:
+
+- Stage: `before userOpHash`
+- Error class: `UserOperationExecutionError`
+- Revert reason: `AA30 paymaster not deployed`
+
+Boundary decision after single attempt:
+
+- No retry executed.
+- Claim boundary unchanged.
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+
 ## PATCH #42A — Live proof env-mode conflict resolved (gating model update)
 
 - Date: 2026-05-20
