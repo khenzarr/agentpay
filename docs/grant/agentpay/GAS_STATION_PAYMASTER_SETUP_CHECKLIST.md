@@ -164,3 +164,21 @@ Note: placeholders are documentation-only in this sprint; no mutation run is aut
 - Do not claim paymaster verified
 - Do not run live sponsored transaction in this sprint
 - Do not treat existing EOA transfer proof as sponsorship proof
+
+## Master Prompt #23 planning checkpoint
+
+- Planning doc: `docs/grant/agentpay/SCA_PAYMASTER_PROOF_PATH_PLAN.md`
+- Optional non-mutating script: `scripts/circle-sca-paymaster-readiness.ts`
+- Script command: `npm run circle:sca-paymaster:readiness`
+
+Conservative classification remains:
+
+- `FEASIBLE_BUT_NEEDS_SCA_WALLET_CREATION`
+- `FEASIBLE_BUT_NEEDS_APP_KIT_PAYMASTER_PATH`
+- `FEASIBLE_BUT_NEEDS_RAW_ERC4337_PATH`
+- `DO_NOT_CLAIM`
+
+Status boundary unchanged:
+
+- Gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

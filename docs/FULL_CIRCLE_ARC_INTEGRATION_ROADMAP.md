@@ -122,3 +122,16 @@ Remaining blockers to verification:
 Gasless/paymaster setup/readiness checklist:
 
 - `docs/grant/agentpay/GAS_STATION_PAYMASTER_SETUP_CHECKLIST.md`
+
+SCA paymaster proof planning doc (Master Prompt #23):
+
+- `docs/grant/agentpay/SCA_PAYMASTER_PROOF_PATH_PLAN.md`
+
+Optional non-mutating readiness utility:
+
+- `npm run circle:sca-paymaster:readiness`
+
+Claim boundary remains unchanged:
+
+- Gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

@@ -172,3 +172,24 @@ Gasless/paymaster discovery update (Master Prompt #19):
 - Classification: `DO_NOT_CLAIM`
 - Blocking tags: `BLOCKED_EXISTING_WALLET_IS_EOA`, `FEASIBLE_BUT_NEEDS_SCA_WALLET`, `FEASIBLE_BUT_NEEDS_GAS_STATION_POLICY`, `FEASIBLE_BUT_NEEDS_CONSOLE_SETUP`
 - Arc-testnet gasless/paymaster path remains unverified without real sponsored transaction proof.
+
+## SCA/Paymaster planning checkpoint (Master Prompt #23)
+
+- Date: 2026-05-19
+- Scope: planning + optional non-mutating readiness only
+- Planning artifact: `docs/grant/agentpay/SCA_PAYMASTER_PROOF_PATH_PLAN.md`
+- Optional script artifact: `scripts/circle-sca-paymaster-readiness.ts`
+- Script command: `npm run circle:sca-paymaster:readiness`
+- Runtime sponsored tx proof: none in this checkpoint
+
+Classification:
+
+- `FEASIBLE_BUT_NEEDS_SCA_WALLET_CREATION`
+- `FEASIBLE_BUT_NEEDS_APP_KIT_PAYMASTER_PATH`
+- `FEASIBLE_BUT_NEEDS_RAW_ERC4337_PATH`
+- `DO_NOT_CLAIM`
+
+Boundary unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

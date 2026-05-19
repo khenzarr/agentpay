@@ -178,6 +178,17 @@ Setup/readiness checklist reference:
 
 - `docs/grant/agentpay/GAS_STATION_PAYMASTER_SETUP_CHECKLIST.md`
 
+Master Prompt #23 planning extension:
+
+- `docs/grant/agentpay/SCA_PAYMASTER_PROOF_PATH_PLAN.md`
+- `scripts/circle-sca-paymaster-readiness.ts`
+- `npm run circle:sca-paymaster:readiness`
+
+Boundary remains unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
+
 ## 13) Risk notes
 
 - Do not treat EOA signing/send verification as gasless/paymaster verification.

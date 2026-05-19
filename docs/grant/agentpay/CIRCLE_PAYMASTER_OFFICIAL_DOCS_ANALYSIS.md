@@ -129,3 +129,21 @@ Recommended minimal-risk sequence:
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 - Arc Testnet paymaster docs support: **documented only**, not runtime-verified in this repo.
+
+## 13. Master Prompt #23 planning checkpoint (discovery-only)
+
+- New planning doc: `docs/grant/agentpay/SCA_PAYMASTER_PROOF_PATH_PLAN.md`
+- Optional non-mutating readiness script: `scripts/circle-sca-paymaster-readiness.ts`
+- Run command: `npm run circle:sca-paymaster:readiness`
+
+Checkpoint outcome:
+
+- `FEASIBLE_BUT_NEEDS_SCA_WALLET_CREATION`
+- `FEASIBLE_BUT_NEEDS_RAW_ERC4337_PATH`
+- `FEASIBLE_BUT_NEEDS_APP_KIT_PAYMASTER_PATH`
+- `DO_NOT_CLAIM`
+
+Status unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
