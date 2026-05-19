@@ -32,9 +32,13 @@ Scope:
 ##4. Circle Paymaster service/data finding
 
 - Circle Paymaster ARC-TESTNET contract addresses are known.
-- No verified Circle paymaster service/RPC/data endpoint is documented in the allowed evidence.
-- Deterministic paymaster stub/data generation path is unresolved.
-- Result: paymaster data path remains unproven.
+- Circle Paymaster v0.8 quickstart documents a local `getPaymasterData()` path:
+  - sign EIP-2612 permit
+  - `encodePacked(["uint8","address","uint256","bytes"], [0, usdcAddress, permitAmount, permitSignature])`
+  - return `paymaster`, `paymasterData`, `paymasterVerificationGasLimit`, `paymasterPostOpGasLimit`, `isFinal`
+- This means paymaster data can be constructed locally for the documented viem quickstart path.
+- A separate `CIRCLE_PAYMASTER_SERVICE_URL` is not yet proven required for that specific v0.8 quickstart path.
+- Result: paymaster data path is feasible via local permit path (not yet runtime-proven on AgentPay Arc flow).
 
 ##5. EntryPoint v0.8/v0.7 finding
 
@@ -47,7 +51,7 @@ Scope:
 
 | Provider | Finding | Status |
 |---|---|---|
-| Circle | Paymaster addresses known; no verified ARC-TESTNET paymaster service/data endpoint in current evidence | `FEASIBLE_BUT_NEEDS_PAYMASTER_SERVICE_PATH` |
+| Circle | Paymaster addresses known; v0.8 quickstart shows local permit-based paymaster data path; still needs runtime proof and SCA compatibility confirmation | `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH` |
 | Arc native infra | No verified native bundler endpoint in current evidence | `BLOCKED_NO_BUNDLER` |
 | Pimlico | Could be an external bundler/paymaster candidate, but not verified here for ARC-TESTNET | `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT` |
 | Stackup | Could be an external bundler/paymaster candidate, but not verified here for ARC-TESTNET | `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT` |
@@ -64,7 +68,7 @@ Scope:
 ##8. Minimum viable proof path if infra exists
 
 1. Resolve bundler RPC for `ARC-TESTNET`.
-2. Resolve paymaster service/data path.
+2. Use documented local permit-based paymaster data construction path (or equivalent proven path).
 3. Confirm EntryPoint version/address.
 4. Confirm Circle SCA metadata/signing compatibility.
 5. Submit one tiny sponsored userOperation only after explicit approval.
@@ -73,14 +77,13 @@ Scope:
 ##9. Blocked path if infra unavailable
 
 - No bundler RPC: raw ERC-4337 cannot start.
-- No paymaster data path: sponsored proof cannot be constructed.
+- No usable paymaster data path (local or service): sponsored proof cannot be constructed.
 - No SCA metadata/signing path: userOperation cannot be proven deterministically.
 - In this state, claim boundary stays unchanged.
 
 ##10. Required env vars
 
 - `ARC_BUNDLER_RPC_URL`
-- `CIRCLE_PAYMASTER_SERVICE_URL`
 - `CIRCLE_PAYMASTER_ADDRESS`
 - `CIRCLE_PAYMASTER_VERSION`
 - `RAW_ERC4337_ENTRYPOINT_VERSION`
@@ -104,7 +107,7 @@ Scope:
 
 Keep Paymaster/Gasless `NOT_CLAIMED`.
 
-Treat raw ERC-4337 as **blocked for proof** until bundler RPC, paymaster data path, and Circle SCA metadata/signing compatibility are all verified.
+Treat raw ERC-4337 as **blocked for proof** until bundler RPC and Circle SCA metadata/signing compatibility are verified, and the local paymaster-data path is validated on the target runtime.
 
 ##13. Claim boundary
 
@@ -115,7 +118,13 @@ Treat raw ERC-4337 as **blocked for proof** until bundler RPC, paymaster data pa
 ## Final classification
 
 - `BLOCKED_NO_BUNDLER`
-- `BLOCKED_NO_PAYMASTER_DATA_PATH`
+- `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH`
 - `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
 - `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
 - `DO_NOT_CLAIM`
+
+##14. Circle v0.8 quickstart compatibility note
+
+- The Circle Paymaster v0.8 quickstart account path uses viem `toSimple7702SmartAccount`.
+- This may not map directly to the existing Circle-created Developer-Controlled SCA wallet path in this repo.
+- Bundler requirement remains unchanged (`createBundlerClient` still required).

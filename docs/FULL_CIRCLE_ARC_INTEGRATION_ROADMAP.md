@@ -132,6 +132,44 @@ Remaining blockers to verification:
 - Keep estimate-verified and blocked items explicitly labeled.
 - Present this roadmap as active implementation direction, not completed status.
 
+## 11) Master Prompt #30E docs revision (Circle Paymaster quickstart path)
+
+Official quickstart findings now recorded in roadmap context:
+
+- Circle Paymaster v0.8 quickstart account path uses viem `toSimple7702SmartAccount`.
+- Quickstart `getPaymasterData()` shows local paymaster data construction:
+  - sign EIP-2612 permit
+  - `encodePacked(["uint8","address","uint256","bytes"], [0, usdcAddress, permitAmount, permitSignature])`
+  - return `paymaster`, `paymasterData`, `paymasterVerificationGasLimit`, `paymasterPostOpGasLimit`, `isFinal`
+- Bundler is still required (`createBundlerClient`).
+- Example documented bundler URL pattern includes:
+  - `https://public.pimlico.io/v2/${client.chain.id}/rpc`
+- A separate Circle paymaster service URL is not yet proven necessary for this specific documented v0.8 quickstart route.
+
+Compatibility caution retained:
+
+- Existing Circle-created Developer-Controlled SCA wallet may not map directly to the quickstart account model because the quickstart uses viem 7702 smart account construction.
+
+Proof artifact guidance alignment:
+
+- UserOp evidence can come from `sendUserOperation`, `waitForUserOperationReceipt`, receipt tx hash, `userOpHash`, and paymaster field/log correlation.
+- Android Modular Wallets SDK docs also show proof-relevant receipt model fields:
+  - `userOpHash`, `paymaster`, `entryPoint`, `logs`, `receipt`, `success`.
+
+Classification update (docs/readiness posture):
+
+- Replaced/softened `BLOCKED_NO_PAYMASTER_DATA_PATH` with `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH`.
+- Kept blockers/guardrails:
+  - `BLOCKED_NO_BUNDLER`
+  - `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
+  - `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
+  - `DO_NOT_CLAIM`
+
+Claim boundary remains unchanged:
+
+- Gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
+
 Gasless/paymaster setup/readiness checklist:
 
 - `docs/grant/agentpay/GAS_STATION_PAYMASTER_SETUP_CHECKLIST.md`

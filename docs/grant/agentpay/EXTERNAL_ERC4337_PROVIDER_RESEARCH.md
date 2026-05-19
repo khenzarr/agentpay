@@ -20,7 +20,7 @@ Scope boundary for this step:
 Baseline from current internal readiness docs remains:
 
 - `BLOCKED_NO_BUNDLER`
-- `BLOCKED_NO_PAYMASTER_DATA_PATH`
+- `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH`
 - `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
 - `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
 - `DO_NOT_CLAIM`
@@ -132,6 +132,13 @@ Verdict: `POSSIBLE_BUT_NEEDS_ACCOUNT_OR_SUPPORT_TICKET`
 
 ## 9. Circle Paymaster compatibility concern
 
+Circle v0.8 quickstart refinement:
+
+- The documented viem route builds paymaster data locally via `getPaymasterData()` using EIP-2612 permit signature + packed bytes payload.
+- A separate Circle paymaster service URL is therefore not yet proven necessary for that specific quickstart path.
+- Bundler remains required (`createBundlerClient`).
+- Compatibility between existing Circle-created SCA wallets and the quickstart account model (`toSimple7702SmartAccount`) remains unresolved.
+
 Even if an external provider supports Arc chain onboarding, unresolved items remain:
 
 1. Can provider bundler/paymaster flow be combined with Circle paymaster addresses on Arc (`v0.8`/`v0.7` above)?
@@ -186,6 +193,7 @@ No claim upgrade is justified from this research-only step.
 ## 13. Final classification
 
 - `FEASIBLE_WITH_PROVIDER_ACCOUNT`
+- `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH`
 - `FEASIBLE_BUT_NEEDS_PROVIDER_CUSTOM_CHAIN_SUPPORT`
 - `FEASIBLE_BUT_NEEDS_SUPPORT_TICKET`
 - `BLOCKED_NO_PROVIDER_CONFIRMED_ARC_TESTNET`

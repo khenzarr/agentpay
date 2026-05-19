@@ -67,21 +67,22 @@ Without this endpoint, raw ERC-4337 send path cannot be executed.
 
 ---
 
-## 5. Paymaster service/data requirement
+## 5. Paymaster data requirement (service optional in documented v0.8 path)
 
 Findings:
 
-1. Circle Paymaster includes known onchain contract addresses, but deterministic ERC-4337 flow also needs paymaster data generation path.
-2. In `viem`, paymaster fields are typically produced via paymaster RPC/service (`createPaymasterClient`, `getPaymasterData`, `getPaymasterStubData`) or equivalent deterministic local path.
-3. A Circle ARC-TESTNET paymaster service URL is **not documented in repo evidence**.
+1. Circle Paymaster includes known onchain contract addresses, and deterministic ERC-4337 flow needs a valid paymaster data generation path.
+2. Circle Paymaster v0.8 quickstart documents local `getPaymasterData()` construction:
+   - sign EIP-2612 permit
+   - `encodePacked(["uint8","address","uint256","bytes"], [0, usdcAddress, permitAmount, permitSignature])`
+   - return `paymaster`, `paymasterData`, `paymasterVerificationGasLimit`, `paymasterPostOpGasLimit`, `isFinal`
+3. Therefore, paymaster data is feasible via local permit path for the documented viem quickstart route.
+4. A separate `CIRCLE_PAYMASTER_SERVICE_URL` is **not yet proven necessary** for that specific documented path.
 
 Required env:
 
-- `CIRCLE_PAYMASTER_SERVICE_URL`
 - `CIRCLE_PAYMASTER_ADDRESS`
 - `CIRCLE_PAYMASTER_VERSION`
-
-Note: `CIRCLE_PAYMASTER_SERVICE_URL` is a readiness placeholder in this sprint, not a verified-in-repo endpoint.
 
 ---
 
@@ -107,6 +108,11 @@ Required env:
 ## 7. Circle SCA metadata/signing requirement
 
 Circle SCA address alone is insufficient for deterministic raw userOperation integration.
+
+Compatibility note:
+
+- Circle Paymaster v0.8 quickstart account path uses viem `toSimple7702SmartAccount`.
+- This may not map directly to the existing Circle-created Developer-Controlled SCA wallet path in this repo.
 
 Missing metadata/signing confirmations include:
 
@@ -142,7 +148,6 @@ Not accepted for proof claim:
 For readiness layer:
 
 - `ARC_BUNDLER_RPC_URL`
-- `CIRCLE_PAYMASTER_SERVICE_URL`
 - `RAW_ERC4337_ENTRYPOINT_VERSION` (default `v0.8`)
 - `RAW_ERC4337_ENTRYPOINT_ADDRESS`
 - `RAW_ERC4337_DRY_RUN` (default `true`)
@@ -180,7 +185,7 @@ Minimum deterministic artifact set before any claim upgrade:
 ## 11. Current missing items
 
 1. ARC-TESTNET bundler RPC endpoint
-2. paymaster service/data path endpoint (or deterministic equivalent)
+2. validated paymaster data path (local permit path and/or service endpoint)
 3. confirmed EntryPoint address/version runtime config for chosen infra
 4. Circle SCA smart-account metadata needed for raw AA integration
 5. Circle-compatible deterministic userOp signing path
@@ -220,7 +225,7 @@ No claim upgrade is allowed from this readiness-only sprint.
 
 1. Resolve infra prerequisites only:
    - bundler RPC URL
-   - paymaster service/data path URL
+   - paymaster data path validation (local permit path and/or service URL)
    - EntryPoint runtime confirmation
    - Circle SCA metadata/signing compatibility
 2. Run exactly one tiny sponsored operation only after explicit approval.
@@ -232,7 +237,7 @@ No claim upgrade is allowed from this readiness-only sprint.
 ## Final classification
 
 - `BLOCKED_NO_BUNDLER`
-- `BLOCKED_NO_PAYMASTER_DATA_PATH`
+- `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH`
 - `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
 - `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
 - `DO_NOT_CLAIM`

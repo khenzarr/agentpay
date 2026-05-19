@@ -278,3 +278,50 @@ Next path recommendation:
 
 - Investigate App Kit Paymaster path only if deterministic paymaster/userOp proof fields are capturable.
 - Otherwise prioritize raw ERC-4337 (`viem` bundler + paymaster + userOperation proof pipeline).
+
+## Master Prompt #30E — Circle Paymaster v0.8 quickstart data-path revision
+
+- Date: 2026-05-19
+- Scope: docs-only revision from official Circle quickstart findings (no mutation)
+- Reviewed sources:
+  - `https://developers.circle.com/paymaster/pay-gas-fees-usdc#3-1-connect-to-the-bundler`
+  - `https://developers.circle.com/paymaster/pay-gas-fees-usdc#paymaster-v0-8`
+  - `https://developers.circle.com/wallets/modular/android-sdk#class-getpaymasterdataresult`
+
+Recorded findings:
+
+1. Circle Paymaster v0.8 quickstart account path uses viem `toSimple7702SmartAccount`.
+2. `getPaymasterData()` can be built locally by:
+   - signing EIP-2612 permit
+   - packing: `encodePacked(["uint8","address","uint256","bytes"], [0, usdcAddress, permitAmount, permitSignature])`
+   - returning: `paymaster`, `paymasterData`, `paymasterVerificationGasLimit`, `paymasterPostOpGasLimit`, `isFinal`
+3. Bundler remains required via `createBundlerClient`.
+4. Example quickstart bundler pattern appears as:
+   - `https://public.pimlico.io/v2/${client.chain.id}/rpc`
+5. UserOp proof artifacts can be captured from:
+   - `sendUserOperation`
+   - `waitForUserOperationReceipt`
+   - receipt transaction hash
+   - `userOpHash`
+   - paymaster field/logs
+6. Android Modular Wallets SDK receipt model includes proof-relevant fields:
+   - `userOpHash`
+   - `paymaster`
+   - `entryPoint`
+   - `logs`
+   - `receipt`
+   - `success`
+
+Classification adjustment:
+
+- Replaced `BLOCKED_NO_PAYMASTER_DATA_PATH` with `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH` for documented quickstart viability.
+- Blockers still active:
+  - `BLOCKED_NO_BUNDLER`
+  - `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
+  - `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
+  - `DO_NOT_CLAIM`
+
+Claim boundary unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

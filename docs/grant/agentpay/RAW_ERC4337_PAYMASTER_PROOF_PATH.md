@@ -62,6 +62,13 @@ Installed `viem` account-abstraction surface supports required primitives:
 
 Raw path is feasible for deterministic proofs, but requires external infra + account compatibility details.
 
+Additional Circle v0.8 quickstart finding:
+
+- The documented path builds paymaster fields locally in `getPaymasterData()` by signing an EIP-2612 permit and packing:
+  - `encodePacked(["uint8","address","uint256","bytes"], [0, usdcAddress, permitAmount, permitSignature])`
+- This supports a local paymaster data path for the quickstart route.
+- A separate Circle paymaster service URL is not yet proven necessary for that specific documented quickstart path.
+
 Classification:
 
 - `FEASIBLE_VIA_RAW_ERC4337`
@@ -86,6 +93,7 @@ What is not yet proven for raw ERC-4337:
 
 - deterministic userOp signing path for this Circle-created SCA
 - smart-account implementation metadata needed by raw AA tooling (factory/init/deployment/signature scheme details)
+- compatibility between existing Circle-created SCA wallet path and Circle v0.8 quickstart account model (`toSimple7702SmartAccount`)
 
 Conclusion:
 
@@ -124,7 +132,7 @@ Rationale:
 Raw ERC-4337 deterministic proof path requires:
 
 1. Bundler RPC endpoint for ARC-TESTNET
-2. Paymaster service endpoint/data-provider path (or deterministic paymaster data generation path)
+2. Deterministic paymaster data generation path (local permit path and/or service endpoint)
 3. Public RPC for finality/log correlation
 4. Reliable log/indexing path for proof capture (tx + userOp + paymaster events)
 
@@ -143,7 +151,6 @@ Existing server-only env baseline:
 Additional config needed for raw deterministic path (future approved sprint):
 
 - `AA_BUNDLER_RPC_URL`
-- `AA_PAYMASTER_RPC_URL` (or equivalent paymaster service URL)
 - `AA_PUBLIC_RPC_URL`
 - `AA_ENTRYPOINT_VERSION=v0.8` (fallback `v0.7`)
 - `AA_ENTRYPOINT_ADDRESS`
@@ -199,7 +206,7 @@ Without all required artifacts, keep claim boundary unchanged.
 2. Prioritize raw ERC-4337 design readiness over App Kit paymaster assumptions.
 3. Resolve blockers first:
    - bundler endpoint
-   - paymaster endpoint/data path
+   - paymaster data path validation (local permit path and/or service endpoint)
    - Circle SCA metadata
    - Circle-compatible userOp signing path
 4. Execute exactly one tiny sponsored operation only in a separate approved sprint.
@@ -276,7 +283,7 @@ Without all required artifacts, keep claim boundary unchanged.
 Conservative classification baseline remains:
 
 - `BLOCKED_NO_BUNDLER`
-- `BLOCKED_NO_PAYMASTER_DATA_PATH`
+- `FEASIBLE_PAYMASTER_DATA_LOCAL_PERMIT_PATH`
 - `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
 - `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
 - `DO_NOT_CLAIM`
