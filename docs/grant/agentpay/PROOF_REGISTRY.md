@@ -504,3 +504,36 @@ Claim boundary unchanged:
 
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
+
+## Master Prompt #39 — Circle Paymaster v0.8 permit signature dry-run (local/offline signing only)
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-v08-permit-signature-dry-run.ts`
+- Command: `npm run circle:paymaster:v08:permit-signature-dry-run`
+- Doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_PERMIT_SIGNATURE_DRY_RUN.md`
+
+Scope boundary:
+
+- local EIP-2612 typed-data signature generation only
+- local paymasterData packing only
+- read-only ERC-20 permit input probes
+
+Explicit non-actions:
+
+- no `sendUserOperation`
+- no userOp submission
+- no tx send/write
+- no token approval/write
+
+Output boundary markers:
+
+- `permitSigningExecuted=true`
+- `userOps=false`
+- `transactions=false`
+- `approvals=false`
+- `paymasterDataEncoded=yes`
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`

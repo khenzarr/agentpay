@@ -141,3 +141,19 @@ Recommended next approved sprint:
 2. Introduce controlled permit-shape assembly inputs.
 3. Add explicit proof-capture scaffolding for `userOpHash`/`txHash` without broadening scope.
 4. Run a single tiny, fully-audited sponsored operation only after separate approval.
+
+---
+
+## 10. Follow-up permit signature dry-run checkpoint
+
+Subsequent artifact:
+
+- `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_PERMIT_SIGNATURE_DRY_RUN.md`
+
+That checkpoint verifies the local EIP-2612 signature + packed paymasterData path while preserving this boundary:
+
+- no `sendUserOperation`
+- no userOp submission
+- no tx send/write
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`

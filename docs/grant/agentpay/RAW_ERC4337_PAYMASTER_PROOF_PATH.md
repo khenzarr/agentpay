@@ -251,6 +251,32 @@ Without all required artifacts, keep claim boundary unchanged.
 
 ---
 
+## 15. Permit signature dry-run checkpoint (Master Prompt #39)
+
+- Added script: `scripts/circle-paymaster-v08-permit-signature-dry-run.ts`
+- Added command: `npm run circle:paymaster:v08:permit-signature-dry-run`
+- Added doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_PERMIT_SIGNATURE_DRY_RUN.md`
+
+Checkpoint scope:
+
+- local EIP-2612 typed-data permit signing (offline/local only)
+- local `encodePacked(["uint8","address","uint256","bytes"], [0, usdcAddress, permitAmount, permitSignature])`
+- read-only token probes (`name`, `version`, `decimals`, `nonces`, `balanceOf`, `allowance`)
+
+Explicit non-actions:
+
+- no `sendUserOperation`
+- no userOp submission
+- no tx send/write
+- no approvals
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+
+---
+
 ## Task A direct answers (concise)
 
 1. **App Kit deterministic proof artifacts?** Not proven from installed surface; currently blocked for deterministic paymaster proof capture.

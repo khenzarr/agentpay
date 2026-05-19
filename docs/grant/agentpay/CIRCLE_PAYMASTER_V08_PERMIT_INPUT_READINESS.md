@@ -148,3 +148,19 @@ Recommended next approved sprint:
 3. Build final local paymasterData with `encodePacked` using real permit signature.
 4. Submit one tiny audited sponsored userOp and capture full artifacts (`userOpHash`, `txHash`, receipt/log correlation).
 5. Re-evaluate claim boundary only if all deterministic proof artifacts are captured.
+
+---
+
+## 10. Follow-up checkpoint completed
+
+Subsequent sprint artifact:
+
+- `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_PERMIT_SIGNATURE_DRY_RUN.md`
+
+That checkpoint performs local EIP-2612 permit typed-data signing and local `paymasterData` packing only, while keeping:
+
+- `userOps=false`
+- `transactions=false`
+- `approvals=false`
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
