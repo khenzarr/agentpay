@@ -150,6 +150,12 @@ Paymaster discovery note:
 - Current Paymaster status: **NOT_CLAIMED**
 - Claim rule: do not claim paymaster until a real sponsored/gasless transaction proof exists from a verified Circle Wallets signing/send flow (likely requiring an SCA/ERC-4337-capable account path).
 
+Gasless/paymaster discovery note (Master Prompt #19):
+
+- See `docs/grant/agentpay/CIRCLE_WALLETS_GASLESS_PAYMASTER_DISCOVERY.md`
+- Classification: **DO_NOT_CLAIM**
+- Existing verified Circle wallet is `accountType: EOA`; conservative blocker tags include **BLOCKED_EXISTING_WALLET_IS_EOA**, **FEASIBLE_BUT_NEEDS_SCA_WALLET**, **FEASIBLE_BUT_NEEDS_GAS_STATION_POLICY**, **FEASIBLE_BUT_NEEDS_CONSOLE_SETUP**.
+
 Circle Wallets server-only readiness scaffold note (Master Prompt #10B):
 
 - Setup/runbook added: `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`

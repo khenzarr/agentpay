@@ -190,6 +190,13 @@ Notes:
 - Circle Wallets gasless: **NOT_CLAIMED**
 - Paymaster: **NOT_CLAIMED**
 
+Gasless/paymaster discovery update (Master Prompt #19):
+
+- Discovery report: `docs/grant/agentpay/CIRCLE_WALLETS_GASLESS_PAYMASTER_DISCOVERY.md`
+- Classification: **DO_NOT_CLAIM**
+- Blocking tags: **BLOCKED_EXISTING_WALLET_IS_EOA**, **FEASIBLE_BUT_NEEDS_SCA_WALLET**, **FEASIBLE_BUT_NEEDS_GAS_STATION_POLICY**, **FEASIBLE_BUT_NEEDS_CONSOLE_SETUP**
+- Existing verified wallet is EOA; gasless/paymaster path remains unverified until sponsored transaction proof is captured.
+
 Paymaster discovery update (Master Prompt #11B):
 
 - Discovery report: `docs/grant/agentpay/PAYMASTER_DISCOVERY.md`

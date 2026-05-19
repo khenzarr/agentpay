@@ -62,6 +62,13 @@ Paymaster discovery classification note:
 - Current claim status: **NOT_CLAIMED**
 - Claim gate: do not claim paymaster until a real sponsored/gasless transaction proof exists from a verified Circle Wallets signing/send flow.
 
+Gasless/paymaster discovery classification note (Master Prompt #19):
+
+- Discovery report: `docs/grant/agentpay/CIRCLE_WALLETS_GASLESS_PAYMASTER_DISCOVERY.md`
+- Classification: **DO_NOT_CLAIM**
+- Blocking tags: **BLOCKED_EXISTING_WALLET_IS_EOA**, **FEASIBLE_BUT_NEEDS_SCA_WALLET**, **FEASIBLE_BUT_NEEDS_GAS_STATION_POLICY**, **FEASIBLE_BUT_NEEDS_CONSOLE_SETUP**
+- Existing verified wallet is EOA; gasless/paymaster remains unverified until real sponsored transaction finality proof exists.
+
 Circle Wallets server-only scaffold artifacts (Master Prompt #10B):
 
 - `docs/grant/agentpay/CIRCLE_WALLETS_SERVER_SETUP.md`

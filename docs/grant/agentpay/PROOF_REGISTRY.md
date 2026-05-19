@@ -122,3 +122,10 @@ Finality check command (non-mutating): `npm run circle:wallets:get-transaction`
 - Circle Wallets send/transfer: `CURRENT_VERIFIED` (live tiny transfer/send verified on ARC-TESTNET)
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+Gasless/paymaster discovery update (Master Prompt #19):
+
+- Discovery report: `docs/grant/agentpay/CIRCLE_WALLETS_GASLESS_PAYMASTER_DISCOVERY.md`
+- Classification: `DO_NOT_CLAIM`
+- Blocking tags: `BLOCKED_EXISTING_WALLET_IS_EOA`, `FEASIBLE_BUT_NEEDS_SCA_WALLET`, `FEASIBLE_BUT_NEEDS_GAS_STATION_POLICY`, `FEASIBLE_BUT_NEEDS_CONSOLE_SETUP`
+- Arc-testnet gasless/paymaster path remains unverified without real sponsored transaction proof.

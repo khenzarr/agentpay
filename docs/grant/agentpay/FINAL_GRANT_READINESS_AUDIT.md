@@ -99,6 +99,12 @@ Related public docs:
 2. Paymaster runtime sponsored/gasless proof not captured.
 3. Gateway / Unified Balance live spend intentionally not executed (fee too high relative to test amount).
 
+Gasless/paymaster discovery addendum (Master Prompt #19):
+
+- Reference: `docs/grant/agentpay/CIRCLE_WALLETS_GASLESS_PAYMASTER_DISCOVERY.md`
+- Classification: `DO_NOT_CLAIM`
+- Conservative blockers: existing verified wallet is EOA (`BLOCKED_EXISTING_WALLET_IS_EOA`), SCA path and Gas Station/Console policy setup are still prerequisite gates.
+
 Circle Wallets transfer-estimate proof addendum:
 
 - `npm run circle:wallets:list-balances` returned ARC-TESTNET `USDC` token balance with `tokenId: 15dc2b5d-0994-58b0-bf8c-3a0501148ee8`.
