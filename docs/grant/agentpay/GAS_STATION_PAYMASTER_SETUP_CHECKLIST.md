@@ -44,6 +44,15 @@ Known live transfer proof:
 
 ## 3) What must be confirmed in Circle Console
 
+Founder-observed Console state (testnet mode, documented for readiness):
+
+- Policy name: `Default Arc Testnet Policy`
+- Network: `Arc Testnet`
+- Status: `Active`
+- Daily spend limit: `50 USDC-TESTNET`
+- `Sponsored Transactions` UI/tab is present
+- Current settled sponsored transaction count: `0`
+
 Confirm all items below before any gasless/paymaster verification attempt:
 
 1. Is `ARC-TESTNET` supported for Gas Station / Paymaster in current Circle Console/account tier?
@@ -115,8 +124,10 @@ Note: placeholders are documentation-only in this sprint; no mutation run is aut
 ## 9) Current blockers
 
 - Existing verified wallet is `EOA`
-- Gas Station/paymaster policy not yet configured/proven
-- ARC-TESTNET sponsorship support not yet runtime-confirmed for this account
+- Console policy visibility is now observed on ARC-TESTNET, but API/runtime policy introspection remains unproven in-repo
+- EOA vs SCA requirement for sponsorship path remains unresolved
+- Policy/config identifier requirement for sponsored transaction params remains unresolved
+- Exact sponsored transfer SDK parameterization remains unresolved
 - No sponsored transaction proof captured
 
 ## 10) Go / no-go criteria

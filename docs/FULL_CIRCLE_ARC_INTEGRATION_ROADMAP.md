@@ -77,6 +77,27 @@ Roadmap targets are implementation goals, not shipped-status statements.
 - Fee economics (e.g., Gateway live spend cost vs test amount)
 - Arc mainnet availability timing for production activation
 
+Gas Station / Paymaster readiness observation update (testnet mode, founder-observed):
+
+- `Default Arc Testnet Policy` is visible in Circle Console
+- policy status is `Active`
+- policy network is `Arc Testnet`
+- policy daily spend limit is `50 USDC-TESTNET`
+- `Sponsored Transactions` UI is present
+- settled sponsored tx count currently `0`
+
+This reduces Console-visibility uncertainty, but does **not** change claim status:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
+
+Remaining blockers to verification:
+
+- EOA vs SCA requirement for sponsored flow remains unresolved
+- policy/config identifier requirement in SDK transaction params remains unresolved
+- exact SDK/API method + parameterization for sponsored transfer still needs runtime proof
+- no real sponsored transaction proof artifact captured yet
+
 ## 10) Demo/grant posture
 
 - Claim only verified pieces in demos and submissions.

@@ -54,6 +54,13 @@ Conservative finding:
 - Gas Station/paymaster eligibility appears policy/config dependent.
 - Installed SDK error surface includes policy-eligibility language for SCA account creation.
 - No in-repo runtime proof currently demonstrates active Gas Station sponsorship policy usage.
+- Founder observed Circle Console policy visibility in testnet mode:
+  - `Default Arc Testnet Policy`
+  - network `Arc Testnet`
+  - status `Active`
+  - daily spend limit `50 USDC-TESTNET`
+  - `Sponsored Transactions` UI present
+  - settled sponsored tx count currently `0`
 
 Classification:
 
@@ -121,8 +128,10 @@ No secrets should be printed or committed.
 ## 11) What is blocked
 
 - Existing verified wallet is `EOA`, not SCA.
-- No verified Gas Station/Paymaster sponsorship policy proof in this repo.
+- Console policy visibility is observed, but API/runtime policy introspection is not yet implemented in this repo.
+- No verified Gas Station/Paymaster sponsorship runtime proof in this repo.
 - No real sponsored transaction proof artifact captured.
+- Policy/config identifier requirement in sponsored tx parameters remains unresolved from current SDK type-only inspection.
 - Installed SDK type surface does not provide a simple standalone “gasless verified” shortcut; policy + account mode + runtime proof are still required.
 
 ## 12) Claim recommendation

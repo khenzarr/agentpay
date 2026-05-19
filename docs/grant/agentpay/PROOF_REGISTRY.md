@@ -123,6 +123,32 @@ Finality check command (non-mutating): `npm run circle:wallets:get-transaction`
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 
+### Gas Station / Paymaster readiness preflight (non-mutating)
+
+Command: `npm run circle:gas-station:readiness`
+
+Documented scope:
+
+- Server-only env validation for Circle keys + wallet + ARC-TESTNET baseline
+- Wallet metadata read (`walletId`, `walletAddress`, `blockchain`, `accountType`, `custodyType`, `state`)
+- Policy env presence check (`CIRCLE_GAS_STATION_POLICY_ID`, `CIRCLE_PAYMASTER_POLICY_ID`)
+- No sponsored transaction sent
+- No wallet created
+
+Founder-observed Console context recorded for readiness (not API-verified in script):
+
+- `Default Arc Testnet Policy`
+- status `Active`
+- network `Arc Testnet`
+- daily spend limit `50 USDC-TESTNET`
+- `Sponsored Transactions` UI present
+- settled sponsored tx count `0`
+
+Current claim boundary remains:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
+
 Gasless/paymaster discovery update (Master Prompt #19):
 
 - Discovery report: `docs/grant/agentpay/CIRCLE_WALLETS_GASLESS_PAYMASTER_DISCOVERY.md`

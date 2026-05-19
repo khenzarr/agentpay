@@ -26,7 +26,8 @@
     "circle:wallets:send-tiny-transfer": "tsx --env-file=.env.circle.local scripts/circle-wallets-send-tiny-transfer.ts",
     "circle:wallets:get-transaction": "tsx --env-file=.env.circle.local scripts/circle-wallets-get-transaction.ts",
     "circle:wallets:token-lookup": "tsx --env-file=.env.circle.local scripts/circle-wallets-token-lookup.ts",
-    "circle:wallets:list-balances": "tsx --env-file=.env.circle.local scripts/circle-wallets-list-balances.ts"
+    "circle:wallets:list-balances": "tsx --env-file=.env.circle.local scripts/circle-wallets-list-balances.ts",
+    "circle:gas-station:readiness": "tsx --env-file=.env.circle.local scripts/circle-gas-station-readiness.ts"
   },
   "dependencies": {
     "@circle-fin/developer-controlled-wallets": "^10.3.1",
