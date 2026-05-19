@@ -467,3 +467,40 @@ Claim boundary unchanged:
 
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
+
+## Master Prompt #38 — Circle Paymaster v0.8 permit input readiness (read-only)
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-v08-permit-input-readiness.ts`
+- Command: `npm run circle:paymaster:v08:permit-input-readiness`
+- Doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_PERMIT_INPUT_READINESS.md`
+
+Scope boundary:
+
+- local owner derivation + read-only ERC-20 permit input probes only
+- no permit signing
+- no `sendUserOperation`
+- no userOp submission
+- no transaction submission
+- no token approvals
+
+Read-only calls allowed in this checkpoint:
+
+- `name()`
+- `decimals()`
+- `nonces(owner)`
+- `balanceOf(owner)`
+- `allowance(owner, paymaster)`
+- optional `version()` with fallback `version=unavailable`
+
+Output boundary markers:
+
+- `permitSigningRequired=true`
+- `permitSigningExecuted=false`
+- `userOps=false`
+- `transactions=false`
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
