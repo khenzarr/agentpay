@@ -1,4 +1,4 @@
-## Circle Paymaster / Gasless discovery checkpoint (Master Prompt #22)
+﻿## Circle Paymaster / Gasless discovery checkpoint (Master Prompt #22)
 
 - Date: 2026-05-19
 - Scope: Official docs deep dive only (no mutations, no sponsored tx, no wallet creation)
@@ -6,7 +6,7 @@
   - `https://developers.circle.com/paymaster`
   - `https://developers.circle.com/paymaster/pay-gas-fees-usdc`
   - `https://developers.circle.com/paymaster/addresses-and-events`
-- Arc Testnet paymaster addresses (doc-level):
+- Arc Testnet paymaster addresses (historical/doc-reference only; not support evidence):
   - v0.7: `0x31BE08D380A21fc740883c0BC434FcFc88740b58`
   - v0.8: `0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
 - Current claim boundary:
@@ -31,9 +31,9 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
-# Proof Registry — AgentPay
+# Proof Registry â€” AgentPay
 
-## Circle Wallets (Developer-Controlled) — ARC-TESTNET
+## Circle Wallets (Developer-Controlled) â€” ARC-TESTNET
 
 ### Verified Circle Wallets live scope (CURRENT_VERIFIED boundary)
 
@@ -231,7 +231,7 @@ Boundary unchanged:
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 
-## Master Prompt #25 — Sponsored transfer dry-run readiness proof (no mutation)
+## Master Prompt #25 â€” Sponsored transfer dry-run readiness proof (no mutation)
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-sponsored-transfer.ts`
@@ -263,7 +263,7 @@ Claim boundary unchanged:
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 
-## Master Prompt #32 — Circle Paymaster v0.8 7702 account dry-run (non-mutating)
+## Master Prompt #32 â€” Circle Paymaster v0.8 7702 account dry-run (non-mutating)
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-v08-7702-account-dry-run.ts`
@@ -290,7 +290,7 @@ Status unchanged:
 - paymasterStatus=`NOT_CLAIMED`
 - gaslessStatus=`NOT_CLAIMED`
 
-## Master Prompt #33 — Circle Paymaster v0.8 7702 owner signer readiness (server-only)
+## Master Prompt #33 â€” Circle Paymaster v0.8 7702 owner signer readiness (server-only)
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-v08-7702-owner-readiness.ts`
@@ -319,7 +319,7 @@ Status unchanged:
 - paymasterStatus=`NOT_CLAIMED`
 - gaslessStatus=`NOT_CLAIMED`
 
-## Master Prompt #34 — Circle Paymaster v0.8 7702 owner readiness verified (server-only)
+## Master Prompt #34 â€” Circle Paymaster v0.8 7702 owner readiness verified (server-only)
 
 - Date: 2026-05-19
 - Command: `npm run circle:paymaster:v08-7702:owner-readiness`
@@ -350,7 +350,7 @@ Status unchanged:
 - paymasterStatus=`NOT_CLAIMED`
 - gaslessStatus=`NOT_CLAIMED`
 
-## Master Prompt #26 — Live sponsored-transfer attempt failure checkpoint
+## Master Prompt #26 â€” Live sponsored-transfer attempt failure checkpoint
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-sponsored-transfer.ts`
@@ -383,7 +383,7 @@ Next path recommendation:
 - Investigate App Kit Paymaster path only if deterministic paymaster/userOp proof fields are capturable.
 - Otherwise prioritize raw ERC-4337 (`viem` bundler + paymaster + userOperation proof pipeline).
 
-## Master Prompt #30E — Circle Paymaster v0.8 quickstart data-path revision
+## Master Prompt #30E â€” Circle Paymaster v0.8 quickstart data-path revision
 
 - Date: 2026-05-19
 - Scope: docs-only revision from official Circle quickstart findings (no mutation)
@@ -430,7 +430,7 @@ Claim boundary unchanged:
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 
-## Master Prompt #36 — v0.8 7702 bundler health (read-only)
+## Master Prompt #36 â€” v0.8 7702 bundler health (read-only)
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-v08-7702-bundler-health.ts`
@@ -457,7 +457,7 @@ Boundary unchanged:
 - paymasterStatus: `NOT_CLAIMED`
 - gaslessStatus: `NOT_CLAIMED`
 
-## Master Prompt #37 — v0.8 7702 UserOp object dry-run (construction-only)
+## Master Prompt #37 â€” v0.8 7702 UserOp object dry-run (construction-only)
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-v08-7702-userop-dry-run.ts`
@@ -485,7 +485,7 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
-## Master Prompt #42B — Circle Paymaster v0.8 controlled live proof attempt (single-run, failed)
+## Master Prompt #42B â€” Circle Paymaster v0.8 controlled live proof attempt (single-run, failed)
 
 - Date: 2026-05-19
 - Command: `npm run circle:paymaster:v08:live-proof`
@@ -524,7 +524,7 @@ Boundary decision after single attempt:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
-## PATCH #42A — Live proof env-mode conflict resolved (gating model update)
+## PATCH #42A â€” Live proof env-mode conflict resolved (gating model update)
 
 - Date: 2026-05-20
 - Scope: safety gating patch only (no live submission)
@@ -552,7 +552,7 @@ Boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
-## Master Prompt #41 — Circle Paymaster v0.8 live proof final readiness docs
+## Master Prompt #41 â€” Circle Paymaster v0.8 live proof final readiness docs
 
 - Date: 2026-05-19
 - Scope: documentation + final readiness only (no live userOp submission)
@@ -573,7 +573,7 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
-## Master Prompt #38 — Circle Paymaster v0.8 permit input readiness (read-only)
+## Master Prompt #38 â€” Circle Paymaster v0.8 permit input readiness (read-only)
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-v08-permit-input-readiness.ts`
@@ -610,7 +610,7 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
-## Master Prompt #39 — Circle Paymaster v0.8 permit signature dry-run (local/offline signing only)
+## Master Prompt #39 â€” Circle Paymaster v0.8 permit signature dry-run (local/offline signing only)
 
 - Date: 2026-05-19
 - Script: `scripts/circle-paymaster-v08-permit-signature-dry-run.ts`
@@ -642,3 +642,25 @@ Claim boundary unchanged:
 
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
+
+---
+
+## Arc Testnet Circle Paymaster Support Boundary (Correction)
+
+- Circle Paymaster official supported chains do not currently include Arc Testnet.
+- The Arc Testnet Paymaster path is blocked by unsupported/missing Circle Paymaster deployment, not by AgentPay client-side readiness.
+- EntryPoint and bundler readiness on Arc Testnet are verified/readiness-only, but Circle Paymaster/Gasless remains NOT_CLAIMED.
+- No claim should state that Circle Paymaster is live or supported on Arc Testnet.
+
+Final status:
+
+- Paymaster: NOT_CLAIMED
+- Gasless: NOT_CLAIMED
+
+Classification:
+
+- BLOCKED_CIRCLE_PAYMASTER_ARC_NOT_SUPPORTED
+- BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
+- READINESS_COMPLETE_CLIENT_SIDE
+- DO_NOT_CLAIM
+

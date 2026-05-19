@@ -1,4 +1,4 @@
-# AgentPay Demo Readiness (Arc Testnet MVP)
+﻿# AgentPay Demo Readiness (Arc Testnet MVP)
 
 **Last updated:** 2026-05-18
 
@@ -120,7 +120,7 @@ Do not claim:
 Allowed current claims:
 - USDC escrow on Arc Testnet
 - ERC-8183 tutorial ABI integration
-- Built for Arc’s agentic economy
+- Built for Arcâ€™s agentic economy
 - Mainnet-ready architecture, waiting for Arc mainnet availability
 
 ## 12) Circle product claim boundary (strict)
@@ -146,7 +146,7 @@ Paymaster discovery note:
 
 - See `docs/grant/agentpay/PAYMASTER_DISCOVERY.md`
 - Classification: **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**
-- Arc Testnet support: documented
+- Arc Testnet support: unsupported/unverified for Circle Paymaster
 - Current Paymaster status: **NOT_CLAIMED**
 - Claim rule: do not claim paymaster until a real sponsored/gasless transaction proof exists from a verified Circle Wallets signing/send flow (likely requiring an SCA/ERC-4337-capable account path).
 
@@ -326,14 +326,14 @@ For App Kit Send private-key usage, run via isolated env file `.env.appkit.local
 
 | Capability | Status now | Recording note |
 |---|---|---|
-| Arc Testnet chain flow | ✅ Implemented | Show chain ID `5042002` in wallet/network guard |
-| USDC escrow lifecycle | ✅ Implemented | Show create → setBudget → approve/fund → submit → complete |
-| ERC-8183 tutorial ABI subset | ✅ Implemented | Explicitly say “tutorial subset”, not full compliance |
-| JobCreated receipt parsing + redirect | ✅ Implemented | Show redirect to `/jobs/{jobId}` after create |
-| `/jobs` and `/payments` indexing | ✅ Implemented (demo-range) | Label as indexed demo block range only |
-| ArcNS resolution | 🟨 Optional/non-blocking | Show with `agentpayagent.circle` (agent) and `agentpayclient.arc` (client/evaluator); fallback to raw wallet if resolver fails |
-| App Kit Send | ✅ CURRENT_VERIFIED | Live send verified on Arc Testnet USDC with isolated `.env.appkit.local`; private key not printed |
-| CCTP / Gateway / Wallets / Paymaster | 🟨 MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED** for EOA wallet creation/read, SCA wallet creation on ARC-TESTNET, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send; Paymaster remains **NOT_CLAIMED** |
+| Arc Testnet chain flow | âœ… Implemented | Show chain ID `5042002` in wallet/network guard |
+| USDC escrow lifecycle | âœ… Implemented | Show create â†’ setBudget â†’ approve/fund â†’ submit â†’ complete |
+| ERC-8183 tutorial ABI subset | âœ… Implemented | Explicitly say â€œtutorial subsetâ€, not full compliance |
+| JobCreated receipt parsing + redirect | âœ… Implemented | Show redirect to `/jobs/{jobId}` after create |
+| `/jobs` and `/payments` indexing | âœ… Implemented (demo-range) | Label as indexed demo block range only |
+| ArcNS resolution | ğŸŸ¨ Optional/non-blocking | Show with `agentpayagent.circle` (agent) and `agentpayclient.arc` (client/evaluator); fallback to raw wallet if resolver fails |
+| App Kit Send | âœ… CURRENT_VERIFIED | Live send verified on Arc Testnet USDC with isolated `.env.appkit.local`; private key not printed |
+| CCTP / Gateway / Wallets / Paymaster | ğŸŸ¨ MIXED | CCTP is **CURRENT_VERIFIED**; Gateway is **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED** (below CURRENT_VERIFIED until live spend proof); Wallets are **CURRENT_VERIFIED** for EOA wallet creation/read, SCA wallet creation on ARC-TESTNET, metadata read, ARC-TESTNET USDC token ID resolution, transfer estimate, message signing, and live tiny transfer/send; Paymaster remains **NOT_CLAIMED** |
 
 Gateway / Unified Balance live deposit + confirmed-balance verification evidence recorded:
 
@@ -426,9 +426,9 @@ Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real s
 ## 17) Latest verified rehearsal note (Master Prompt #4)
 
 - Preflight completed and green:
-  - `npm run lint` ✅
-  - `npm run typecheck` ✅
-  - `npm run build` ✅
+  - `npm run lint` âœ…
+  - `npm run typecheck` âœ…
+  - `npm run build` âœ…
 - Runtime values now configured in `.env.local`:
   - `NEXT_PUBLIC_DEMO_AGENT_ADDRESS=0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC`
   - `NEXT_PUBLIC_DEMO_AGENT_NAME=AgentPay Demo Agent`
@@ -452,3 +452,25 @@ Paymaster status boundary: **NOT_CLAIMED** (feasible in principle, but no real s
 - Live deposit was executed with explicit env toggle (`APPKIT_UB_DEPOSIT_DRY_RUN=false`).
 - Gateway / Unified Balance status is now **CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED**.
 - Status remains below **CURRENT_VERIFIED** until live spend proof is captured.
+
+---
+
+## Arc Testnet Circle Paymaster Support Boundary (Correction)
+
+- Circle Paymaster official supported chains do not currently include Arc Testnet.
+- The Arc Testnet Paymaster path is blocked by unsupported/missing Circle Paymaster deployment, not by AgentPay client-side readiness.
+- EntryPoint and bundler readiness on Arc Testnet are verified/readiness-only, but Circle Paymaster/Gasless remains NOT_CLAIMED.
+- No claim should state that Circle Paymaster is live or supported on Arc Testnet.
+
+Final status:
+
+- Paymaster: NOT_CLAIMED
+- Gasless: NOT_CLAIMED
+
+Classification:
+
+- BLOCKED_CIRCLE_PAYMASTER_ARC_NOT_SUPPORTED
+- BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
+- READINESS_COMPLETE_CLIENT_SIDE
+- DO_NOT_CLAIM
+

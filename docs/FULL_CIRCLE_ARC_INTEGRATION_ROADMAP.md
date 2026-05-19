@@ -1,4 +1,4 @@
-
+﻿
 ## Paymaster official docs discovery update (Master Prompt #22)
 
 - Official Circle Paymaster docs reviewed:
@@ -17,7 +17,7 @@
 
 ## 1) Product goal
 
-AgentPay’s target is a full Circle + Arc integration dApp for agentic commerce.
+AgentPayâ€™s target is a full Circle + Arc integration dApp for agentic commerce.
 
 This roadmap represents active implementation direction. Product/grant claims remain strictly tied to verified proof.
 
@@ -31,7 +31,7 @@ This roadmap represents active implementation direction. Product/grant claims re
 6. ArcNS optional identity display/resolution support
 7. App Kit Send
 8. Bridge / CCTP
-9. Circle Wallets — Developer-Controlled EOA wallet creation/read + SCA wallet creation (ARC-TESTNET) + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send proof
+9. Circle Wallets â€” Developer-Controlled EOA wallet creation/read + SCA wallet creation (ARC-TESTNET) + metadata read + ARC-TESTNET USDC token ID resolution + transfer estimate + message signing + live tiny transfer/send proof
 
 SCA wallet creation proof update:
 
@@ -87,7 +87,7 @@ SCA wallet creation proof update:
 
 For every integration area:
 
-**Implement → verify → record proof → claim**
+**Implement â†’ verify â†’ record proof â†’ claim**
 
 No integration should be publicly claimed before runtime proof is captured and documented.
 
@@ -245,3 +245,25 @@ Status remains unchanged:
 
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+---
+
+## Arc Testnet Circle Paymaster Support Boundary (Correction)
+
+- Circle Paymaster official supported chains do not currently include Arc Testnet.
+- The Arc Testnet Paymaster path is blocked by unsupported/missing Circle Paymaster deployment, not by AgentPay client-side readiness.
+- EntryPoint and bundler readiness on Arc Testnet are verified/readiness-only, but Circle Paymaster/Gasless remains NOT_CLAIMED.
+- No claim should state that Circle Paymaster is live or supported on Arc Testnet.
+
+Final status:
+
+- Paymaster: NOT_CLAIMED
+- Gasless: NOT_CLAIMED
+
+Classification:
+
+- BLOCKED_CIRCLE_PAYMASTER_ARC_NOT_SUPPORTED
+- BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
+- READINESS_COMPLETE_CLIENT_SIDE
+- DO_NOT_CLAIM
+

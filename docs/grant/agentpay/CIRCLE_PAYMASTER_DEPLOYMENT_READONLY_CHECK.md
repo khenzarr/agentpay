@@ -1,4 +1,4 @@
-# Circle Paymaster Deployment Read-Only Check (Arc Testnet)
+﻿# Circle Paymaster Deployment Read-Only Check (Arc Testnet)
 
 ## 1. Purpose
 
@@ -81,3 +81,25 @@ Unchanged:
 1. Use read-only output to confirm deployment reality for v0.8/v0.7.
 2. If v0.8 paymaster is not deployed at target address, open infra/provider clarification path before any new live attempt.
 3. Keep claim boundary unchanged until deterministic userOpHash + txHash + receipt/log fee evidence is captured in an explicitly approved live sprint.
+
+---
+
+## Arc Testnet Circle Paymaster Support Boundary (Correction)
+
+- Circle Paymaster official supported chains do not currently include Arc Testnet.
+- The Arc Testnet Paymaster path is blocked by unsupported/missing Circle Paymaster deployment, not by AgentPay client-side readiness.
+- EntryPoint and bundler readiness on Arc Testnet are verified/readiness-only, but Circle Paymaster/Gasless remains NOT_CLAIMED.
+- No claim should state that Circle Paymaster is live or supported on Arc Testnet.
+
+Final status:
+
+- Paymaster: NOT_CLAIMED
+- Gasless: NOT_CLAIMED
+
+Classification:
+
+- BLOCKED_CIRCLE_PAYMASTER_ARC_NOT_SUPPORTED
+- BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
+- READINESS_COMPLETE_CLIENT_SIDE
+- DO_NOT_CLAIM
+

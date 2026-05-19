@@ -1,4 +1,4 @@
-# FINAL GRANT READINESS AUDIT — AgentPay
+﻿# FINAL GRANT READINESS AUDIT â€” AgentPay
 
 **Date:** 2026-05-19  
 **Scope:** Final claim/readiness audit before grant demo recording.  
@@ -48,12 +48,12 @@ Related public docs:
 
 ## 3) Disallowed claims
 
-- “Full ERC-8183 compliance.”
-- “Full ERC-8004 compliance.”
-- “Paymaster integrated.”
-- “Gasless transactions verified.”
-- “Circle Wallets gasless verified.”
-- “Gateway / Unified Balance live spend verified.”
+- â€œFull ERC-8183 compliance.â€
+- â€œFull ERC-8004 compliance.â€
+- â€œPaymaster integrated.â€
+- â€œGasless transactions verified.â€
+- â€œCircle Wallets gasless verified.â€
+- â€œGateway / Unified Balance live spend verified.â€
 
 ---
 
@@ -139,8 +139,8 @@ Circle Wallets transfer-estimate proof addendum:
 
 ## 7) Grant form claim language recommendations
 
-- Use: **“mainnet-ready; waiting for Arc mainnet availability.”**
-- Use: **“not claimed until runtime proof exists.”**
+- Use: **â€œmainnet-ready; waiting for Arc mainnet availability.â€**
+- Use: **â€œnot claimed until runtime proof exists.â€**
 - Keep Gateway wording at: **implemented + deposit/balance/estimate verified; live spend not executed**.
 - Keep Circle Wallets wording at: **EOA wallet creation/read + SCA wallet creation verified on ARC-TESTNET, plus metadata read, token ID resolution, transfer estimate, message signing, tiny transfer/send verified; gasless NOT_CLAIMED**.
 - Keep Paymaster wording at: **feasible in principle, NOT_CLAIMED**.
@@ -153,3 +153,25 @@ Circle Wallets transfer-estimate proof addendum:
 
 1. validation commands pass (`lint`, `typecheck`, `build`), and
 2. narrator follows strict claim boundaries above.
+
+---
+
+## Arc Testnet Circle Paymaster Support Boundary (Correction)
+
+- Circle Paymaster official supported chains do not currently include Arc Testnet.
+- The Arc Testnet Paymaster path is blocked by unsupported/missing Circle Paymaster deployment, not by AgentPay client-side readiness.
+- EntryPoint and bundler readiness on Arc Testnet are verified/readiness-only, but Circle Paymaster/Gasless remains NOT_CLAIMED.
+- No claim should state that Circle Paymaster is live or supported on Arc Testnet.
+
+Final status:
+
+- Paymaster: NOT_CLAIMED
+- Gasless: NOT_CLAIMED
+
+Classification:
+
+- BLOCKED_CIRCLE_PAYMASTER_ARC_NOT_SUPPORTED
+- BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
+- READINESS_COMPLETE_CLIENT_SIDE
+- DO_NOT_CLAIM
+

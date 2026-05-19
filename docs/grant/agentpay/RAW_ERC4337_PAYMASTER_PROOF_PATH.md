@@ -1,4 +1,4 @@
-# Raw ERC-4337 / Circle Paymaster Proof Path — AgentPay (ARC-TESTNET)
+﻿# Raw ERC-4337 / Circle Paymaster Proof Path â€” AgentPay (ARC-TESTNET)
 
 ## 1. Purpose
 
@@ -308,7 +308,7 @@ Claim boundary unchanged:
 
 ---
 
-## Master Prompt #32 — 7702 account construction dry-run checkpoint
+## Master Prompt #32 â€” 7702 account construction dry-run checkpoint
 
 - Added script: `scripts/circle-paymaster-v08-7702-account-dry-run.ts`
 - Added command: `npm run circle:paymaster:v08-7702:account-dry-run`
@@ -337,7 +337,7 @@ Boundary unchanged:
 
 ---
 
-## Master Prompt #34 — v0.8 7702 owner readiness verified (offline)
+## Master Prompt #34 â€” v0.8 7702 owner readiness verified (offline)
 
 - Command: `npm run circle:paymaster:v08-7702:owner-readiness`
 - Checkpoint type: `verified / readiness-only`
@@ -396,7 +396,7 @@ Conservative classification baseline remains:
 
 ---
 
-## Master Prompt #36 — Bundler health probe (read-only)
+## Master Prompt #36 â€” Bundler health probe (read-only)
 
 - Script: `scripts/circle-paymaster-v08-7702-bundler-health.ts`
 - Command: `npm run circle:paymaster:v08-7702:bundler-health`
@@ -422,7 +422,7 @@ Boundary unchanged:
 
 ---
 
-## Master Prompt #41 — Final live-proof readiness docs (checklist + runbook)
+## Master Prompt #41 â€” Final live-proof readiness docs (checklist + runbook)
 
 Added final readiness docs before any live sponsored userOp attempt:
 
@@ -442,3 +442,25 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 - `DO_NOT_CLAIM`
+
+---
+
+## Arc Testnet Circle Paymaster Support Boundary (Correction)
+
+- Circle Paymaster official supported chains do not currently include Arc Testnet.
+- The Arc Testnet Paymaster path is blocked by unsupported/missing Circle Paymaster deployment, not by AgentPay client-side readiness.
+- EntryPoint and bundler readiness on Arc Testnet are verified/readiness-only, but Circle Paymaster/Gasless remains NOT_CLAIMED.
+- No claim should state that Circle Paymaster is live or supported on Arc Testnet.
+
+Final status:
+
+- Paymaster: NOT_CLAIMED
+- Gasless: NOT_CLAIMED
+
+Classification:
+
+- BLOCKED_CIRCLE_PAYMASTER_ARC_NOT_SUPPORTED
+- BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
+- READINESS_COMPLETE_CLIENT_SIDE
+- DO_NOT_CLAIM
+

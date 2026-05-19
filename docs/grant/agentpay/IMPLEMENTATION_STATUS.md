@@ -1,4 +1,4 @@
-# Implementation Status — AgentPay MVP Demo Path
+﻿# Implementation Status â€” AgentPay MVP Demo Path
 
 **Date:** 2026-05-18  
 **Phase:** Master Prompt #7A (App Kit Send local script integration)
@@ -21,16 +21,16 @@ AgentPay frontend now supports an end-to-end Arc Testnet MVP demo path with real
 - Wagmi connector list cleaned up to reduce duplicate wallet options (`src/lib/wagmi.ts`)
 - Homepage copy updated to strict product-safe language (`src/app/page.tsx`)
 - App Kit Send local script utility implemented for Arc Testnet USDC with safe default dry-run (`scripts/appkit-send-arc-usdc.ts`)
-- App Kit Send run command added (`package.json` → `appkit:send:arc:usdc`)
+- App Kit Send run command added (`package.json` â†’ `appkit:send:arc:usdc`)
 - App Kit Send env placeholders added (`.env.example`)
 - App Kit Send script explicitly uses isolated env file: `.env.appkit.local` (not frontend `.env.local`)
 - App Kit Bridge/CCTP local script implemented with estimate-first and dry-run default (`scripts/appkit-bridge-usdc-to-arc.ts`)
-- App Kit Bridge/CCTP run command added (`package.json` → `appkit:bridge:usdc:arc`)
+- App Kit Bridge/CCTP run command added (`package.json` â†’ `appkit:bridge:usdc:arc`)
 - App Kit Bridge/CCTP env placeholders added (`.env.example`)
 - App Kit Gateway / Unified Balance discovery completed with official docs + installed SDK type confirmation (`docs/grant/agentpay/APP_KIT_GATEWAY_UNIFIED_BALANCE_DISCOVERY.md`)
 - App Kit Gateway / Unified Balance local check script implemented (`scripts/appkit-unified-balance-check.ts`)
 - App Kit Gateway / Unified Balance local spend-to-Arc script implemented with estimate-first + dry-run default (`scripts/appkit-unified-balance-spend-to-arc.ts`)
-- App Kit Gateway / Unified Balance run commands added (`package.json` → `appkit:ub:check`, `appkit:ub:spend:arc`)
+- App Kit Gateway / Unified Balance run commands added (`package.json` â†’ `appkit:ub:check`, `appkit:ub:spend:arc`)
 - App Kit Gateway / Unified Balance env placeholders added (`.env.example`)
 
 ---
@@ -68,15 +68,15 @@ AgentPay frontend now supports an end-to-end Arc Testnet MVP demo path with real
 
 | Area | Status | Notes |
 |------|--------|-------|
-| `JobCreated` parsing | ✅ | `parseJobCreatedFromReceipt` implemented with parse + decode fallback |
-| Create-job redirect to `/jobs/{jobId}` | ✅ | Redirect happens when event parse succeeds |
-| Fallback when parse fails | ✅ | Tx hash + ArcScan + manual job ID instructions |
-| `/jobs` event indexing | ✅ | Client-side log indexing from configurable from-block |
-| `/jobs` filters | ✅ | All / as client / as provider |
-| Dashboard stats | ✅ | Explicitly “indexed demo range”, not protocol-wide totals |
-| `/payments` history | ✅ (derived) | Derived from current job status, no invented settlement events |
-| Job detail grant-demo polish | ✅ | Status, participants, actions, role guidance, ArcScan links |
-| ArcNS in core flow | ⏸ Optional | Non-blocking; core flow does not require ArcNS |
+| `JobCreated` parsing | âœ… | `parseJobCreatedFromReceipt` implemented with parse + decode fallback |
+| Create-job redirect to `/jobs/{jobId}` | âœ… | Redirect happens when event parse succeeds |
+| Fallback when parse fails | âœ… | Tx hash + ArcScan + manual job ID instructions |
+| `/jobs` event indexing | âœ… | Client-side log indexing from configurable from-block |
+| `/jobs` filters | âœ… | All / as client / as provider |
+| Dashboard stats | âœ… | Explicitly â€œindexed demo rangeâ€, not protocol-wide totals |
+| `/payments` history | âœ… (derived) | Derived from current job status, no invented settlement events |
+| Job detail grant-demo polish | âœ… | Status, participants, actions, role guidance, ArcScan links |
+| ArcNS in core flow | â¸ Optional | Non-blocking; core flow does not require ArcNS |
 
 ---
 
@@ -168,9 +168,9 @@ Validation rerun in this phase (Master Prompt #6):
 
 | Command | Result |
 |---------|--------|
-| `npm run lint` | ✅ Pass |
-| `npm run typecheck` | ✅ Pass |
-| `npm run build` | ✅ Pass |
+| `npm run lint` | âœ… Pass |
+| `npm run typecheck` | âœ… Pass |
+| `npm run build` | âœ… Pass |
 
 Notes:
 - Build output showed successful compilation and route generation.
@@ -201,7 +201,7 @@ Paymaster discovery update (Master Prompt #11B):
 
 - Discovery report: `docs/grant/agentpay/PAYMASTER_DISCOVERY.md`
 - Feasibility classification: **FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_SIGNING_FLOW**
-- Arc Testnet support: documented
+- Arc Testnet support: unsupported/unverified for Circle Paymaster
 - Current claim status: **NOT_CLAIMED**
 - Reason: no real sponsored/gasless transaction proof exists yet; Circle Wallets signing/send transaction flow must be implemented and verified first, and gasless proof likely requires an SCA/ERC-4337-capable account path.
 
@@ -285,8 +285,8 @@ Circle Wallets transfer-estimate verification evidence recorded:
 
 Strict claim boundary:
 
-- ✅ Allowed: Circle Developer-Controlled Wallet live scope verified on ARC-TESTNET (wallet creation, metadata read, USDC token ID resolution, transfer estimate, message signing, tiny transfer/send)
-- ❌ Not yet verified: gasless transactions, paymaster
+- âœ… Allowed: Circle Developer-Controlled Wallet live scope verified on ARC-TESTNET (wallet creation, metadata read, USDC token ID resolution, transfer estimate, message signing, tiny transfer/send)
+- âŒ Not yet verified: gasless transactions, paymaster
 
 Circle Wallets live tiny transfer/send proof (founder-run):
 
@@ -422,21 +422,21 @@ Circle Wallets-specific founder gate for any next live mutation beyond wallet cr
 
 ## 10) Real Arc Testnet Dry-Run Status
 
-**Status:** ✅ Lifecycle completed for Job #21683 (final confirmations pending)
+**Status:** âœ… Lifecycle completed for Job #21683 (final confirmations pending)
 
 ### Dry-run preflight result
 
-- ✅ Working directory context confirmed: `c:\Users\mertb\Desktop\NODE\agentpay`
-- ✅ Required docs/code preflight reviewed
-- ✅ Validation passed:
+- âœ… Working directory context confirmed: `c:\Users\mertb\Desktop\NODE\agentpay`
+- âœ… Required docs/code preflight reviewed
+- âœ… Validation passed:
   - `npm run lint`
   - `npm run typecheck`
   - `npm run build`
-- ✅ Founder provided client/agent wallets and confirmed funding readiness
-- ✅ `.env.local` configured with demo agent and temporary indexing block (`42654907`)
-- ✅ Real Arc Testnet lifecycle completed for **Job #21683**
-- ✅ Final on-chain job status observed as **Completed**
-- ✅ Budget for the tested job: **1 USDC**
+- âœ… Founder provided client/agent wallets and confirmed funding readiness
+- âœ… `.env.local` configured with demo agent and temporary indexing block (`42654907`)
+- âœ… Real Arc Testnet lifecycle completed for **Job #21683**
+- âœ… Final on-chain job status observed as **Completed**
+- âœ… Budget for the tested job: **1 USDC**
 
 ### Tx hashes (Job #21683)
 
@@ -463,3 +463,25 @@ Circle Wallets-specific founder gate for any next live mutation beyond wallet cr
 ### Next action
 
 - Add the remaining confirmations in `docs/grant/agentpay/DRY_RUN_REPORT.md`, then proceed with grant demo recording.
+
+---
+
+## Arc Testnet Circle Paymaster Support Boundary (Correction)
+
+- Circle Paymaster official supported chains do not currently include Arc Testnet.
+- The Arc Testnet Paymaster path is blocked by unsupported/missing Circle Paymaster deployment, not by AgentPay client-side readiness.
+- EntryPoint and bundler readiness on Arc Testnet are verified/readiness-only, but Circle Paymaster/Gasless remains NOT_CLAIMED.
+- No claim should state that Circle Paymaster is live or supported on Arc Testnet.
+
+Final status:
+
+- Paymaster: NOT_CLAIMED
+- Gasless: NOT_CLAIMED
+
+Classification:
+
+- BLOCKED_CIRCLE_PAYMASTER_ARC_NOT_SUPPORTED
+- BLOCKED_PAYMASTER_CONTRACT_NOT_DEPLOYED_ON_ARC_TESTNET
+- READINESS_COMPLETE_CLIENT_SIDE
+- DO_NOT_CLAIM
+
