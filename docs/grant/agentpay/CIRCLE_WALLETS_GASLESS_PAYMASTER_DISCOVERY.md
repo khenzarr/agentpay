@@ -139,6 +139,10 @@ Supporting feasibility tags:
 - `FEASIBLE_BUT_NEEDS_CONSOLE_SETUP`
 - `FEASIBLE_BUT_NEEDS_ARC_TESTNET_SUPPORT_CONFIRMATION`
 
+Setup/readiness checklist reference:
+
+- `docs/grant/agentpay/GAS_STATION_PAYMASTER_SETUP_CHECKLIST.md`
+
 ## 13) Risk notes
 
 - Do not treat EOA signing/send verification as gasless/paymaster verification.

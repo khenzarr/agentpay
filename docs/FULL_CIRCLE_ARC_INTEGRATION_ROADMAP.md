@@ -82,3 +82,7 @@ Roadmap targets are implementation goals, not shipped-status statements.
 - Claim only verified pieces in demos and submissions.
 - Keep estimate-verified and blocked items explicitly labeled.
 - Present this roadmap as active implementation direction, not completed status.
+
+Gasless/paymaster setup/readiness checklist:
+
+- `docs/grant/agentpay/GAS_STATION_PAYMASTER_SETUP_CHECKLIST.md`
