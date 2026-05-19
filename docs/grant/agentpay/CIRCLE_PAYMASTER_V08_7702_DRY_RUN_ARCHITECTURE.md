@@ -169,3 +169,30 @@ Missing required proof artifacts means claim boundary cannot change.
 - `FEASIBLE_BUT_NEEDS_BUNDLER_RPC`
 - `FEASIBLE_BUT_NEEDS_PERMIT_SIGNING_DRY_RUN`
 - `DO_NOT_CLAIM`
+
+---
+
+## 12. Account construction dry-run checkpoint (Master Prompt #32)
+
+- Added script: `scripts/circle-paymaster-v08-7702-account-dry-run.ts`
+- Added command: `npm run circle:paymaster:v08-7702:account-dry-run`
+- Added report: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_ACCOUNT_DRY_RUN.md`
+
+Local installed-type findings recorded:
+
+- `toSimple7702SmartAccount` import path: `viem/account-abstraction`
+- `entryPoint07Address`/`entryPoint08Address` import path: `viem/account-abstraction`
+- `defineChain` import path: `viem`
+- `toSimple7702SmartAccount` requires `owner: PrivateKeyAccount`
+
+Safety result in this checkpoint:
+
+- No account construction invocation (signer required)
+- No signing
+- No userOperation submission
+- No network/bundler call
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`

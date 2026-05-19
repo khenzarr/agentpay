@@ -246,6 +246,33 @@ Claim boundary unchanged:
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
 
+## Master Prompt #32 — Circle Paymaster v0.8 7702 account dry-run (non-mutating)
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-v08-7702-account-dry-run.ts`
+- Command: `npm run circle:paymaster:v08-7702:account-dry-run`
+- Findings doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_ACCOUNT_DRY_RUN.md`
+
+Recorded local findings (installed viem types/source only):
+
+- `toSimple7702SmartAccount` import path: `viem/account-abstraction`
+- `entryPoint07Address` and `entryPoint08Address` import path: `viem/account-abstraction`
+- Arc chain helper import path: `defineChain` from `viem`
+- `toSimple7702SmartAccount` requires `owner: PrivateKeyAccount`
+
+Checkpoint boundary:
+
+- no private key usage
+- no signer construction
+- no wallet creation
+- no `sendUserOperation`
+- no network calls
+
+Status unchanged:
+
+- paymasterStatus=`NOT_CLAIMED`
+- gaslessStatus=`NOT_CLAIMED`
+
 ## Master Prompt #26 — Live sponsored-transfer attempt failure checkpoint
 
 - Date: 2026-05-19

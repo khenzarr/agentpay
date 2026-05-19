@@ -279,6 +279,33 @@ Claim boundary unchanged:
 
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
+
+---
+
+## Master Prompt #32 — 7702 account construction dry-run checkpoint
+
+- Added script: `scripts/circle-paymaster-v08-7702-account-dry-run.ts`
+- Added command: `npm run circle:paymaster:v08-7702:account-dry-run`
+- Added findings doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_ACCOUNT_DRY_RUN.md`
+
+Local installed-type findings:
+
+1. `toSimple7702SmartAccount` import path: `viem/account-abstraction`
+2. `entryPoint07Address`/`entryPoint08Address` import path: `viem/account-abstraction`
+3. Arc custom chain helper import path: `defineChain` from `viem`
+4. `toSimple7702SmartAccount` requires `owner: PrivateKeyAccount`
+
+Checkpoint safety profile:
+
+- no network calls
+- no signer usage
+- no account construction invocation
+- no userOperation submission
+
+Boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
 6. **Minimal sponsored op?** Tiny USDC transfer.
 7. **Current blockers?** Missing deterministic artifacts and unresolved raw-path dependencies.
 
