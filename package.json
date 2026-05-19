@@ -32,7 +32,8 @@
     "circle:sca-paymaster:readiness": "tsx --env-file=.env.circle.local scripts/circle-sca-paymaster-readiness.ts",
     "circle:paymaster:sponsored-transfer": "tsx --env-file=.env.circle.local scripts/circle-paymaster-sponsored-transfer.ts",
     "paymaster:proof-path:inspect": "tsx scripts/paymaster-proof-path-inspect.ts",
-    "appkit:paymaster:surface": "tsx scripts/appkit-paymaster-surface-inspect.ts"
+    "appkit:paymaster:surface": "tsx scripts/appkit-paymaster-surface-inspect.ts",
+    "raw-erc4337:infra:readiness": "tsx --env-file=.env.circle.local scripts/raw-erc4337-infra-readiness.ts"
   },
   "dependencies": {
     "@circle-fin/developer-controlled-wallets": "^10.3.1",

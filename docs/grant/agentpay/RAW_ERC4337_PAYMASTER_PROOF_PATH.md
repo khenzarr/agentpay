@@ -264,3 +264,19 @@ Without all required artifacts, keep claim boundary unchanged.
 - `FEASIBLE_BUT_NEEDS_CIRCLE_WALLETS_USEROP_SIGNING_PATH`
 - `BLOCKED_DOCS_OR_SDK_INSUFFICIENT` (App Kit deterministic paymaster proof path in this repo)
 - `DO_NOT_CLAIM`
+
+---
+
+## Master Prompt #29 readiness update
+
+- New non-mutating readiness doc: `docs/grant/agentpay/RAW_ERC4337_INFRA_READINESS.md`
+- New script: `npm run raw-erc4337:infra:readiness`
+- Scope: env/config readiness only (no network calls, no userOp submission, no sponsorship mutation)
+
+Conservative classification baseline remains:
+
+- `FEASIBLE_BUT_NEEDS_BUNDLER_RPC`
+- `FEASIBLE_BUT_NEEDS_PAYMASTER_SERVICE_OR_DATA_PATH`
+- `FEASIBLE_BUT_NEEDS_CIRCLE_SCA_METADATA`
+- `FEASIBLE_BUT_NEEDS_USEROP_SIGNING_PATH`
+- `DO_NOT_CLAIM`
