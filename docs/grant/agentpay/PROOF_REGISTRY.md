@@ -14,6 +14,23 @@
   - Paymaster: `NOT_CLAIMED`
 - Runtime proof artifact: **none captured in this checkpoint**
 
+## Circle Paymaster deployment read-only verification checkpoint (Master Prompt #42C)
+
+- Date: 2026-05-20
+- Scope: Arc Testnet read-only diagnostics only (`eth_chainId`, `eth_blockNumber`, `eth_getCode`)
+- Script: `scripts/circle-paymaster-deployment-readonly-check.ts`
+- Command: `npm run circle:paymaster:deployment-check`
+- Diagnostics doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_DEPLOYMENT_READONLY_CHECK.md`
+- Triggering blocker reference: `AA30 paymaster not deployed` from v0.8 live proof artifact
+- Mutation executed: none
+- userOp submitted: none
+- transaction sent: none
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+
 # Proof Registry — AgentPay
 
 ## Circle Wallets (Developer-Controlled) — ARC-TESTNET

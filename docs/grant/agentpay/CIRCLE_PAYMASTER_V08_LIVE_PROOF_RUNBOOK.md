@@ -183,3 +183,17 @@ Current boundary remains:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 - Classification: `DO_NOT_CLAIM` until full artifact set is captured in an approved live run.
+
+---
+
+## 12. Read-only deployment verification prerequisite
+
+Before any future live retry, execute:
+
+- `npm run circle:paymaster:deployment-check`
+
+Reference:
+
+- `docs/grant/agentpay/CIRCLE_PAYMASTER_DEPLOYMENT_READONLY_CHECK.md`
+
+If output includes `DIAGNOSTIC_PAYMASTER_V08_NOT_DEPLOYED`, treat v0.8 live proof path as blocked until deployment/address alignment is resolved.

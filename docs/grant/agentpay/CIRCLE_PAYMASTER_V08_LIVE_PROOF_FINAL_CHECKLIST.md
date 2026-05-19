@@ -91,6 +91,8 @@ Out of scope for live proof:
 
 ## 7. EntryPoint and Paymaster checklist
 
+- [ ] Run read-only deployment check: `npm run circle:paymaster:deployment-check`.
+- [ ] If `DIAGNOSTIC_PAYMASTER_V08_NOT_DEPLOYED` appears, mark v0.8 path as blocked (`NO-GO`) until deployment/address alignment is resolved.
 - [ ] EntryPoint version fixed to `v0.8`.
 - [ ] EntryPoint address fixed to `0x4337084D9E255Ff0702461CF8895CE9E3b5Ff108`.
 - [ ] Paymaster address fixed to `0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`.

@@ -50,3 +50,14 @@ Version: viem@2.49.3
 ```json
 unavailable
 ```
+
+## Follow-up checkpoint
+
+- Follow-up type: read-only deployment verification
+- Script: `scripts/circle-paymaster-deployment-readonly-check.ts`
+- Command: `npm run circle:paymaster:deployment-check`
+- Doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_DEPLOYMENT_READONLY_CHECK.md`
+- Scope boundary: no userOp submission, no signing, no transaction mutation
+- Claim boundary unchanged:
+  - Paymaster: `NOT_CLAIMED`
+  - Gasless: `NOT_CLAIMED`
