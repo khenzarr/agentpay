@@ -468,6 +468,34 @@ Claim boundary unchanged:
 - Paymaster: `NOT_CLAIMED`
 - Gasless: `NOT_CLAIMED`
 
+## PATCH #42A — Live proof env-mode conflict resolved (gating model update)
+
+- Date: 2026-05-20
+- Scope: safety gating patch only (no live submission)
+- Updated script: `scripts/circle-paymaster-v08-live-proof.ts`
+- Updated env template: `.env.example`
+
+Gating model update:
+
+- Removed live-proof dependency on `RAW_ERC4337_DRY_RUN=false`.
+- Dry-run/readiness scripts keep `RAW_ERC4337_DRY_RUN=true`.
+- Live-proof script now requires exact gates:
+  - `CIRCLE_PAYMASTER_LIVE_PROOF_APPROVED=true`
+  - `CIRCLE_PAYMASTER_LIVE_PROOF_EXECUTE=true`
+  - `CIRCLE_PAYMASTER_LIVE_PROOF_MAX_ATTEMPTS=1`
+
+Blocked markers (no submission when triggered):
+
+- `LIVE_PROOF_BLOCKED_EXECUTE_FLAG_MISSING`
+- `LIVE_PROOF_BLOCKED_APPROVAL_FLAG_MISSING`
+- `LIVE_PROOF_BLOCKED_MAX_ATTEMPTS_NOT_ONE`
+
+Boundary unchanged:
+
+- no claim upgrade from this patch
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+
 ## Master Prompt #41 — Circle Paymaster v0.8 live proof final readiness docs
 
 - Date: 2026-05-19

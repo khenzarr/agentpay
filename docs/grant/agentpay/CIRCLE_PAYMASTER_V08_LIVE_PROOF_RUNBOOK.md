@@ -40,7 +40,18 @@ Required categories:
 1. Owner signing inputs (never printed)
 2. Arc bundler/public RPC inputs
 3. Circle paymaster + USDC address inputs
-4. Explicit dry-run/live mode guard flags for the approved script path
+4. Explicit live-proof guard flags for the approved script path
+
+Required live-proof guards (all must match exactly):
+
+- `CIRCLE_PAYMASTER_LIVE_PROOF_APPROVED=true`
+- `CIRCLE_PAYMASTER_LIVE_PROOF_EXECUTE=true`
+- `CIRCLE_PAYMASTER_LIVE_PROOF_MAX_ATTEMPTS=1`
+
+Important env-mode rule:
+
+- Keep `RAW_ERC4337_DRY_RUN=true` for dry-run/readiness commands.
+- Live-proof gating is controlled by the three `CIRCLE_PAYMASTER_LIVE_PROOF_*` flags above.
 
 Security requirements:
 
@@ -59,7 +70,8 @@ Run non-mutating readiness checks before any live attempt window:
 
 1. `npm run circle:paymaster:v08-7702:owner-readiness`
 2. `npm run circle:paymaster:v08-7702:bundler-health`
-3. `npm run circle:paymaster:v08:userop-assembly-dry-run`
+3. `npm run circle:paymaster:v08:permit-input-readiness`
+4. `npm run circle:paymaster:v08:userop-assembly-dry-run`
 
 Interpretation:
 

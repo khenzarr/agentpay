@@ -196,6 +196,19 @@ Live proof is blocked until explicit founder approval is provided for:
 
 Without explicit approval, no live run is allowed.
 
+Live-proof script gates must all match exactly before any submission path is allowed:
+
+1. `CIRCLE_PAYMASTER_LIVE_PROOF_APPROVED=true`
+2. `CIRCLE_PAYMASTER_LIVE_PROOF_EXECUTE=true`
+3. `CIRCLE_PAYMASTER_LIVE_PROOF_MAX_ATTEMPTS=1`
+
+If any gate is not exact, run is blocked and no userOp submission is allowed.
+
+Dry-run/readiness note:
+
+- keep `RAW_ERC4337_DRY_RUN=true` for readiness and dry-run commands
+- live-proof allow/deny is controlled by the explicit live-proof flags above
+
 ---
 
 ## 16. Recommended live proof command placeholder
