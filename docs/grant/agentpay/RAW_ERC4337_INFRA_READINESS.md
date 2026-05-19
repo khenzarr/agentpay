@@ -115,10 +115,9 @@ Missing metadata/signing confirmations include:
 3. deterministic `signUserOperation` compatibility path
 4. exact raw-AA construction compatibility (`encodeCalls`, `getFactoryArgs`, stub signature semantics)
 
-Current blocker tags:
+Current blocker tag:
 
-- `FEASIBLE_BUT_NEEDS_CIRCLE_SCA_METADATA`
-- `FEASIBLE_BUT_NEEDS_USEROP_SIGNING_PATH`
+- `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
 
 ---
 
@@ -147,6 +146,8 @@ For readiness layer:
 - `RAW_ERC4337_ENTRYPOINT_VERSION` (default `v0.8`)
 - `RAW_ERC4337_ENTRYPOINT_ADDRESS`
 - `RAW_ERC4337_DRY_RUN` (default `true`)
+- `RAW_ERC4337_PROVIDER_NAME`
+- `RAW_ERC4337_USEROP_SIGNING_PATH`
 - `CIRCLE_SCA_WALLET_ID`
 - `CIRCLE_SCA_WALLET_ADDRESS`
 - `CIRCLE_PAYMASTER_ADDRESS`
@@ -230,8 +231,8 @@ No claim upgrade is allowed from this readiness-only sprint.
 
 ## Final classification
 
-- `FEASIBLE_BUT_NEEDS_BUNDLER_RPC`
-- `FEASIBLE_BUT_NEEDS_PAYMASTER_SERVICE_OR_DATA_PATH`
-- `FEASIBLE_BUT_NEEDS_CIRCLE_SCA_METADATA`
-- `FEASIBLE_BUT_NEEDS_USEROP_SIGNING_PATH`
+- `BLOCKED_NO_BUNDLER`
+- `BLOCKED_NO_PAYMASTER_DATA_PATH`
+- `BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY`
+- `FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT`
 - `DO_NOT_CLAIM`

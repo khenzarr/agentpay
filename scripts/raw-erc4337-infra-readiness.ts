@@ -6,6 +6,8 @@ type RequiredEnvKey =
   | "RAW_ERC4337_ENTRYPOINT_VERSION"
   | "RAW_ERC4337_ENTRYPOINT_ADDRESS"
   | "RAW_ERC4337_DRY_RUN"
+  | "RAW_ERC4337_PROVIDER_NAME"
+  | "RAW_ERC4337_USEROP_SIGNING_PATH"
   | "CIRCLE_SCA_WALLET_ID"
   | "CIRCLE_SCA_WALLET_ADDRESS"
   | "CIRCLE_PAYMASTER_ADDRESS";
@@ -16,6 +18,8 @@ const REQUIRED_ENV_KEYS: RequiredEnvKey[] = [
   "RAW_ERC4337_ENTRYPOINT_VERSION",
   "RAW_ERC4337_ENTRYPOINT_ADDRESS",
   "RAW_ERC4337_DRY_RUN",
+  "RAW_ERC4337_PROVIDER_NAME",
+  "RAW_ERC4337_USEROP_SIGNING_PATH",
   "CIRCLE_SCA_WALLET_ID",
   "CIRCLE_SCA_WALLET_ADDRESS",
   "CIRCLE_PAYMASTER_ADDRESS",
@@ -105,13 +109,17 @@ function main(): void {
   if (checks.length > 0) console.log(`validationFlags=${checks.join(",")}`);
   if (missingCritical.length > 0) console.log(`criticalMissing=${missingCritical.join(",")}`);
 
-  const classifications = [
-    "FEASIBLE_BUT_NEEDS_BUNDLER_RPC",
-    "FEASIBLE_BUT_NEEDS_PAYMASTER_SERVICE_OR_DATA_PATH",
-    "FEASIBLE_BUT_NEEDS_CIRCLE_SCA_METADATA",
-    "FEASIBLE_BUT_NEEDS_USEROP_SIGNING_PATH",
-    "DO_NOT_CLAIM",
-  ];
+  const hasBundler = isPresent(values.ARC_BUNDLER_RPC_URL);
+  const hasPaymasterService = isPresent(values.CIRCLE_PAYMASTER_SERVICE_URL);
+  const hasCircleScaMetadata = isPresent(values.CIRCLE_SCA_WALLET_ID) && isPresent(values.CIRCLE_SCA_WALLET_ADDRESS);
+  const hasUserOpSigningPath = isPresent(values.RAW_ERC4337_USEROP_SIGNING_PATH);
+
+  const classifications: string[] = [];
+  if (!hasBundler) classifications.push("BLOCKED_NO_BUNDLER");
+  if (!hasPaymasterService) classifications.push("BLOCKED_NO_PAYMASTER_DATA_PATH");
+  if (!(hasCircleScaMetadata && hasUserOpSigningPath)) classifications.push("BLOCKED_CIRCLE_SCA_RAW_COMPATIBILITY");
+  classifications.push("FEASIBLE_BUT_NEEDS_PROVIDER_ACCOUNT");
+  classifications.push("DO_NOT_CLAIM");
 
   console.log("\n[verdict]");
   console.log(`readinessVerdict=${classifications.join(" | ")}`);
