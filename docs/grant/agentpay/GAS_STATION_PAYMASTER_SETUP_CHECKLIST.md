@@ -1,3 +1,18 @@
+## Master Prompt #22 official-docs delta (discovery only)
+
+- [x] Circle Paymaster official docs reviewed (`/paymaster`, `/pay-gas-fees-usdc`, `/addresses-and-events`)
+- [x] Arc Testnet paymaster addresses identified from official docs:
+  - v0.7: `0x31BE08D380A21fc740883c0BC434FcFc88740b58`
+  - v0.8: `0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- [x] Relationship clarified: Paymaster vs Circle Wallets Gas Station are distinct surfaces
+- [x] Requirement clarified: paymaster integration is SCA/ERC-4337 userOp path (not plain EOA transfer path)
+- [ ] Runtime paymaster/gasless proof on Arc Testnet (deferred to next approved sprint)
+
+Claim boundary reminder:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
+
 # Circle Gas Station / Paymaster Setup Checklist — ARC-TESTNET (Readiness Only)
 
 ## 1) Current status

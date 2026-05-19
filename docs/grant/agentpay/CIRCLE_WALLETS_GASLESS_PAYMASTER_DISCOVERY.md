@@ -148,6 +148,32 @@ Supporting feasibility tags:
 - `FEASIBLE_BUT_NEEDS_CONSOLE_SETUP`
 - `FEASIBLE_BUT_NEEDS_ARC_TESTNET_SUPPORT_CONFIRMATION`
 
+## 14) Official Circle Paymaster docs deep-dive update (Master Prompt #22)
+
+Official Paymaster docs inspected:
+
+- https://developers.circle.com/paymaster
+- https://developers.circle.com/paymaster/pay-gas-fees-usdc
+- https://developers.circle.com/paymaster/addresses-and-events
+
+Findings added to discovery boundary:
+
+- Circle Paymaster is documented as a **permissionless onchain ERC-4337 token paymaster** (v0.7 and v0.8 variants).
+- It is distinct from Circle Wallets Gas Station product surface, even though both address gas UX.
+- Arc Testnet paymaster addresses are explicitly documented:
+  - v0.7: `0x31BE08D380A21fc740883c0BC434FcFc88740b58`
+  - v0.8: `0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- Quickstart flow is smart-account + userOp centric; treat as SCA/ERC-4337 path requirement.
+
+This is **documentation-level confirmation only** and does not change claim status:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`
+
+Reference analysis document:
+
+- `docs/grant/agentpay/CIRCLE_PAYMASTER_OFFICIAL_DOCS_ANALYSIS.md`
+
 Setup/readiness checklist reference:
 
 - `docs/grant/agentpay/GAS_STATION_PAYMASTER_SETUP_CHECKLIST.md`

@@ -1,3 +1,18 @@
+
+## Paymaster official docs discovery update (Master Prompt #22)
+
+- Official Circle Paymaster docs reviewed:
+  - `https://developers.circle.com/paymaster`
+  - `https://developers.circle.com/paymaster/pay-gas-fees-usdc`
+  - `https://developers.circle.com/paymaster/addresses-and-events`
+- Arc Testnet paymaster contract addresses (doc-level):
+  - v0.7: `0x31BE08D380A21fc740883c0BC434FcFc88740b58`
+  - v0.8: `0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- Architecture finding: Circle Paymaster is an ERC-4337 smart-account/userOp flow and is distinct from Wallets Gas Station product surface.
+- Claim boundary unchanged:
+  - Paymaster: `NOT_CLAIMED`
+  - Gasless: `NOT_CLAIMED`
+
 # AgentPay Full Circle + Arc Integration Roadmap
 
 ## 1) Product goal

@@ -1,3 +1,19 @@
+## Circle Paymaster / Gasless discovery checkpoint (Master Prompt #22)
+
+- Date: 2026-05-19
+- Scope: Official docs deep dive only (no mutations, no sponsored tx, no wallet creation)
+- Sources:
+  - `https://developers.circle.com/paymaster`
+  - `https://developers.circle.com/paymaster/pay-gas-fees-usdc`
+  - `https://developers.circle.com/paymaster/addresses-and-events`
+- Arc Testnet paymaster addresses (doc-level):
+  - v0.7: `0x31BE08D380A21fc740883c0BC434FcFc88740b58`
+  - v0.8: `0x3BA9A96eE3eFf3A69E2B18886AcF52027EFF8966`
+- Current claim boundary:
+  - Circle Wallets gasless: `NOT_CLAIMED`
+  - Paymaster: `NOT_CLAIMED`
+- Runtime proof artifact: **none captured in this checkpoint**
+
 # Proof Registry — AgentPay
 
 ## Circle Wallets (Developer-Controlled) — ARC-TESTNET
