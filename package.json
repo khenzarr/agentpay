@@ -31,7 +31,8 @@
     "circle:gas-station:readiness": "tsx --env-file=.env.circle.local scripts/circle-gas-station-readiness.ts",
     "circle:sca-paymaster:readiness": "tsx --env-file=.env.circle.local scripts/circle-sca-paymaster-readiness.ts",
     "circle:paymaster:sponsored-transfer": "tsx --env-file=.env.circle.local scripts/circle-paymaster-sponsored-transfer.ts",
-    "paymaster:proof-path:inspect": "tsx scripts/paymaster-proof-path-inspect.ts"
+    "paymaster:proof-path:inspect": "tsx scripts/paymaster-proof-path-inspect.ts",
+    "appkit:paymaster:surface": "tsx scripts/appkit-paymaster-surface-inspect.ts"
   },
   "dependencies": {
     "@circle-fin/developer-controlled-wallets": "^10.3.1",
