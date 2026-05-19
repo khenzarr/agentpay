@@ -439,3 +439,31 @@ Boundary unchanged:
 - transactions: `false`
 - paymasterStatus: `NOT_CLAIMED`
 - gaslessStatus: `NOT_CLAIMED`
+
+## Master Prompt #37 — v0.8 7702 UserOp object dry-run (construction-only)
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-v08-7702-userop-dry-run.ts`
+- Command: `npm run circle:paymaster:v08-7702:userop-dry-run`
+- Doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_USEROP_DRY_RUN.md`
+
+Scope boundary:
+
+- env validation + local owner derivation + object construction only
+- no permit signing
+- no `sendUserOperation`
+- no tx send/write
+
+Output boundary markers:
+
+- `signing=false`
+- `userOps=false`
+- `transactions=false`
+- `paymasterDataBuilderStatus=stub_no_signature`
+- `permitSigningRequired=true`
+- `permitSigningExecuted=false`
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`

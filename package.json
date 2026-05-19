@@ -36,6 +36,7 @@
     "circle:paymaster:v08-7702:owner-readiness": "tsx --env-file=.env.circle.local scripts/circle-paymaster-v08-7702-owner-readiness.ts",
     "circle:paymaster:v08-7702:bundler-readiness": "tsx --env-file=.env.circle.local scripts/circle-paymaster-v08-7702-bundler-readiness.ts",
     "circle:paymaster:v08-7702:bundler-health": "tsx --env-file=.env.circle.local scripts/circle-paymaster-v08-7702-bundler-health.ts",
+    "circle:paymaster:v08-7702:userop-dry-run": "tsx --env-file=.env.circle.local scripts/circle-paymaster-v08-7702-userop-dry-run.ts",
     "paymaster:proof-path:inspect": "tsx scripts/paymaster-proof-path-inspect.ts",
     "appkit:paymaster:surface": "tsx scripts/appkit-paymaster-surface-inspect.ts",
     "raw-erc4337:infra:readiness": "tsx --env-file=.env.circle.local scripts/raw-erc4337-infra-readiness.ts"
