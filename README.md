@@ -41,7 +41,7 @@ Claim-safe status summary:
 
 - **Verified:** Arc Testnet, USDC escrow lifecycle, App Kit Send, Bridge/CCTP, Circle Wallets wallet creation + metadata read, ArcNS identity display
 - **Estimate-verified:** Gateway / Unified Balance
-- **Not claimed yet:** Paymaster, Circle Wallets signing/send/gasless, full ERC-8183, full ERC-8004
+- **Not claimed yet:** Paymaster, Circle Wallets gasless, full ERC-8183, full ERC-8004
 
 ## Honesty
 

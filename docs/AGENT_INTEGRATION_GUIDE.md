@@ -91,9 +91,10 @@ If ArcNS resolution is unavailable, core escrow/job lifecycle still functions.
 | Verified now | App Kit Send | CURRENT_VERIFIED |
 | Verified now | Bridge / CCTP | CURRENT_VERIFIED |
 | Verified now | Circle Wallets wallet creation + metadata read on ARC-TESTNET | CURRENT_VERIFIED (limited scope) |
-| Estimate-verified | Gateway / Unified Balance | CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED (deposit/balance/estimate verified; live spend not executed) |
-| Blocked/pending proof | Circle Wallets transfer estimate path | IMPLEMENTED / BLOCKED (official ARC-TESTNET USDC Circle Wallet token ID unresolved) |
-| Not claimed yet | Circle Wallets signing/send/gasless | NOT_CLAIMED |
+| Estimate-verified | Circle Wallets transfer estimate path | CURRENT_CODE_IMPLEMENTED_TRANSFER_ESTIMATE_VERIFIED |
+| Verified now | Circle Wallets signing (message signing) | CURRENT_VERIFIED |
+| Verified now | Circle Wallets send/transfer (tiny ARC-TESTNET proof transfer) | CURRENT_VERIFIED |
+| Not claimed yet | Circle Wallets gasless | NOT_CLAIMED |
 | Not claimed yet | Paymaster | NOT_CLAIMED |
 | Not claimed yet | Full ERC-8183 compliance | NOT_CLAIMED |
 | Not claimed yet | Full ERC-8004 compliance | NOT_CLAIMED |
@@ -123,7 +124,7 @@ This pattern does not require any unshipped AgentPay SDK. Use existing contract 
 
 - Full ERC-8183 compliance is **not claimed**.
 - Full ERC-8004 compliance is **not claimed**.
-- Circle Wallets signing/send/gasless is **not claimed**.
+- Circle Wallets gasless is **not claimed**.
 - Paymaster is **not claimed**.
 - Gateway live spend was **not executed** (estimate-verified only).
 
@@ -133,15 +134,11 @@ AgentPay’s product direction is full Circle + Arc integration coverage for age
 
 Priority completion path:
 
-1. Circle Wallets token ID resolution for ARC-TESTNET USDC
-2. Circle Wallets transfer estimate verification
-3. Circle Wallets signing proof
-4. Circle Wallets send/transfer proof
-5. Circle Wallets gasless transaction proof
-6. Paymaster / Gas Station proof
-7. Gateway live spend execution decision + proof
-8. Full ERC-8183 compatibility expansion
-9. ERC-8004-compatible identity/reputation path
+1. Circle Wallets gasless transaction proof
+2. Paymaster / Gas Station proof
+3. Gateway live spend execution decision + proof
+4. Full ERC-8183 compatibility expansion
+5. ERC-8004-compatible identity/reputation path
 
 ## 14) Quickstart checklist
 
@@ -170,4 +167,4 @@ Priority completion path:
 - “Gasless verified.”
 - “Full ERC-8183 compliant.”
 - “Full ERC-8004 compliant.”
-- “Circle Wallets signing/send/transfer verified.”
+- “Circle Wallets gasless verified.”
