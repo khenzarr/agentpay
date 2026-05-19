@@ -245,3 +245,36 @@ Claim boundary unchanged:
 
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+## Master Prompt #26 — Live sponsored-transfer attempt failure checkpoint
+
+- Date: 2026-05-19
+- Script: `scripts/circle-paymaster-sponsored-transfer.ts`
+- Attempt mode: live (`CIRCLE_PAYMASTER_DRY_RUN=false`)
+- Outcome: failed in Circle SDK/API path before proof capture
+
+Failure checkpoint fields:
+
+- `paymasterProofCaptured=false`
+- `userOpHashPresent=false`
+- `txHashPresent=false`
+- `paymasterStatus=NOT_CLAIMED`
+- `gaslessStatus=NOT_CLAIMED`
+
+Not captured in this failed attempt:
+
+- `userOpHash`
+- sponsored `txHash`
+- transaction id suitable for sponsored-proof finality
+- sponsored transaction finality evidence
+
+Boundary decision:
+
+- No claim upgrade permitted from this attempt.
+- Circle Wallets gasless remains `NOT_CLAIMED`.
+- Paymaster remains `NOT_CLAIMED`.
+
+Next path recommendation:
+
+- Investigate App Kit Paymaster path only if deterministic paymaster/userOp proof fields are capturable.
+- Otherwise prioritize raw ERC-4337 (`viem` bundler + paymaster + userOperation proof pipeline).

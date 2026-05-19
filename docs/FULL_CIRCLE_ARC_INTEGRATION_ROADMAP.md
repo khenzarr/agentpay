@@ -174,3 +174,36 @@ Status remains:
 
 - Circle Wallets gasless: `NOT_CLAIMED`
 - Paymaster: `NOT_CLAIMED`
+
+## Master Prompt #26 live sponsored-transfer failure update
+
+- A live Circle Wallets sponsored-transfer attempt was previously executed with `CIRCLE_PAYMASTER_DRY_RUN=false`.
+- Attempt failed inside the Circle SDK/API flow before proof evidence could be captured.
+
+Captured failure checkpoint:
+
+- `paymasterProofCaptured=false`
+- `userOpHashPresent=false`
+- `txHashPresent=false`
+- `paymasterStatus=NOT_CLAIMED`
+- `gaslessStatus=NOT_CLAIMED`
+
+Not captured:
+
+- `userOpHash`
+- sponsored `txHash`
+- transaction id suitable for sponsored-proof finality
+- sponsored tx finality evidence
+
+Roadmap implication:
+
+- No claim/status upgrade is permitted from this failed attempt.
+- Circle Wallets sponsored transfer path, as used in current Wallets SDK flow, did not yet provide reliable paymaster-proof fields.
+- Next verification sprint should prioritize deterministic proof capture via:
+  1. App Kit paymaster path only if explicit evidence fields are confirmed, or
+  2. raw ERC-4337 path (`viem` bundler/paymaster/userOp pipeline).
+
+Status remains unchanged:
+
+- Circle Wallets gasless: `NOT_CLAIMED`
+- Paymaster: `NOT_CLAIMED`

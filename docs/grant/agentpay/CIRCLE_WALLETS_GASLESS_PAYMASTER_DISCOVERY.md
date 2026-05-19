@@ -245,3 +245,32 @@ Claim boundary remains unchanged:
 - Do not create SCA/policy config by guesswork.
 - Do not claim sponsorship support without transaction-level proof.
 - Keep all Circle credentials server-only and never expose them in frontend/public env.
+
+## 16) Master Prompt #26 live sponsored-transfer failure record
+
+- A live sponsored-transfer attempt was executed previously with `CIRCLE_PAYMASTER_DRY_RUN=false`.
+- The attempt failed inside Circle SDK/API path before reliable paymaster proof artifacts were produced.
+- No claim-upgrade artifacts were captured:
+  - no `userOpHash`
+  - no sponsored `txHash`
+  - no transaction id suitable for sponsored-proof finality
+  - no sponsored transaction finality evidence
+
+Failure-status checkpoint to preserve conservative boundary:
+
+- `paymasterProofCaptured=false`
+- `userOpHashPresent=false`
+- `txHashPresent=false`
+- `paymasterStatus=NOT_CLAIMED`
+- `gaslessStatus=NOT_CLAIMED`
+
+Conclusion:
+
+- Circle Wallets gasless remains `NOT_CLAIMED`.
+- Paymaster remains `NOT_CLAIMED`.
+- Wallets SDK transfer path did not yet produce deterministic paymaster-proof fields for this repo.
+
+Recommended next path:
+
+- Investigate App Kit Paymaster path only if explicit proof-field capture can be made deterministic.
+- Otherwise prioritize raw ERC-4337 (`viem` bundler/paymaster/userOperation flow) for deterministic `userOpHash` + onchain finality capture.

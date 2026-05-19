@@ -285,3 +285,32 @@ Reason:
 - No live sponsored transaction/userOperation proof captured yet.
 - Wallets SDK `createTransaction` response surface does not explicitly guarantee paymaster/userOp evidence fields.
 - Final proof still requires userOp/paymaster correlation (tx hash + userOpHash if present + onchain/console evidence).
+
+---
+
+## Master Prompt #26 live attempt record (failed before proof capture)
+
+- A live Circle Wallets sponsored-transfer attempt was executed with `CIRCLE_PAYMASTER_DRY_RUN=false`.
+- Attempt failed inside Circle SDK/API path before proof fields were captured.
+- Captured on failure:
+  - `paymasterProofCaptured=false`
+  - `userOpHashPresent=false`
+  - `txHashPresent=false`
+  - `paymasterStatus=NOT_CLAIMED`
+  - `gaslessStatus=NOT_CLAIMED`
+- Not captured:
+  - `userOpHash`
+  - `txHash`
+  - transaction id usable for sponsored-proof finality
+  - sponsored transaction finality evidence
+
+Boundary decision:
+
+- No claim upgrade is allowed from this failed live attempt.
+- Circle Wallets gasless remains `NOT_CLAIMED`.
+- Paymaster remains `NOT_CLAIMED`.
+
+Next path recommendation:
+
+- Investigate App Kit Paymaster path if explicit paymaster/userOp evidence capture can be made deterministic.
+- In parallel/otherwise, implement raw ERC-4337 (`viem` bundler/paymaster/userOperation path) for deterministic proof capture.
