@@ -83,6 +83,7 @@ Conservative decision: keep signing as **NOT_CLAIMED** until explicit proof is c
 Evidence:
 
 - SDK exposes `createDeveloperTransactionTransfer(...)`.
+- Repo now includes `scripts/circle-wallets-send-tiny-transfer.ts` with dry-run default and explicit live gate.
 - Existing docs already gate Circle Wallets to wallet-creation-only verification.
 
 Operational caveat:
@@ -206,6 +207,7 @@ Conservative claim classification for this discovery:
 - If attempting live transfer afterward: **FEASIBLE_BUT_NEEDS_WALLET_FUNDING**
 - Gasless/paymaster path: **FEASIBLE_BUT_NEEDS_SCA_WALLET** + **FEASIBLE_BUT_NEEDS_GAS_STATION_POLICY**
 - Current overall status decision for this sprint: **DO_NOT_CLAIM** (for signing/send/gasless verification)
+- Tiny transfer live send remains **NOT_CLAIMED** until a non-dry-run tx proof exists.
 
 ---
 

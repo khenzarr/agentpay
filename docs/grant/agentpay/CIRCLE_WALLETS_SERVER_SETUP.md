@@ -89,6 +89,12 @@ npm run circle:wallets:token-lookup
 npm run circle:wallets:list-balances
 ```
 
+11.7. Run tiny transfer script (dry-run default; no mutation unless explicitly disabled):
+
+```bash
+npm run circle:wallets:send-tiny-transfer
+```
+
 Required transfer-estimate env values in `.env.circle.local`:
 
 ```bash
@@ -170,6 +176,13 @@ Additional verified proof (non-mutating):
 - Env: `CIRCLE_WALLET_TRANSFER_TOKEN_ID=15dc2b5d-0994-58b0-bf8c-3a0501148ee8`, `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`
 - Result: transfer estimate succeeded (low/medium/high tiers recorded)
 - No live transfer was executed.
+
+Tiny transfer send script status:
+
+- Script added: `scripts/circle-wallets-send-tiny-transfer.ts`
+- Package command: `npm run circle:wallets:send-tiny-transfer`
+- Default safety gate: `CIRCLE_WALLET_TRANSFER_DRY_RUN=true`
+- Live send remains **NOT_CLAIMED** until non-dry-run tx proof exists.
 
 Safety rule after any live wallet-creation run:
 
