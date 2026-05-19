@@ -1,4 +1,4 @@
-import { FeeLevel, initiateDeveloperControlledWalletsClient } from "@circle-fin/developer-controlled-wallets";
+import { initiateDeveloperControlledWalletsClient } from "@circle-fin/developer-controlled-wallets";
 import { randomUUID } from "node:crypto";
 
 const PLACEHOLDER_TOKENS = ["BURAYA", "PLACEHOLDER", "TODO", "YOUR_", "CHANGE_ME", "example"];
@@ -71,7 +71,7 @@ async function main(): Promise<void> {
       fee: {
         type: "level",
         config: {
-          feeLevel: FeeLevel.Medium,
+          feeLevel: "MEDIUM",
         },
       },
     });
