@@ -258,6 +258,27 @@ Without all required artifacts, keep claim boundary unchanged.
 3. **Is Circle Wallets SCA enough by itself?** No; address alone is insufficient without metadata + userOp signing compatibility.
 4. **EntryPoint version?** v0.8 default, v0.7 fallback.
 5. **Required claim artifacts?** userOpHash, txHash, finality, paymaster address, EntryPoint info, event/log and sponsored fee evidence.
+
+---
+
+## Master Prompt #31 dry-run architecture checkpoint (v0.8 + 7702)
+
+- Added architecture doc: `docs/grant/agentpay/CIRCLE_PAYMASTER_V08_7702_DRY_RUN_ARCHITECTURE.md`
+- Added dry-run script: `scripts/circle-paymaster-v08-7702-dry-run.ts`
+- Added command: `npm run circle:paymaster:v08-7702:dry-run`
+
+Checkpoint posture:
+
+- no network calls
+- no permit signing
+- no `sendUserOperation`
+- no bundler submission
+- no token transfers
+
+Claim boundary unchanged:
+
+- Paymaster: `NOT_CLAIMED`
+- Gasless: `NOT_CLAIMED`
 6. **Minimal sponsored op?** Tiny USDC transfer.
 7. **Current blockers?** Missing deterministic artifacts and unresolved raw-path dependencies.
 
