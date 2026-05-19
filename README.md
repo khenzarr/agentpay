@@ -38,8 +38,7 @@ AgentPay helps AI agents and clients coordinate USDC-funded jobs on Arc through 
 - Integration guide: `docs/AGENT_INTEGRATION_GUIDE.md`
 
 Claim-safe status summary:
-
-- **Verified:** Arc Testnet, USDC escrow lifecycle, App Kit Send, Bridge/CCTP, Circle Wallets wallet creation + metadata read, ArcNS identity display
+- **Verified:** Arc Testnet, USDC escrow lifecycle, App Kit Send, Bridge/CCTP, Circle Wallets EOA create/read/sign/send + SCA wallet creation, ArcNS identity display
 - **Estimate-verified:** Gateway / Unified Balance
 - **Not claimed yet:** Paymaster, Circle Wallets gasless, full ERC-8183, full ERC-8004
 
@@ -48,11 +47,11 @@ Claim-safe status summary:
 Current claim boundary for this repo snapshot:
 
 - Live on Arc Testnet
-- Mainnet-ready architecture, waiting for Arc mainnet availability
+- Mainnet readiness: NOT_CLAIMED
 - ERC-8183 tutorial ABI lifecycle subset
 - App Kit Send: CURRENT_VERIFIED
 - Bridge / CCTP: CURRENT_VERIFIED
 - Gateway / Unified Balance: implemented through supported-chain check, live deposit, confirmed balance, and spend estimate; live spend not executed due to high fee relative to test amount
-- Circle Developer-Controlled Wallet creation and metadata read verified on ARC-TESTNET
+- Circle Wallets EOA create/read/sign/send and SCA wallet creation: CURRENT_VERIFIED on ARC-TESTNET
 - Paymaster is feasible in principle, but remains NOT_CLAIMED until sponsored/gasless transaction proof exists
 - Full ERC-8183 and full ERC-8004 compliance are NOT_CLAIMED

@@ -18,9 +18,9 @@ This document evaluates Circle/Arc Paymaster (gasless) feasibility for AgentPay 
 - Relevant product is **Circle Wallets Gas Station** (Circle-managed paymaster sponsorship).
 
 ### 2) Arc Testnet support
-- **Yes (documented)**.
-- Circle gasless quickstart content explicitly lists Arc for EVM gasless SCA support.
-- Circle supported blockchains includes **ARC-TESTNET**.
+- **NOT_CLAIMED for Arc Testnet paymaster runtime support in AgentPay.**
+- AgentPay policy boundary: Circle Paymaster official supported chains are treated as excluding Arc Testnet for live claim purposes until Circle Paymaster support/deployment is explicitly available and proven.
+- Therefore Arc Testnet paymaster remains blocked for live claim in this repo.
 
 ### 3) Requires Circle Wallets?
 - **Yes** for Circle Gas Station path.
@@ -61,4 +61,4 @@ This document evaluates Circle/Arc Paymaster (gasless) feasibility for AgentPay 
 
 ## Current claim recommendation
 - **Paymaster claim status: NOT_CLAIMED**
-- Rationale: product appears technically supported on Arc Testnet, but AgentPay lacks completed/verified Circle Wallets signing + send verification for gasless sponsorship proof.
+- Rationale: Arc Testnet Circle Paymaster support/deployment is currently treated as unavailable for live claim, and AgentPay also lacks completed/verified Circle Wallets gasless sponsorship runtime proof.

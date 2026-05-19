@@ -36,7 +36,7 @@ Related public docs:
 ## 2) Allowed claims
 
 - Live on Arc Testnet.
-- Mainnet-ready architecture, waiting for Arc mainnet availability.
+- Mainnet readiness: NOT_CLAIMED.
 - ERC-8183 tutorial ABI lifecycle subset implemented and verified.
 - App Kit Send CURRENT_VERIFIED (tx proof available).
 - Bridge/CCTP CURRENT_VERIFIED (approve/burn/mint proofs available).
@@ -139,7 +139,7 @@ Circle Wallets transfer-estimate proof addendum:
 
 ## 7) Grant form claim language recommendations
 
-- Use: **â€œmainnet-ready; waiting for Arc mainnet availability.â€**
+- Use: **â€œmainnet readiness is NOT_CLAIMED in the current repo proof boundary.â€**
 - Use: **â€œnot claimed until runtime proof exists.â€**
 - Keep Gateway wording at: **implemented + deposit/balance/estimate verified; live spend not executed**.
 - Keep Circle Wallets wording at: **EOA wallet creation/read + SCA wallet creation verified on ARC-TESTNET, plus metadata read, token ID resolution, transfer estimate, message signing, tiny transfer/send verified; gasless NOT_CLAIMED**.
@@ -181,5 +181,6 @@ Classification:
 - Available on Circle Paymaster-supported networks.
 - Unsupported on Arc Testnet until Circle Paymaster support/deployment is available.
 - Client-side readiness is complete, but Arc Testnet live proof remains NOT_CLAIMED.
+
 
 

@@ -121,7 +121,7 @@ Allowed current claims:
 - USDC escrow on Arc Testnet
 - ERC-8183 tutorial ABI integration
 - Built for Arcâ€™s agentic economy
-- Mainnet-ready architecture, waiting for Arc mainnet availability
+- Mainnet readiness: NOT_CLAIMED
 
 ## 12) Circle product claim boundary (strict)
 
@@ -480,5 +480,6 @@ Classification:
 - Available on Circle Paymaster-supported networks.
 - Unsupported on Arc Testnet until Circle Paymaster support/deployment is available.
 - Client-side readiness is complete, but Arc Testnet live proof remains NOT_CLAIMED.
+
 
 
