@@ -1,12 +1,54 @@
 # AgentPay
 
-**USDC escrow and job settlement infrastructure for autonomous agents on Arc Testnet.**
+<p align="left">
+  <a href="https://github.com/khenzarr/agentpay/stargazers">
+    <img src="https://img.shields.io/github/stars/khenzarr/agentpay?style=for-the-badge&logo=github" alt="GitHub stars" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay/network/members">
+    <img src="https://img.shields.io/github/forks/khenzarr/agentpay?style=for-the-badge&logo=github" alt="GitHub forks" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/khenzarr/agentpay?style=for-the-badge" alt="Contributors" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay/commits/main">
+    <img src="https://img.shields.io/github/last-commit/khenzarr/agentpay?style=for-the-badge" alt="Last commit" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay">
+    <img src="https://img.shields.io/github/repo-size/khenzarr/agentpay?style=for-the-badge" alt="Repo size" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay/issues">
+    <img src="https://img.shields.io/github/issues/khenzarr/agentpay?style=for-the-badge" alt="Open issues" />
+  </a>
+</p>
 
-`Arc Testnet MVP` • `Read-only Developer API v0` • `USDC Job Lifecycle` • `ArcNS Identity Layer`
+<p align="left">
+  <img src="https://img.shields.io/badge/Arc%20Testnet-Live-00C2FF?style=for-the-badge" alt="Arc Testnet Live" />
+  <img src="https://img.shields.io/badge/USDC-Escrow-2775CA?style=for-the-badge&logo=usdcoin&logoColor=white" alt="USDC Escrow" />
+  <img src="https://img.shields.io/badge/Developer%20API-v0%20Read--Only-7C3AED?style=for-the-badge" alt="Developer API v0 Read-Only" />
+  <img src="https://img.shields.io/badge/ArcNS-Identity%20Layer-0EA5E9?style=for-the-badge" alt="ArcNS Identity Layer" />
+  <img src="https://img.shields.io/badge/Circle-Integrations-1C64F2?style=for-the-badge&logo=circle&logoColor=white" alt="Circle Integrations" />
+  <img src="https://img.shields.io/badge/Paymaster-Unsupported%20on%20Arc%20Testnet-F59E0B?style=for-the-badge" alt="Paymaster Unsupported on Arc Testnet" />
+  <img src="https://img.shields.io/badge/Mainnet%20Readiness-NOT__CLAIMED-6B7280?style=for-the-badge" alt="Mainnet Readiness Not Claimed" />
+</p>
 
-AgentPay is a payment coordination layer for autonomous agents, marketplaces, and external apps. It helps clients create funded jobs, providers submit work, and teams track job/payment state with transparent lifecycle transitions.
+<p align="left">
+  <a href="https://github.com/khenzarr/agentpay">
+    <img src="https://img.shields.io/badge/GitHub-Repository-111827?style=for-the-badge&logo=github" alt="GitHub Repository" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay#readme">
+    <img src="https://img.shields.io/badge/Docs-README-0F172A?style=for-the-badge" alt="README Docs" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay/tree/main/docs">
+    <img src="https://img.shields.io/badge/Project-Docs-0F172A?style=for-the-badge" alt="Project Docs" />
+  </a>
+  <a href="https://github.com/khenzarr/agentpay/issues">
+    <img src="https://img.shields.io/badge/Feedback-Issues-DC2626?style=for-the-badge" alt="Feedback Issues" />
+  </a>
+</p>
 
-Today, AgentPay is focused on a **claim-safe Arc Testnet MVP** with a **read-only Developer API v0** for integrations.
+AgentPay is a USDC-native escrow and job settlement layer for autonomous agents, marketplaces, and external applications on Arc Testnet.
+
+It coordinates job creation, USDC budgeting, work submission, completion, payment state tracking, ArcNS-readable identity, and read-only developer integration surfaces.
 
 ---
 
@@ -249,6 +291,8 @@ AgentPay is currently an **Arc Testnet MVP**.
 - Demo / grant packaging
 
 Roadmap items are forward-looking and separate from current verified scope.
+
+Live demo and public API badges will be added after Vercel deployment.
 
 ---
 
