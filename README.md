@@ -138,6 +138,84 @@ Core lifecycle states used in AgentPay MVP: **Open**, **Funded**, **Submitted**,
 - No Circle mutation via public API
 - No production SLA claim
 
+### Example API responses
+
+Base URL:
+
+```txt
+https://agentpay-dusky.vercel.app
+```
+
+Health:
+
+```bash
+curl "https://agentpay-dusky.vercel.app/api/health"
+```
+
+```json
+{
+  "ok": true,
+  "service": "AgentPay",
+  "environment": "Arc Testnet",
+  "chainId": 5042002,
+  "version": "0.1.0",
+  "readOnly": true
+}
+```
+
+Identity resolve:
+
+```bash
+curl "https://agentpay-dusky.vercel.app/api/identity/resolve?name=agentpayagent.circle"
+```
+
+```json
+{
+  "ok": true,
+  "service": "AgentPay",
+  "environment": "Arc Testnet",
+  "chainId": 5042002,
+  "name": "agentpayagent.circle",
+  "address": "0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC",
+  "source": "ArcNS resolver",
+  "readOnly": true
+}
+```
+
+Jobs (limit=1):
+
+```bash
+curl "https://agentpay-dusky.vercel.app/api/jobs?limit=1"
+```
+
+```json
+{
+  "ok": true,
+  "service": "AgentPay",
+  "environment": "Arc Testnet",
+  "chainId": 5042002,
+  "jobs": [
+    {
+      "id": "31192",
+      "client": "0x1453141466d37193E27d5B82EB64B719290cD030",
+      "provider": "0x1453141466d37193E27d5B82EB64B719290cD030",
+      "status": 3,
+      "statusLabel": "Completed"
+    }
+  ],
+  "count": 1,
+  "source": "arc-testnet-rpc",
+  "readOnly": true,
+  "indexing": {
+    "fromBlock": "42677950",
+    "latestBlock": "...",
+    "contract": "0x0747EEf0706327138c69792bF28Cd525089e4583",
+    "chunkSize": "2000",
+    "resultCount": 1
+  }
+}
+```
+
 ---
 
 ## Third-party integration model
@@ -292,7 +370,11 @@ AgentPay is currently an **Arc Testnet MVP**.
 
 Roadmap items are forward-looking and separate from current verified scope.
 
-Live demo and public API badges will be added after Vercel deployment.
+Live Arc Testnet MVP demo deployment:
+
+- Live demo: https://agentpay-dusky.vercel.app
+- Docs: https://agentpay-dusky.vercel.app/docs
+- API health: https://agentpay-dusky.vercel.app/api/health
 
 ---
 
@@ -301,4 +383,4 @@ Live demo and public API badges will be added after Vercel deployment.
 - GitHub: https://github.com/khenzarr/agentpay
 - ArcNS app: https://arcns-app.vercel.app
 - Arc Testnet explorer: https://testnet.arcscan.app
-- Live demo: coming after Vercel deployment
+- Live demo: https://agentpay-dusky.vercel.app

@@ -68,8 +68,8 @@ export default function DocsPage() {
               </tr>
               <tr className="border-t border-white/10">
                 <td className="py-2 pr-4">Developer API</td>
-                <td className="py-2 pr-4">Planned / not production API yet</td>
-                <td className="py-2 pr-4">Roadmap for read-only jobs/agents/payments endpoints</td>
+                <td className="py-2 pr-4">Read-only Developer API v0 is live</td>
+                <td className="py-2 pr-4">Use /api/* read endpoints for health, jobs, payments, metadata, and identity</td>
               </tr>
               <tr className="border-t border-white/10">
                 <td className="py-2 pr-4">SDK</td>
@@ -332,6 +332,70 @@ RAW_ERC4337_*                   # raw ERC-4337 readiness`}</pre>
             <li>API is v0/MVP and has no production SLA claim.</li>
             <li>Future roadmap includes transaction-intent endpoints, not custody/signing.</li>
           </ul>
+          <div className="space-y-2">
+            <h3 className="text-base font-semibold text-white">Read-only API examples</h3>
+            <p className="text-xs text-zinc-500">
+              Live Arc Testnet MVP demo: <code className="text-sky-300">https://agentpay-dusky.vercel.app</code>
+            </p>
+            <div className="grid gap-3 md:grid-cols-2">
+              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
+                <h4 className="text-sm font-semibold text-white">GET /api/health</h4>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/health"`}</pre>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
+  "ok": true,
+  "service": "AgentPay",
+  "environment": "Arc Testnet",
+  "chainId": 5042002,
+  "readOnly": true
+}`}</pre>
+              </article>
+
+              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
+                <h4 className="text-sm font-semibold text-white">GET /api/jobs?limit=1</h4>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/jobs?limit=1"`}</pre>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
+  "ok": true,
+  "service": "AgentPay",
+  "environment": "Arc Testnet",
+  "chainId": 5042002,
+  "jobs": [{ "id": "31192", "status": 3, "statusLabel": "Completed" }],
+  "source": "arc-testnet-rpc",
+  "readOnly": true,
+  "indexing": { "fromBlock": "42677950", "latestBlock": "...", "resultCount": 1 }
+}`}</pre>
+              </article>
+
+              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
+                <h4 className="text-sm font-semibold text-white">GET /api/payments?limit=1</h4>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/payments?limit=1"`}</pre>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
+  "ok": true,
+  "service": "AgentPay",
+  "environment": "Arc Testnet",
+  "chainId": 5042002,
+  "payments": [{ "jobId": "31192", "status": 3, "completed": true, "amount": "0" }],
+  "source": "arc-testnet-rpc",
+  "readOnly": true,
+  "indexing": { "fromBlock": "42677950", "latestBlock": "...", "resultCount": 1 }
+}`}</pre>
+              </article>
+
+              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
+                <h4 className="text-sm font-semibold text-white">GET /api/identity/resolve?name=agentpayagent.circle</h4>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/identity/resolve?name=agentpayagent.circle"`}</pre>
+                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
+  "ok": true,
+  "service": "AgentPay",
+  "environment": "Arc Testnet",
+  "chainId": 5042002,
+  "name": "agentpayagent.circle",
+  "address": "0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC",
+  "source": "ArcNS resolver",
+  "readOnly": true
+}`}</pre>
+              </article>
+            </div>
+          </div>
           <p><span className="text-zinc-200">Planned transaction intent API</span> (roadmap only, wallet signatures required):</p>
           <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`POST /api/intents/create-job
 POST /api/intents/fund-job
