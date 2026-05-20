@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #060a12;
+  --bg: #070a12;
   --card: rgba(255, 255, 255, 0.03);
   --border: rgba(255, 255, 255, 0.08);
   --accent: #0ea5e9;
@@ -13,11 +13,19 @@
 
 html,
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(1200px 500px at 80% -10%, rgba(45, 212, 255, 0.08), transparent),
+    radial-gradient(900px 400px at -10% 0%, rgba(139, 92, 246, 0.08), transparent),
+    var(--bg);
   color: #f1f5f9;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+}
+
+::selection {
+  background: rgba(45, 212, 255, 0.25);
+  color: #f8fafc;
 }
 
 input,
@@ -39,8 +47,9 @@ label {
 }
 
 .card {
-  background: var(--card);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.03));
   border: 1px solid var(--border);
   border-radius: 0.75rem;
   padding: 1.25rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }

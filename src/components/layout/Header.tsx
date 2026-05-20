@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { AgentPayBadge } from "@/components/ui/agentpay/AgentPayBadge";
+import { AgentPayLogoMark } from "@/components/ui/agentpay/AgentPayLogoMark";
+import { AgentPayShell } from "@/components/ui/agentpay/AgentPayShell";
 import { ConnectButton } from "@/components/wallet/ConnectButton";
 import { UsdcBalance } from "@/components/wallet/UsdcBalance";
 
@@ -12,30 +15,36 @@ const nav = [
 
 export function Header() {
   return (
-    <header className="border-b border-white/8 bg-black/20 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-4">
-        <Link href="/" className="text-lg font-semibold tracking-tight text-white">
-          AgentPay
-          <span className="ml-2 text-sm font-normal text-sky-400">for Arc</span>
-        </Link>
-        <nav className="flex flex-wrap gap-4 text-sm text-zinc-400">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3">
-          <UsdcBalance />
-          <ConnectButton />
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#070A12]/80 backdrop-blur-xl">
+      <AgentPayShell>
+        <div className="flex flex-wrap items-center justify-between gap-4 py-3">
+          <AgentPayLogoMark href="/" />
+
+          <nav className="flex flex-wrap items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 text-sm text-zinc-300">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-3 py-1.5 transition hover:bg-white/10 hover:text-white"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <div className="hidden items-center gap-1.5 md:flex">
+              <AgentPayBadge variant="arc">Arc Testnet</AgentPayBadge>
+              <AgentPayBadge variant="readonly">Read-only API v0</AgentPayBadge>
+            </div>
+            <UsdcBalance />
+            <ConnectButton />
+          </div>
         </div>
-      </div>
+      </AgentPayShell>
     </header>
   );
 }
+
 
 
