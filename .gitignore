@@ -95,6 +95,14 @@ docs/grant/**/*DRAFT_PRIVATE*
 docs/grant/**/*PERSONAL*
 docs/grant/**/*APPLICATION_PRIVATE*
 
+# private/local operations and internal docs
+scripts/private/
+ops/private/
+ops/local/
+docs/private/
+docs/grant/private/
+*.local.ts
+
 # temporary docs scrape folders
 docs/**/_tmp*/
 docs/**/*_tmp*/
