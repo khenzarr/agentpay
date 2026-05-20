@@ -1,5 +1,10 @@
 # AgentPay Recording Runbook
 
+Related final guides:
+
+- `./AGENTPAY_TIMED_REHEARSAL_PLAN.md` (strict 5-minute recording flow)
+- `./AGENTPAY_FINAL_GRANT_ASSETS_CHECKLIST.md` (submission-ready assets checklist)
+
 ## Recommended recording setup
 
 - Browser window: maximize or fixed 16:9 capture (recommended 1920×1080).

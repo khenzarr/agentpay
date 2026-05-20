@@ -1,5 +1,10 @@
 # AgentPay Demo Walkthrough Checklist
 
+Related final guides:
+
+- `./AGENTPAY_TIMED_REHEARSAL_PLAN.md` (strict recording timeline + compressed script)
+- `./AGENTPAY_FINAL_GRANT_ASSETS_CHECKLIST.md` (final submission links + form snippets)
+
 ## Pre-recording environment checklist
 
 - [ ] Browser is clean and ready (no unrelated tabs pinned in view).
