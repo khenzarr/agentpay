@@ -27,6 +27,28 @@ export interface ReadJob {
   explorer: string;
 }
 
+export interface IndexedJobsOptions {
+  limit?: number;
+  provider?: `0x${string}`;
+  client?: `0x${string}`;
+  state?: number;
+}
+
+export interface IndexingMetadata {
+  fromBlock: string;
+  latestBlock: string;
+  contract: `0x${string}`;
+  chunkSize: string;
+  resultCount: number;
+}
+
+export interface IndexedJobsResult {
+  jobs: ReadJob[];
+  source: "arc-testnet-rpc";
+  readOnly: true;
+  indexing: IndexingMetadata;
+}
+
 function asJobTuple(job: unknown): Erc8183JobTuple | undefined {
   if (!job || typeof job !== "object") return undefined;
   const c = job as Partial<Erc8183JobTuple>;
@@ -76,6 +98,11 @@ export function getPublicClient() {
   });
 }
 
+function normalizeLimit(limit?: number): number {
+  if (typeof limit !== "number" || !Number.isFinite(limit) || limit <= 0) return 100;
+  return Math.floor(limit);
+}
+
 function getIndexingFromBlock(): bigint {
   const raw = process.env.NEXT_PUBLIC_ERC8183_INDEXING_FROM_BLOCK;
   if (!raw) return ERC8183_INDEXING_FROM_BLOCK;
@@ -86,14 +113,28 @@ function getIndexingFromBlock(): bigint {
   }
 }
 
-export async function getIndexedJobs(limit?: number): Promise<ReadJob[]> {
+export async function getIndexedJobs(options: IndexedJobsOptions = {}): Promise<IndexedJobsResult> {
   const publicClient = getPublicClient();
   const fromBlock = getIndexingFromBlock();
   const latestBlock = await publicClient.getBlockNumber();
-  if (fromBlock > latestBlock) return [];
+  const chunkSize = 2_000n;
+  const limit = normalizeLimit(options.limit);
+  if (fromBlock > latestBlock) {
+    return {
+      jobs: [],
+      source: "arc-testnet-rpc",
+      readOnly: true,
+      indexing: {
+        fromBlock: fromBlock.toString(),
+        latestBlock: latestBlock.toString(),
+        contract: ERC8183_AGENTIC_COMMERCE_ADDRESS,
+        chunkSize: chunkSize.toString(),
+        resultCount: 0,
+      },
+    };
+  }
 
   const logs: Awaited<ReturnType<typeof publicClient.getLogs>> = [];
-  const chunkSize = 2_000n;
   let cursor = fromBlock;
   while (cursor <= latestBlock) {
     const end = cursor + chunkSize > latestBlock ? latestBlock : cursor + chunkSize;
@@ -115,7 +156,7 @@ export async function getIndexedJobs(limit?: number): Promise<ReadJob[]> {
   }
 
   const sortedIds = Array.from(uniqueJobIds).sort((a, b) => (a > b ? -1 : 1));
-  const trimmedIds = typeof limit === "number" && limit > 0 ? sortedIds.slice(0, limit) : sortedIds;
+  const trimmedIds = sortedIds.slice(0, limit);
   const jobs = await Promise.all(
     trimmedIds.map(async (jobId) => {
       try {
@@ -133,7 +174,31 @@ export async function getIndexedJobs(limit?: number): Promise<ReadJob[]> {
     })
   );
 
-  return jobs.filter((j): j is ReadJob => Boolean(j));
+  const normalizedProvider = options.provider?.toLowerCase();
+  const normalizedClient = options.client?.toLowerCase();
+  const hasStateFilter = Number.isFinite(options.state);
+
+  const filteredJobs = jobs
+    .filter((j): j is ReadJob => Boolean(j))
+    .filter((job) => {
+      if (normalizedProvider && job.provider.toLowerCase() !== normalizedProvider) return false;
+      if (normalizedClient && job.client.toLowerCase() !== normalizedClient) return false;
+      if (hasStateFilter && job.status !== options.state) return false;
+      return true;
+    });
+
+  return {
+    jobs: filteredJobs,
+    source: "arc-testnet-rpc",
+    readOnly: true,
+    indexing: {
+      fromBlock: fromBlock.toString(),
+      latestBlock: latestBlock.toString(),
+      contract: ERC8183_AGENTIC_COMMERCE_ADDRESS,
+      chunkSize: chunkSize.toString(),
+      resultCount: filteredJobs.length,
+    },
+  };
 }
 
 export async function getJobById(jobId: bigint): Promise<ReadJob | undefined> {
@@ -150,9 +215,9 @@ export async function getJobById(jobId: bigint): Promise<ReadJob | undefined> {
   return mapReadJob(tuple);
 }
 
-export async function getDerivedPayments(limit?: number) {
-  const jobs = await getIndexedJobs(limit);
-  return jobs.map((job) => ({
+export async function getDerivedPayments(options: IndexedJobsOptions = {}) {
+  const indexed = await getIndexedJobs(options);
+  const payments = indexed.jobs.map((job) => ({
     jobId: job.id,
     client: job.client,
     provider: job.provider,
@@ -162,4 +227,14 @@ export async function getDerivedPayments(limit?: number) {
     completed: job.status === 3,
     explorer: job.explorer,
   }));
+
+  return {
+    payments,
+    source: "arc-testnet-rpc" as const,
+    readOnly: true as const,
+    indexing: {
+      ...indexed.indexing,
+      resultCount: payments.length,
+    },
+  };
 }
