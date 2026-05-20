@@ -29,8 +29,10 @@ build/
 Thumbs.db
 *.pem
 .key
+*.key
 .keystore
 .secret
+*.secret
 .env
 .env.local
 .env*.local
