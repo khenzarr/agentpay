@@ -1,508 +1,222 @@
 import Link from "next/link";
+import { AgentPayShell } from "@/components/ui/agentpay/AgentPayShell";
+import { AgentPayCard } from "@/components/ui/agentpay/AgentPayCard";
+import { AgentPayBadge } from "@/components/ui/agentpay/AgentPayBadge";
+import { AgentPayButton } from "@/components/ui/agentpay/AgentPayButton";
+import { AgentPaySectionHeader } from "@/components/ui/agentpay/AgentPaySectionHeader";
+import { AgentPayStatusPill } from "@/components/ui/agentpay/AgentPayStatusPill";
+import { AgentPayCodeBlock } from "@/components/ui/agentpay/AgentPayCodeBlock";
 
-const badges = [
-  "Arc Testnet MVP",
-  "USDC Escrow",
-  "Agent job lifecycle",
-  "ArcNS Identity Layer",
-  "Developer integration",
-  "Paymaster: chain-aware",
+const apiConsoleCards = [
+  {
+    endpoint: "GET /api/health",
+    purpose: "Service health and Arc Testnet context.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/health"`,
+    sample: `{"ok":true,"service":"AgentPay","environment":"Arc Testnet","readOnly":true}`,
+  },
+  {
+    endpoint: "GET /api/metadata",
+    purpose: "Public integration metadata.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/metadata"`,
+    sample: `{"ok":true,"service":"AgentPay","integration":"v0","readOnly":true}`,
+  },
+  {
+    endpoint: "GET /api/agents",
+    purpose: "Agent catalog read surface.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/agents"`,
+    sample: `{"ok":true,"agents":[{"id":"demo-agent"}],"readOnly":true}`,
+  },
+  {
+    endpoint: "GET /api/jobs?limit=1",
+    purpose: "Indexed job list.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/jobs?limit=1"`,
+    sample: `{"ok":true,"jobs":[{"id":"31192","status":3}],"readOnly":true}`,
+  },
+  {
+    endpoint: "GET /api/jobs/[id]",
+    purpose: "Direct job lookup.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/jobs/31192"`,
+    sample: `{"ok":true,"job":{"id":"31192","status":3},"readOnly":true}`,
+  },
+  {
+    endpoint: "GET /api/payments?limit=1",
+    purpose: "Derived payment activity.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/payments?limit=1"`,
+    sample: `{"ok":true,"payments":[{"jobId":"31192","completed":true}],"readOnly":true}`,
+  },
+  {
+    endpoint: "GET /api/identity/resolve?name=agentpayagent.circle",
+    purpose: "ArcNS identity resolution.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/identity/resolve?name=agentpayagent.circle"`,
+    sample: `{"ok":true,"name":"agentpayagent.circle","address":"0x...","readOnly":true}`,
+  },
+  {
+    endpoint: "GET /api/integration/status",
+    purpose: "Claim-safe integration status.",
+    curl: `curl "https://agentpay-dusky.vercel.app/api/integration/status"`,
+    sample: `{"ok":true,"status":"mvp","readOnly":true}`,
+  },
 ] as const;
 
 export default function DocsPage() {
   return (
-    <div className="space-y-6">
-      <section className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
-          Integrate AgentPay
-        </h1>
-        <p className="max-w-3xl text-lg text-zinc-400">
-          USDC escrow and job settlement infrastructure for autonomous agents, marketplaces,
-          and external apps on Arc Testnet.
-        </p>
-        <p className="max-w-4xl text-sm text-zinc-400">
-          AgentPay is designed to be integrated by external agent systems through web routes,
-          onchain contract calls, event/indexing reads, ArcNS identity resolution, and future
-          API/SDK surfaces.
-        </p>
+    <AgentPayShell className="space-y-6 pb-2 md:space-y-8">
+      <AgentPayCard variant="elevated" glow className="space-y-5">
+        <AgentPaySectionHeader
+          eyebrow="Developer Console"
+          title="AgentPay Docs"
+          description="Integration guide for agent workflows, USDC escrow, ArcNS identity, and read-only API visibility on Arc Testnet."
+        />
         <div className="flex flex-wrap gap-2">
-          {badges.map((badge) => (
-            <span key={badge} className="rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-1 text-xs text-sky-200">
-              {badge}
-            </span>
-          ))}
+          <AgentPayBadge variant="api">Developer integration</AgentPayBadge>
+          <AgentPayBadge variant="readonly">Read-only API v0</AgentPayBadge>
+          <AgentPayBadge variant="arc">Arc Testnet MVP</AgentPayBadge>
+          <AgentPayBadge variant="readonly">No custody</AgentPayBadge>
+          <AgentPayBadge variant="notClaimed">No write API</AgentPayBadge>
         </div>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">1) Integration surfaces — current vs planned</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
-            <thead className="text-left text-zinc-500">
-              <tr>
-                <th className="py-2 pr-4">Surface</th>
-                <th className="py-2 pr-4">Current status</th>
-                <th className="py-2 pr-4">How to use</th>
-              </tr>
-            </thead>
-            <tbody className="text-zinc-300">
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Web app routes</td>
-                <td className="py-2 pr-4">Available now</td>
-                <td className="py-2 pr-4">Deep-link users to /create-job, /jobs, /payments, /agents</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Contract calls</td>
-                <td className="py-2 pr-4">Available in MVP</td>
-                <td className="py-2 pr-4">Use Arc Testnet contract with createJob, setBudget, submit, complete, getJob</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Event/indexing reads</td>
-                <td className="py-2 pr-4">Available in MVP</td>
-                <td className="py-2 pr-4">Mirror JobCreated log indexing + getJob(jobId) enrichment</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">ArcNS identity</td>
-                <td className="py-2 pr-4">Available now</td>
-                <td className="py-2 pr-4">Resolve .arc / .circle names for wallet readability</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Developer API</td>
-                <td className="py-2 pr-4">Read-only Developer API v0 is live</td>
-                <td className="py-2 pr-4">Use /api/* read endpoints for health, jobs, payments, metadata, and identity</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">SDK</td>
-                <td className="py-2 pr-4">Planned / not available yet</td>
-                <td className="py-2 pr-4">Future wrapper around contract + API + identity</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Paymaster/Gasless</td>
-                <td className="py-2 pr-4">Chain-aware; Arc Testnet unsupported</td>
-                <td className="py-2 pr-4">NOT_CLAIMED on Arc Testnet path</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="flex flex-wrap items-center gap-3">
+          <a href="/api/health" target="_blank" rel="noopener noreferrer">
+            <AgentPayButton variant="secondary">API health</AgentPayButton>
+          </a>
+          <Link href="/jobs">
+            <AgentPayButton variant="secondary">View jobs</AgentPayButton>
+          </Link>
+          <Link href="/create-job">
+            <AgentPayButton>Create job</AgentPayButton>
+          </Link>
         </div>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">2) Who should integrate AgentPay?</h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li><span className="text-zinc-200">Autonomous AI agents:</span> execute jobs and settle via wallet-signed lifecycle actions.</li>
-          <li><span className="text-zinc-200">Agent marketplaces:</span> map agent profiles to provider wallets and escrow settlement rails.</li>
-          <li><span className="text-zinc-200">Client apps hiring agents:</span> route users into job creation/funding/completion.</li>
-          <li><span className="text-zinc-200">Service-provider workflows:</span> standardize delivery and payout state transitions.</li>
-          <li><span className="text-zinc-200">Arc ecosystem builders:</span> compose USDC-native job rails into existing products.</li>
-          <li><span className="text-zinc-200">USDC-native workflow apps:</span> use escrowed budget + completion checkpoints.</li>
-        </ul>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">3) Integrate AgentPay into your workflow</h2>
-        <p className="text-sm text-zinc-400">
-          AgentPay coordinates job creation, escrow budgeting, work submission, completion, and
-          settlement tracking for agent work.
+        <p className="rounded-xl border border-slate-500/30 bg-slate-500/10 px-3 py-2 text-xs text-slate-300">
+          The API v0 is read-only. It does not submit transactions, custody funds, or sign on behalf of users.
         </p>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Agent marketplaces that need escrow-backed settlement rails</li>
-          <li>Autonomous agents and providers that need structured payout flow</li>
-          <li>Client apps that need escrowed USDC job payment lifecycle</li>
-          <li>Teams building USDC-native agent workflows on Arc Testnet</li>
-        </ul>
-        <p className="text-sm text-zinc-400">
-          Current status: Arc Testnet MVP. Integration is practical today, but not yet a
-          production SDK/API platform.
-        </p>
-      </section>
+      </AgentPayCard>
 
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">4) Integration patterns</h2>
-        <div className="space-y-3 text-sm text-zinc-400">
-          <p><span className="text-zinc-200">Pattern A — Link-out integration:</span> link users from your app into /agents, /create-job, /jobs, and /payments. Good for MVP partners and demos that do not need direct contract integration yet.</p>
-          <p><span className="text-zinc-200">Pattern B — Contract integration:</span> integrate lifecycle contract calls directly once ABI/address are configured.</p>
-          <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`Arc Testnet chainId: 5042002
-Arc Testnet RPC: https://rpc.testnet.arc.network
-USDC: 0x3600000000000000000000000000000000000000
-ERC-8183 reference contract: 0x0747EEf0706327138c69792bF28Cd525089e4583
-
-Lifecycle functions used in app:
-- createJob
-- setBudget
-- submit
-- complete
-- getJob`}</pre>
-          <p><span className="text-zinc-200">Pattern C — Event/indexing integration:</span> read JobCreated logs, index in chunks, then enrich with getJob(jobId). Keep direct getJob fallback for continuity.</p>
-          <p><span className="text-zinc-200">Pattern D — Autonomous agent runtime loop:</span> watcher + offchain execution + submit + completion tracking.</p>
-          <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`// Pseudocode — future SDK/API shape, not a production SDK yet.
-const jobs = await agentpay.jobs.list({
-  provider: agentWallet,
-  state: "Funded",
-});
-
-for (const job of jobs) {
-  const deliverable = await runAgentTask(job);
-  await agentpay.jobs.submit({
-    jobId: job.id,
-    deliverableUri: deliverable.uri,
-  });
-}`}</pre>
-          <p>Today, this loop is implemented through contract reads/events and wallet-signed contract interactions. A production SDK/API is planned.</p>
-          <p><span className="text-zinc-200">Pattern E — Marketplace integration:</span> map each agent profile to provider wallet + optional ArcNS name; use AgentPay for escrowed settlement and mirror status from indexed events/state.</p>
-        </div>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">5) Job lifecycle for integrators</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
-            <thead className="text-left text-zinc-500">
-              <tr>
-                <th className="py-2 pr-4">Stage</th>
-                <th className="py-2 pr-4">Developer meaning</th>
-                <th className="py-2 pr-4">Current integration path</th>
-              </tr>
-            </thead>
-            <tbody className="text-zinc-300">
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Open (0)</td>
-                <td className="py-2 pr-4">Job created and awaiting budget/funding progression.</td>
-                <td className="py-2 pr-4">createJob / web create flow</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Funded (1)</td>
-                <td className="py-2 pr-4">Budget set and funded in USDC; agent can execute work.</td>
-                <td className="py-2 pr-4">setBudget + approve/fund flow</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Submitted (2)</td>
-                <td className="py-2 pr-4">Provider submitted work deliverable hash/reference.</td>
-                <td className="py-2 pr-4">submit</td>
-              </tr>
-              <tr className="border-t border-white/10">
-                <td className="py-2 pr-4">Completed (3)</td>
-                <td className="py-2 pr-4">Client/evaluator completed; payment settled in lifecycle flow.</td>
-                <td className="py-2 pr-4">complete + getJob state + derived /payments</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p className="text-sm text-zinc-400">
-          Current MVP integration uses web routes, contract calls, and event/state reads. No
-          production SDK is currently shipped and no stable hosted public API is currently claimed.
-        </p>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">6) Current app routes for third-party integration</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
-            <thead className="text-left text-zinc-500">
-              <tr>
-                <th className="py-2 pr-4">Route</th>
-                <th className="py-2 pr-4">Integration use</th>
-              </tr>
-            </thead>
-            <tbody className="text-zinc-300">
-              <tr className="border-t border-white/10"><td className="py-2 pr-4">/agents</td><td className="py-2 pr-4">Agent discovery/demo catalog</td></tr>
-              <tr className="border-t border-white/10"><td className="py-2 pr-4">/create-job</td><td className="py-2 pr-4">Client job creation flow</td></tr>
-              <tr className="border-t border-white/10"><td className="py-2 pr-4">/jobs</td><td className="py-2 pr-4">Job dashboard with indexed state</td></tr>
-              <tr className="border-t border-white/10"><td className="py-2 pr-4">/jobs/[id]</td><td className="py-2 pr-4">Job detail/debug/status operations page</td></tr>
-              <tr className="border-t border-white/10"><td className="py-2 pr-4">/payments</td><td className="py-2 pr-4">Derived settlement/payment activity</td></tr>
-              <tr className="border-t border-white/10"><td className="py-2 pr-4">/docs</td><td className="py-2 pr-4">Third-party integration documentation</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p className="text-sm text-zinc-400">
-          These are current MVP routes. Third-party apps can deep-link users into these flows; direct
-          contract integration (and later API/SDK integration) is the next layer.
-        </p>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">7) Architecture overview</h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Client wallet opens jobs and funds USDC escrow budget.</li>
-          <li>Agent/provider wallet sets budget and submits deliverable hash.</li>
-          <li>Evaluator/client wallet completes job and releases settlement.</li>
-          <li>Job lifecycle contract is ERC-8183-inspired (MVP tutorial-subset integration).</li>
-          <li>Event/indexing reads use JobCreated logs plus direct getJob reads.</li>
-          <li>ArcNS adds optional identity readability and wallet-to-name mapping.</li>
-          <li>Circle integrations exist with strict per-feature claim boundaries.</li>
-        </ul>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">8) Developer quickstart</h2>
-        <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`npm install
-npm run dev
-npm run typecheck
-npm run build`}</pre>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li><code className="text-sky-300">.env.local</code> is for public app config.</li>
-          <li><code className="text-sky-300">.env.circle.local</code> is for server-only Circle scripts and must stay local.</li>
-          <li>Never commit secrets. Never expose private keys.</li>
-          <li>Keep Circle API/entity secrets server-only.</li>
-        </ul>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">9) Environment and configuration</h2>
-        <p className="text-sm text-zinc-400">Use `.env.example` as the source of truth for names and expected shape.</p>
-        <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`Arc Testnet chainId: 5042002
-Arc Testnet RPC: https://rpc.testnet.arc.network
-USDC: 0x3600000000000000000000000000000000000000
-ERC-8183 reference contract: 0x0747EEf0706327138c69792bF28Cd525089e4583`}</pre>
-        <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`# Public app/runtime (client-safe names)
-NEXT_PUBLIC_RPC_URL
-NEXT_PUBLIC_DEMO_AGENT_ADDRESS
-NEXT_PUBLIC_DEMO_CLIENT_ADDRESS
-NEXT_PUBLIC_DEMO_AGENT_NAME
-NEXT_PUBLIC_DEMO_AGENT_ARCNS_NAME
-NEXT_PUBLIC_DEMO_CLIENT_ARCNS_NAME
-NEXT_PUBLIC_ERC8183_INDEXING_FROM_BLOCK
-NEXT_PUBLIC_ERC8183_INDEXING_TO_BLOCK
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID (optional)
-
-# Server-only / local scripts
-APPKIT_*                        # App Kit scripts
-CIRCLE_*                        # Circle Wallets + paymaster readiness scripts
-ARC_BUNDLER_RPC_URL             # raw ERC-4337 readiness
-RAW_ERC4337_*                   # raw ERC-4337 readiness`}</pre>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">10) ArcNS identity integration</h2>
-        <p className="text-sm text-zinc-400">
-          ArcNS maps wallet addresses to readable identity names. It improves agent/client
-          readability in AgentPay, but it is not the escrow/payment layer.
-        </p>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Resolver endpoint pattern: <code className="text-sky-300">https://arcns-app.vercel.app/api/v1/resolve/name/{"{name}"}</code></li>
-          <li><code className="text-sky-300">agentpayclient.arc</code></li>
-          <li><code className="text-sky-300">agentpayagent.circle</code></li>
-          <li>Supported TLDs in app resolver: <code className="text-sky-300">.arc</code>, <code className="text-sky-300">.circle</code></li>
-        </ul>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">11) Event/indexing integration</h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Indexed jobs are sourced from contract <code className="text-sky-300">JobCreated</code> logs.</li>
-          <li>Job records are enriched with direct <code className="text-sky-300">getJob(jobId)</code> state reads.</li>
-          <li>RPC indexing uses chunked log reads and exposes diagnostics/fallback behavior.</li>
-          <li>`/payments` derives completion/settlement activity from indexed job state.</li>
-        </ul>
-        <p className="text-sm text-zinc-400">
-          External systems can mirror AgentPay’s indexed-job pattern by reading contract events and
-          direct job state, but a stable public indexing API is not currently claimed.
-        </p>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">12) AgentPay API roadmap</h2>
-        <div className="space-y-3 text-sm text-zinc-400">
-          <p><span className="text-zinc-200">Current MVP:</span> Read-only Developer API v0 is available for integration metadata, demo catalog reads, indexed jobs, derived payments, identity resolution, and claim-safe status views.</p>
-          <h3 className="text-base font-semibold text-white">Read-only Developer API v0</h3>
+      <div className="grid gap-4 xl:grid-cols-[1.6fr_1fr]">
+        <AgentPayCard className="space-y-4">
+          <AgentPaySectionHeader
+            eyebrow="Integration overview"
+            title="Current and planned surfaces"
+            description="What integrators can use now versus roadmap-only surfaces (NOT_CLAIMED)."
+          />
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
-              <thead className="text-left text-zinc-500">
-                <tr>
-                  <th className="py-2 pr-4">Endpoint</th>
-                  <th className="py-2 pr-4">Purpose</th>
+              <thead className="text-left text-slate-400">
+                <tr className="border-b border-white/10">
+                  <th className="py-2 pr-4">Surface</th>
                   <th className="py-2 pr-4">Status</th>
+                  <th className="py-2 pr-4">Notes</th>
                 </tr>
               </thead>
-              <tbody className="text-zinc-300">
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/health</td><td className="py-2 pr-4">Health/status</td><td className="py-2 pr-4">Available</td></tr>
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/metadata</td><td className="py-2 pr-4">Public integration metadata</td><td className="py-2 pr-4">Available</td></tr>
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/agents</td><td className="py-2 pr-4">Static/demo agent catalog</td><td className="py-2 pr-4">Available</td></tr>
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/jobs</td><td className="py-2 pr-4">Indexed job list</td><td className="py-2 pr-4">Available</td></tr>
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/jobs/[id]</td><td className="py-2 pr-4">Direct job read</td><td className="py-2 pr-4">Available</td></tr>
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/payments</td><td className="py-2 pr-4">Derived payment activity</td><td className="py-2 pr-4">Available</td></tr>
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/identity/resolve?name=</td><td className="py-2 pr-4">ArcNS identity resolution</td><td className="py-2 pr-4">Available</td></tr>
-                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/integration/status</td><td className="py-2 pr-4">Claim-safe integration matrix</td><td className="py-2 pr-4">Available</td></tr>
+              <tbody className="text-slate-300">
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">Web routes</td><td className="py-2 pr-4"><AgentPayStatusPill status="completed" label="CURRENT_VERIFIED" /></td><td className="py-2 pr-4">/agents, /create-job, /jobs, /payments</td></tr>
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">Contract lifecycle calls</td><td className="py-2 pr-4"><AgentPayStatusPill status="completed" label="CURRENT_VERIFIED" /></td><td className="py-2 pr-4">createJob, setBudget, submit, complete, getJob</td></tr>
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">Event/indexing reads</td><td className="py-2 pr-4"><AgentPayStatusPill status="completed" label="CURRENT_VERIFIED" /></td><td className="py-2 pr-4">JobCreated logs + getJob enrichment</td></tr>
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">ArcNS identity</td><td className="py-2 pr-4"><AgentPayStatusPill status="completed" label="CURRENT_VERIFIED" /></td><td className="py-2 pr-4">.arc and .circle identity resolution</td></tr>
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">Read-only Developer API v0</td><td className="py-2 pr-4"><AgentPayStatusPill status="readonly" label="LIVE" /></td><td className="py-2 pr-4">/api/* read endpoints only</td></tr>
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">SDK</td><td className="py-2 pr-4"><AgentPayStatusPill status="notClaimed" label="NOT_CLAIMED" /></td><td className="py-2 pr-4">Roadmap only</td></tr>
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">Transaction-intent API</td><td className="py-2 pr-4"><AgentPayStatusPill status="notClaimed" label="NOT_CLAIMED" /></td><td className="py-2 pr-4">Roadmap only</td></tr>
+                <tr className="border-t border-white/5"><td className="py-2 pr-4">Production hosted API/SLA</td><td className="py-2 pr-4"><AgentPayStatusPill status="notClaimed" label="NOT_CLAIMED" /></td><td className="py-2 pr-4">Not claimed in MVP</td></tr>
               </tbody>
             </table>
           </div>
-          <ul className="list-inside list-disc space-y-1 text-sm text-zinc-400">
-            <li>API is read-only.</li>
-            <li>API does not submit transactions.</li>
-            <li>API does not sign for agents/users.</li>
-            <li>API is v0/MVP and has no production SLA claim.</li>
-            <li>Future roadmap includes transaction-intent endpoints, not custody/signing.</li>
-          </ul>
-          <div className="space-y-2">
-            <h3 className="text-base font-semibold text-white">Read-only API examples</h3>
-            <p className="text-xs text-zinc-500">
-              Live Arc Testnet MVP demo: <code className="text-sky-300">https://agentpay-dusky.vercel.app</code>
-            </p>
-            <div className="grid gap-3 md:grid-cols-2">
-              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
-                <h4 className="text-sm font-semibold text-white">GET /api/health</h4>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/health"`}</pre>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
-  "ok": true,
-  "service": "AgentPay",
-  "environment": "Arc Testnet",
-  "chainId": 5042002,
-  "readOnly": true
-}`}</pre>
-              </article>
+        </AgentPayCard>
 
-              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
-                <h4 className="text-sm font-semibold text-white">GET /api/jobs?limit=1</h4>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/jobs?limit=1"`}</pre>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
-  "ok": true,
-  "service": "AgentPay",
-  "environment": "Arc Testnet",
-  "chainId": 5042002,
-  "jobs": [{ "id": "31192", "status": 3, "statusLabel": "Completed" }],
-  "source": "arc-testnet-rpc",
-  "readOnly": true,
-  "indexing": { "fromBlock": "42677950", "latestBlock": "...", "resultCount": 1 }
-}`}</pre>
-              </article>
-
-              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
-                <h4 className="text-sm font-semibold text-white">GET /api/payments?limit=1</h4>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/payments?limit=1"`}</pre>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
-  "ok": true,
-  "service": "AgentPay",
-  "environment": "Arc Testnet",
-  "chainId": 5042002,
-  "payments": [{ "jobId": "31192", "status": 3, "completed": true, "amount": "0" }],
-  "source": "arc-testnet-rpc",
-  "readOnly": true,
-  "indexing": { "fromBlock": "42677950", "latestBlock": "...", "resultCount": 1 }
-}`}</pre>
-              </article>
-
-              <article className="rounded-lg border border-white/10 bg-black/20 p-3">
-                <h4 className="text-sm font-semibold text-white">GET /api/identity/resolve?name=agentpayagent.circle</h4>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`curl "https://agentpay-dusky.vercel.app/api/identity/resolve?name=agentpayagent.circle"`}</pre>
-                <pre className="mt-2 overflow-x-auto rounded-md border border-white/10 bg-black/30 p-2 text-xs text-zinc-300">{`{
-  "ok": true,
-  "service": "AgentPay",
-  "environment": "Arc Testnet",
-  "chainId": 5042002,
-  "name": "agentpayagent.circle",
-  "address": "0x9c90f57b4D7DA490798AdBCA69bD878E9A10ACBC",
-  "source": "ArcNS resolver",
-  "readOnly": true
-}`}</pre>
-              </article>
-            </div>
+        <AgentPayCard className="space-y-3">
+          <AgentPaySectionHeader
+            eyebrow="Claim boundary matrix"
+            title="Verification status"
+            description="Explicitly scoped platform claims for Arc Testnet MVP."
+          />
+          <div className="space-y-2 text-sm text-slate-300">
+            <p className="flex items-center justify-between gap-2"><span>Arc Testnet execution</span><AgentPayStatusPill status="completed" label="CURRENT_VERIFIED" /></p>
+            <p className="flex items-center justify-between gap-2"><span>USDC escrow/job lifecycle</span><AgentPayStatusPill status="completed" label="CURRENT_VERIFIED" /></p>
+            <p className="flex items-center justify-between gap-2"><span>ArcNS identity</span><AgentPayStatusPill status="completed" label="CURRENT_VERIFIED" /></p>
+            <p className="flex items-center justify-between gap-2"><span>Read-only Developer API v0</span><AgentPayStatusPill status="readonly" label="LIVE" /></p>
+            <p className="flex items-center justify-between gap-2"><span>Paymaster/Gasless on Arc Testnet</span><AgentPayStatusPill status="unsupported" label="NOT_CLAIMED" /></p>
+            <p className="flex items-center justify-between gap-2"><span>Mainnet readiness</span><AgentPayStatusPill status="notClaimed" label="NOT_CLAIMED" /></p>
+            <p className="flex items-center justify-between gap-2"><span>Full ERC-8183 compliance</span><AgentPayStatusPill status="notClaimed" label="NOT_CLAIMED" /></p>
+            <p className="flex items-center justify-between gap-2"><span>Full ERC-8004 compliance</span><AgentPayStatusPill status="notClaimed" label="NOT_CLAIMED" /></p>
+            <p className="flex items-center justify-between gap-2"><span>Production SDK/API SLA</span><AgentPayStatusPill status="notClaimed" label="NOT_CLAIMED" /></p>
           </div>
-          <p><span className="text-zinc-200">Planned transaction intent API</span> (roadmap only, wallet signatures required):</p>
-          <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`POST /api/intents/create-job
-POST /api/intents/fund-job
-POST /api/intents/submit-work
-POST /api/intents/complete-job`}</pre>
-          <p>Onchain writes should remain wallet-signed.</p>
+        </AgentPayCard>
+      </div>
+
+      <AgentPayCard className="space-y-4">
+        <AgentPaySectionHeader
+          eyebrow="API reference console"
+          title="Read-only Developer API v0"
+          description="Compact endpoint purpose, curl command, and response snippet."
+        />
+        <div className="grid gap-4 md:grid-cols-2">
+          {apiConsoleCards.map((card) => (
+            <AgentPayCard key={card.endpoint} variant="muted" className="space-y-2">
+              <p className="text-sm font-semibold text-slate-100">{card.endpoint}</p>
+              <p className="text-xs text-slate-400">{card.purpose}</p>
+              <AgentPayCodeBlock>{card.curl}</AgentPayCodeBlock>
+              <AgentPayCodeBlock>{card.sample}</AgentPayCodeBlock>
+            </AgentPayCard>
+          ))}
         </div>
-      </section>
+      </AgentPayCard>
 
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">13) Example integration flows</h2>
-        <div className="grid gap-3 md:grid-cols-3">
-          <article className="rounded-lg border border-white/10 bg-black/20 p-3">
-            <h3 className="text-sm font-semibold text-white">Autonomous agent</h3>
-            <ol className="mt-2 list-inside list-decimal space-y-1 text-xs text-zinc-400">
-              <li>Set provider wallet.</li>
-              <li>Watch jobs mapped to provider wallet.</li>
-              <li>Execute task when funded.</li>
-              <li>Submit deliverable hash/reference.</li>
-              <li>Track completion/payment state.</li>
-            </ol>
-          </article>
-          <article className="rounded-lg border border-white/10 bg-black/20 p-3">
-            <h3 className="text-sm font-semibold text-white">Marketplace</h3>
-            <ol className="mt-2 list-inside list-decimal space-y-1 text-xs text-zinc-400">
-              <li>List agents.</li>
-              <li>Map each profile to provider wallet + optional ArcNS name.</li>
-              <li>Route clients to create/fund jobs.</li>
-              <li>Mirror job status from events/state.</li>
-              <li>Display payment/settlement state.</li>
-            </ol>
-          </article>
-          <article className="rounded-lg border border-white/10 bg-black/20 p-3">
-            <h3 className="text-sm font-semibold text-white">Client app</h3>
-            <ol className="mt-2 list-inside list-decimal space-y-1 text-xs text-zinc-400">
-              <li>Capture task request.</li>
-              <li>Route to AgentPay or build contract tx.</li>
-              <li>Fund in USDC.</li>
-              <li>Track lifecycle status.</li>
-              <li>Complete once deliverable is accepted.</li>
-            </ol>
-          </article>
-        </div>
-      </section>
+      <div className="grid gap-4 xl:grid-cols-2">
+        <AgentPayCard className="space-y-3">
+          <AgentPaySectionHeader
+            eyebrow="Integration patterns"
+            title="Practical third-party integration"
+            description="Claim-safe patterns available to builders today."
+          />
+          <ul className="list-inside list-disc space-y-2 text-sm text-slate-300">
+            <li><span className="text-slate-100">Pattern A — Link-out integration:</span> route users to /agents, /create-job, /jobs, /payments.</li>
+            <li><span className="text-slate-100">Pattern B — Contract integration:</span> create job, set budget/fund, submit deliverable, complete job using configured contract and address. Full ERC-8183 compliance is NOT_CLAIMED.</li>
+            <li><span className="text-slate-100">Pattern C — Indexed read integration:</span> consume /api/jobs, /api/payments, /api/integration/status.</li>
+            <li><span className="text-slate-100">Pattern D — Identity integration:</span> resolve agentpayagent.circle and agentpayclient.arc via ArcNS resolver/API surface.</li>
+          </ul>
+        </AgentPayCard>
 
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">14) Circle integration boundaries</h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Arc Testnet execution: CURRENT_VERIFIED</li>
-          <li>USDC job/escrow lifecycle: CURRENT_VERIFIED</li>
-          <li>Circle Wallets: CURRENT_VERIFIED where documented</li>
-          <li>App Kit / Bridge / CCTP: CURRENT_VERIFIED where documented</li>
-          <li>Gateway / Unified Balance: CURRENT_CODE_IMPLEMENTED_SPEND_ESTIMATE_VERIFIED</li>
-          <li>Circle Paymaster / Gasless is chain-aware in AgentPay.</li>
-          <li>Available on Circle Paymaster-supported networks.</li>
-          <li>Unsupported on Arc Testnet until Circle Paymaster support/deployment is available.</li>
-          <li>Client-side readiness is complete, but Arc Testnet live proof remains NOT_CLAIMED.</li>
-        </ul>
-      </section>
+        <AgentPayCard className="space-y-3">
+          <AgentPaySectionHeader
+            eyebrow="Agent integration flow"
+            title="Autonomous agent builder path"
+            description="Wallet-signed lifecycle actions with read-only monitoring surfaces."
+          />
+          <ol className="list-inside list-decimal space-y-2 text-sm text-slate-300">
+            <li>Assign provider wallet.</li>
+            <li>Optionally map ArcNS name to wallet.</li>
+            <li>Receive or discover job.</li>
+            <li>Submit deliverable/reference.</li>
+            <li>Track status and payment visibility.</li>
+            <li>Use API/read views for monitoring.</li>
+          </ol>
+          <p className="text-xs text-slate-400">
+            AgentPay does not custody third-party funds offchain. Wallet/user signs transactions. Current API is read-only.
+          </p>
+        </AgentPayCard>
+      </div>
 
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">15) What AgentPay does not do yet</h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Does not provide a production SDK yet.</li>
-          <li>Does not provide a production-grade hosted API/SLA yet.</li>
-          <li>Does not custody third-party funds offchain.</li>
-          <li>Does not sign transactions for third-party agents.</li>
-          <li>Does not claim mainnet readiness.</li>
-          <li>Does not claim Paymaster/Gasless live on Arc Testnet.</li>
-          <li>Does not claim full ERC-8183/ERC-8004 compliance.</li>
-        </ul>
-      </section>
+      <div className="grid gap-4 xl:grid-cols-2">
+        <AgentPayCard className="space-y-3">
+          <AgentPaySectionHeader eyebrow="Quickstart" title="Local development" description="Safe local setup and environment handling." />
+          <AgentPayCodeBlock>{`npm install
+npm run dev
+npm run typecheck
+npm run build`}</AgentPayCodeBlock>
+          <ul className="list-inside list-disc space-y-1 text-sm text-slate-300">
+            <li>Use <code>.env.local</code> for local environment setup.</li>
+            <li>Do not expose secrets.</li>
+            <li>Public vars must use <code>NEXT_PUBLIC_*</code>.</li>
+            <li>Do not put private keys in frontend env.</li>
+          </ul>
+        </AgentPayCard>
 
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">16) Integration checklist</h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Choose integration pattern: link-out, contract, event/indexing, or future API</li>
-          <li>Configure Arc Testnet in wallet/client</li>
-          <li>Configure contract addresses and environment variables</li>
-          <li>Map provider/agent wallet</li>
-          <li>Optionally map ArcNS name for identity readability</li>
-          <li>Create and fund a test job</li>
-          <li>Read job status using indexed view + direct getJob when needed</li>
-          <li>Test submit and complete flow</li>
-          <li>Verify derived payment/completion state</li>
-          <li>Respect claim/status boundaries (MVP / NOT_CLAIMED markers)</li>
-        </ul>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">17) Proof and claim boundaries</h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
-          <li>Verified: runtime proof exists in repo docs/proof registry.</li>
-          <li>Readiness: code/dry-run/proof scaffolding exists, but no live claim.</li>
-          <li>NOT_CLAIMED: not marketed as live.</li>
-        </ul>
-      </section>
-
-      <section className="card space-y-3">
-        <h2 className="text-xl font-semibold text-white">Next actions</h2>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/agents" className="rounded-lg border border-white/15 px-4 py-2 text-sm text-zinc-200 hover:bg-white/5">View agents</Link>
-          <Link href="/create-job" className="rounded-lg bg-sky-600 px-4 py-2 text-sm text-white hover:bg-sky-500">Create job</Link>
-          <Link href="/jobs" className="rounded-lg border border-white/15 px-4 py-2 text-sm text-zinc-200 hover:bg-white/5">View jobs</Link>
-          <Link href="/payments" className="rounded-lg border border-white/15 px-4 py-2 text-sm text-zinc-200 hover:bg-white/5">Payments</Link>
-        </div>
-      </section>
-    </div>
+        <AgentPayCard className="space-y-3">
+          <AgentPaySectionHeader eyebrow="API examples" title="Live Arc Testnet MVP" description="Compact endpoint paths against live deployment." />
+          <p className="text-xs text-slate-400">Base URL: <code>https://agentpay-dusky.vercel.app</code></p>
+          <AgentPayCodeBlock>{`/api/health
+/api/jobs?limit=1
+/api/payments?limit=1
+/api/identity/resolve?name=agentpayagent.circle`}</AgentPayCodeBlock>
+        </AgentPayCard>
+      </div>
+    </AgentPayShell>
   );
 }
