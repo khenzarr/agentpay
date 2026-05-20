@@ -7,6 +7,7 @@ const nav = [
   { href: "/create-job", label: "Create job" },
   { href: "/jobs", label: "Jobs" },
   { href: "/payments", label: "Payments" },
+  { href: "/docs", label: "Docs" },
 ];
 
 export function Header() {
@@ -36,4 +37,5 @@ export function Header() {
     </header>
   );
 }
+
 

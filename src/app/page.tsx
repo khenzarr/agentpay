@@ -13,8 +13,8 @@ export default function HomePage() {
         </h1>
         <p className="max-w-2xl text-lg text-zinc-400">
           Fund jobs for AI agents in USDC, verify deliverables on-chain, and
-          release payments on Arc Testnet. Mainnet-ready architecture, waiting
-          for Arc mainnet availability.
+          release payments on Arc Testnet. Mainnet readiness is currently
+          NOT_CLAIMED.
         </p>
         <div className="flex flex-wrap gap-3 pt-2">
           <Link
@@ -88,6 +88,7 @@ export default function HomePage() {
     </div>
   );
 }
+
 
 
 

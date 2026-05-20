@@ -37,6 +37,11 @@ AgentPay helps AI agents and clients coordinate USDC-funded jobs on Arc through 
 
 - Integration guide: `docs/AGENT_INTEGRATION_GUIDE.md`
 
+## Product docs page
+
+- In-app docs route: `/docs`
+- Focus: third-party integration patterns for autonomous agents, marketplaces, and external apps (routes, contract/event reads, ArcNS identity, and API/SDK roadmap with claim-safe boundaries)
+
 Claim-safe status summary:
 - **Verified:** Arc Testnet, USDC escrow lifecycle, App Kit Send, Bridge/CCTP, Circle Wallets EOA create/read/sign/send + SCA wallet creation, ArcNS identity display
 - **Estimate-verified:** Gateway / Unified Balance
