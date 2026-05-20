@@ -302,22 +302,42 @@ RAW_ERC4337_*                   # raw ERC-4337 readiness`}</pre>
       <section className="card space-y-3">
         <h2 className="text-xl font-semibold text-white">12) AgentPay API roadmap</h2>
         <div className="space-y-3 text-sm text-zinc-400">
-          <p><span className="text-zinc-200">Current MVP:</span> No production public API is claimed. Current integration uses web routes, contract calls, event/indexing reads, and ArcNS resolver integration.</p>
-          <p><span className="text-zinc-200">Planned read-only API v0</span> (roadmap only, not implemented as app routes in this repo):</p>
-          <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`GET /api/health
-GET /api/metadata
-GET /api/agents
-GET /api/jobs
-GET /api/jobs/:id
-GET /api/payments
-GET /api/identity/resolve?name=
-GET /api/integration/status`}</pre>
+          <p><span className="text-zinc-200">Current MVP:</span> Read-only Developer API v0 is available for integration metadata, demo catalog reads, indexed jobs, derived payments, identity resolution, and claim-safe status views.</p>
+          <h3 className="text-base font-semibold text-white">Read-only Developer API v0</h3>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead className="text-left text-zinc-500">
+                <tr>
+                  <th className="py-2 pr-4">Endpoint</th>
+                  <th className="py-2 pr-4">Purpose</th>
+                  <th className="py-2 pr-4">Status</th>
+                </tr>
+              </thead>
+              <tbody className="text-zinc-300">
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/health</td><td className="py-2 pr-4">Health/status</td><td className="py-2 pr-4">Available</td></tr>
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/metadata</td><td className="py-2 pr-4">Public integration metadata</td><td className="py-2 pr-4">Available</td></tr>
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/agents</td><td className="py-2 pr-4">Static/demo agent catalog</td><td className="py-2 pr-4">Available</td></tr>
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/jobs</td><td className="py-2 pr-4">Indexed job list</td><td className="py-2 pr-4">Available</td></tr>
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/jobs/[id]</td><td className="py-2 pr-4">Direct job read</td><td className="py-2 pr-4">Available</td></tr>
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/payments</td><td className="py-2 pr-4">Derived payment activity</td><td className="py-2 pr-4">Available</td></tr>
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/identity/resolve?name=</td><td className="py-2 pr-4">ArcNS identity resolution</td><td className="py-2 pr-4">Available</td></tr>
+                <tr className="border-t border-white/10"><td className="py-2 pr-4">/api/integration/status</td><td className="py-2 pr-4">Claim-safe integration matrix</td><td className="py-2 pr-4">Available</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul className="list-inside list-disc space-y-1 text-sm text-zinc-400">
+            <li>API is read-only.</li>
+            <li>API does not submit transactions.</li>
+            <li>API does not sign for agents/users.</li>
+            <li>API is v0/MVP and has no production SLA claim.</li>
+            <li>Future roadmap includes transaction-intent endpoints, not custody/signing.</li>
+          </ul>
           <p><span className="text-zinc-200">Planned transaction intent API</span> (roadmap only, wallet signatures required):</p>
           <pre className="overflow-x-auto rounded-md border border-white/10 bg-black/30 p-3 text-xs text-zinc-300">{`POST /api/intents/create-job
 POST /api/intents/fund-job
 POST /api/intents/submit-work
 POST /api/intents/complete-job`}</pre>
-          <p>These endpoints are roadmap unless implemented in the repo. Onchain writes should remain wallet-signed.</p>
+          <p>Onchain writes should remain wallet-signed.</p>
         </div>
       </section>
 
@@ -376,7 +396,7 @@ POST /api/intents/complete-job`}</pre>
         <h2 className="text-xl font-semibold text-white">15) What AgentPay does not do yet</h2>
         <ul className="list-inside list-disc space-y-2 text-sm text-zinc-400">
           <li>Does not provide a production SDK yet.</li>
-          <li>Does not provide a stable hosted public API yet.</li>
+          <li>Does not provide a production-grade hosted API/SLA yet.</li>
           <li>Does not custody third-party funds offchain.</li>
           <li>Does not sign transactions for third-party agents.</li>
           <li>Does not claim mainnet readiness.</li>

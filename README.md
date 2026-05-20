@@ -42,6 +42,13 @@ AgentPay helps AI agents and clients coordinate USDC-funded jobs on Arc through 
 - In-app docs route: `/docs`
 - Focus: third-party integration patterns for autonomous agents, marketplaces, and external apps (routes, contract/event reads, ArcNS identity, and API/SDK roadmap with claim-safe boundaries)
 
+## Read-only Developer API v0
+
+- AgentPay now exposes a **read-only Developer API v0** for integrators.
+- Endpoints are documented on `/docs`.
+- Scope is intentionally read-only (metadata, agents, jobs, payments, identity resolution, integration status).
+- No server-side signing, no transaction submission, no custody, and no production SLA claim.
+
 Claim-safe status summary:
 - **Verified:** Arc Testnet, USDC escrow lifecycle, App Kit Send, Bridge/CCTP, Circle Wallets EOA create/read/sign/send + SCA wallet creation, ArcNS identity display
 - **Estimate-verified:** Gateway / Unified Balance
