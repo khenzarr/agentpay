@@ -1,0 +1,38 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">AgentPay stacked logo lockup</title>
+  <desc id="desc">Stacked AgentPay AP monogram and wordmark.</desc>
+  <defs>
+    <linearGradient id="markGradient" x1="201" y1="124" x2="598" y2="456" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00E6FF"/>
+      <stop offset="0.5" stop-color="#18A8FF"/>
+      <stop offset="1" stop-color="#2775CA"/>
+    </linearGradient>
+    <linearGradient id="payGradient" x1="438" y1="562" x2="654" y2="666" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2775CA"/>
+      <stop offset="0.58" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#8A5CFF"/>
+    </linearGradient>
+    <linearGradient id="sparkGradient" x1="342" y1="331" x2="421" y2="410" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#B88CFF"/>
+      <stop offset="1" stop-color="#7B5CFF"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.000 0 0 0 0 0.902 0 0 0 0 1.000 0 0 0 0.2 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#glow)" transform="translate(180 110) scale(0.86)">
+    <path d="M72 408L190 104H250L132 408H72Z" fill="url(#markGradient)"/>
+    <path d="M178 266H268L250 318H158L178 266Z" fill="url(#markGradient)" opacity="0.96"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M246 104H382C433.915 104 468 134.709 468 182C468 229.291 433.915 260 382 260H304V408H246V104ZM304 158V206H378C398.435 206 410 196.7 410 182C410 167.3 398.435 158 378 158H304Z" fill="url(#markGradient)"/>
+    <path d="M304 260H360L332 312H304V260Z" fill="#05080F" fill-opacity="0.64"/>
+    <path d="M218 284L231 317L264 330L231 343L218 376L205 343L172 330L205 317L218 284Z" fill="url(#sparkGradient)"/>
+  </g>
+  <text x="126" y="616" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="96" font-weight="760" letter-spacing="-3" fill="#F8FAFC">Agent</text>
+  <text x="433" y="616" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="96" font-weight="760" letter-spacing="-3" fill="url(#payGradient)">Pay</text>
+  <text x="305" y="670" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" font-size="22" font-weight="650" letter-spacing="8" fill="#2DD4FF">FOR ARC</text>
+</svg>

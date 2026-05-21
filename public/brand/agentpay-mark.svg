@@ -1,0 +1,36 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">AgentPay AP Monogram</title>
+  <desc id="desc">A cyan to blue AP monogram with a violet spark accent.</desc>
+  <defs>
+    <linearGradient id="agentpayMarkGradient" x1="72" y1="88" x2="462" y2="424" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00E6FF"/>
+      <stop offset="0.48" stop-color="#18A8FF"/>
+      <stop offset="1" stop-color="#2775CA"/>
+    </linearGradient>
+    <linearGradient id="agentpaySparkGradient" x1="184" y1="270" x2="254" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#B88CFF"/>
+      <stop offset="1" stop-color="#7B5CFF"/>
+    </linearGradient>
+    <filter id="agentpaySoftGlow" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.000 0 0 0 0 0.902 0 0 0 0 1.000 0 0 0 0.28 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#agentpaySoftGlow)">
+    <!-- A pillar -->
+    <path d="M72 408L190 104H250L132 408H72Z" fill="url(#agentpayMarkGradient)"/>
+    <!-- A shoulder / crossbar -->
+    <path d="M178 266H268L250 318H158L178 266Z" fill="url(#agentpayMarkGradient)" opacity="0.96"/>
+    <!-- P body: intentionally wide and geometric to avoid R-like silhouette -->
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M246 104H382C433.915 104 468 134.709 468 182C468 229.291 433.915 260 382 260H304V408H246V104ZM304 158V206H378C398.435 206 410 196.7 410 182C410 167.3 398.435 158 378 158H304Z" fill="url(#agentpayMarkGradient)"/>
+    <!-- subtle lower cut to keep it AP, not AR -->
+    <path d="M304 260H360L332 312H304V260Z" fill="#05080F" fill-opacity="0.64"/>
+    <!-- violet spark -->
+    <path d="M218 284L231 317L264 330L231 343L218 376L205 343L172 330L205 317L218 284Z" fill="url(#agentpaySparkGradient)"/>
+  </g>
+</svg>

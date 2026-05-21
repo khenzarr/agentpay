@@ -12,7 +12,7 @@
   - developer-friendly
   - Arc-native
 
-This sprint integrates a **production-safe brand layer** using preview/public PNG assets while preserving product logic and claim-safe boundaries.
+This sprint integrates a **production-safe brand layer** using final SVG logo assets while preserving product logic and claim-safe boundaries.
 
 ## Logo system
 
@@ -28,7 +28,7 @@ AgentPay’s logo system is centered around an **AP monogram** with a premium da
 - Primary: dark premium surfaces
 - Light backgrounds are supported only with sufficient contrast treatment
 
-> Note: current repo-integrated assets are **preview PNG boards**. True production vector exports (SVG/logo set) are intentionally deferred to a future brand production task.
+> Note: the repo now includes the core production vector exports (SVG logo set) for product usage. PNG board assets remain preview/marketing references.
 
 ## Color palette
 
@@ -85,15 +85,24 @@ No font files are included in this sprint.
 
 ## Public asset references
 
+- `/brand/agentpay-mark.svg`
+- `/brand/agentpay-lockup-horizontal.svg`
+- `/brand/agentpay-lockup-stacked.svg`
+- `/brand/agentpay-bg-mesh.svg`
 - `/brand/agentpay-brandkit-board.png`
 - `/brand/agentpay-og-cover.png`
 - `/brand/agentpay-app-icons-preview.png`
 
+### Source of truth
+
+- The AP monogram SVG (`/brand/agentpay-mark.svg`) is now the source of truth for app/header logo usage.
+- PNG board images are for preview/marketing board contexts, not primary product header logo rendering.
+- Additional transparent PNG icon size exports may be added in a future asset export pass if required by distribution channels.
+
 ## Future production asset tasks
 
-- Export true SVG logo variants
-- Export transparent PNG logo variants
-- Create exact favicon/app icon files
+- Export additional transparent PNG logo/icon variants from the SVG source set
+- Optionally regenerate favicon/app icon raster outputs from the SVG source set
 - Create final OG image at target platform dimensions
 - Create X banner and launch post visual set
 - Create README hero crop variants if needed

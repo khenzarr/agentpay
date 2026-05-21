@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
+      { url: "/brand/agentpay-mark.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icon.png", type: "image/png" },
     ],
@@ -71,6 +72,7 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 
 

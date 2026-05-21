@@ -1,0 +1,32 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="glowCyan" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 120) rotate(52) scale(760 460)">
+      <stop stop-color="#00E6FF" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#00E6FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1300 220) rotate(116) scale(860 520)">
+      <stop stop-color="#2775CA" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#2775CA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowViolet" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1460 840) rotate(152) scale(760 420)">
+      <stop stop-color="#8A5CFF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#8A5CFF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="mesh" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" stroke="#2DD4FF" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="rail" x1="80" y1="680" x2="1840" y2="456" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00E6FF" stop-opacity="0"/>
+      <stop offset="0.28" stop-color="#00E6FF" stop-opacity="0.12"/>
+      <stop offset="0.58" stop-color="#2775CA" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#8A5CFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="transparent"/>
+  <rect width="1920" height="1080" fill="url(#glowCyan)"/>
+  <rect width="1920" height="1080" fill="url(#glowBlue)"/>
+  <rect width="1920" height="1080" fill="url(#glowViolet)"/>
+  <rect width="1920" height="1080" fill="url(#mesh)"/>
+  <path d="M80 710C300 610 430 790 650 676C850 572 1008 466 1224 552C1420 630 1608 574 1840 430" stroke="url(#rail)" stroke-width="2" stroke-opacity="0.7"/>
+  <path d="M120 780C360 670 492 838 736 720C952 615 1100 534 1310 612C1510 686 1672 632 1880 520" stroke="url(#rail)" stroke-width="1.4" stroke-opacity="0.45"/>
+</svg>
