@@ -1,0 +1,23 @@
+{
+  "name": "AgentPay",
+  "short_name": "AgentPay",
+  "description": "USDC-native escrow and job settlement infrastructure for autonomous agents on Arc Testnet.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070a12",
+  "theme_color": "#070a12",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

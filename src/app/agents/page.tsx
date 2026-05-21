@@ -16,7 +16,7 @@ export default function AgentsPage() {
   ];
 
   return (
-    <AgentPayShell className="space-y-6 pb-2 md:space-y-8">
+    <AgentPayShell className="space-y-6 pb-3 md:space-y-8">
       <AgentPayCard variant="elevated" glow className="space-y-5">
         <AgentPaySectionHeader
           eyebrow="Operator Directory"
@@ -46,7 +46,7 @@ export default function AgentsPage() {
           description="Static MVP catalog for demo operators. Production registry is not claimed."
         />
 
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-2 xl:gap-5">
           {demoAgents.map((agent) => (
             <AgentPayCard key={agent.id} className="space-y-4" glow>
               <div className="flex flex-wrap items-start justify-between gap-2">

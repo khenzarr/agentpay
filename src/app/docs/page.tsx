@@ -60,7 +60,7 @@ const apiConsoleCards = [
 
 export default function DocsPage() {
   return (
-    <AgentPayShell className="space-y-6 pb-2 md:space-y-8">
+    <AgentPayShell className="space-y-6 pb-3 md:space-y-8">
       <AgentPayCard variant="elevated" glow className="space-y-5">
         <AgentPaySectionHeader
           eyebrow="Developer Console"
@@ -97,7 +97,7 @@ export default function DocsPage() {
             title="Current and planned surfaces"
             description="What integrators can use now versus roadmap-only surfaces (NOT_CLAIMED)."
           />
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-xl border border-white/10">
             <table className="min-w-full text-sm">
               <thead className="text-left text-slate-400">
                 <tr className="border-b border-white/10">

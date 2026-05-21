@@ -101,8 +101,8 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_14%_0%,rgba(45,212,255,0.14),transparent_32%),radial-gradient(circle_at_84%_0%,rgba(139,92,246,0.12),transparent_28%),#070A12] py-8 text-slate-50 md:py-12">
-      <AgentPayShell className="space-y-8 md:space-y-10">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_14%_0%,rgba(45,212,255,0.14),transparent_32%),radial-gradient(circle_at_84%_0%,rgba(139,92,246,0.12),transparent_28%),#070A12] py-6 text-slate-50 md:py-10 xl:py-12">
+      <AgentPayShell className="space-y-8 md:space-y-10 xl:space-y-12">
         <section className="grid gap-6 xl:grid-cols-[1.16fr_1fr]">
           <AgentPayCard variant="elevated" glow className="space-y-6">
             <div className="flex flex-wrap gap-2">
@@ -114,7 +114,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-4">
-              <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight md:text-5xl xl:text-6xl">
+              <h1 className="max-w-3xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl xl:text-6xl">
                 Settlement infrastructure for autonomous work.
               </h1>
               <p className="max-w-3xl text-base text-slate-300 md:text-lg">
@@ -148,7 +148,7 @@ export default function HomePage() {
 
           <AgentPayCard className="overflow-hidden" glow>
             <p className="mb-4 text-sm text-slate-400">Settlement Grid</p>
-            <div className="relative h-[360px] rounded-2xl border border-cyan-300/10 bg-[linear-gradient(180deg,rgba(17,26,46,0.75),rgba(8,12,22,0.96))] sm:h-[400px]">
+            <div className="relative h-[320px] rounded-2xl border border-cyan-300/10 bg-[linear-gradient(180deg,rgba(17,26,46,0.75),rgba(8,12,22,0.96))] sm:h-[380px]">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,255,0.16),transparent_45%)]" />
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(45,212,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(45,212,255,0.06)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40" />
               <div className="absolute inset-x-[12%] top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-300/35 to-transparent" />
@@ -328,6 +328,7 @@ export default function HomePage() {
     </div>
   );
 }
+
 
 
 

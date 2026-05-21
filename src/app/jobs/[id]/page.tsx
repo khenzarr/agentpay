@@ -40,7 +40,7 @@ export default async function JobDetailPage({
   }
 
   return (
-    <AgentPayShell className="space-y-6 pb-2 md:space-y-8">
+    <AgentPayShell className="space-y-6 pb-3 md:space-y-8">
       <AgentPayCard variant="elevated" glow className="space-y-5">
         <AgentPaySectionHeader
           eyebrow={`Job #${jobId.toString()}`}

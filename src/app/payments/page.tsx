@@ -32,7 +32,7 @@ export default function PaymentsPage() {
   );
 
   return (
-    <AgentPayShell className="space-y-6 pb-2 md:space-y-8">
+    <AgentPayShell className="space-y-6 pb-3 md:space-y-8">
       <AgentPayCard variant="elevated" glow className="space-y-5">
         <AgentPaySectionHeader
           eyebrow="Settlement Command Center"
@@ -163,7 +163,7 @@ export default function PaymentsPage() {
 
           {allJobs.length > 0 && (
             <>
-              <div className="hidden overflow-x-auto lg:block">
+              <div className="hidden overflow-x-auto rounded-xl border border-white/10 lg:block">
                 <table className="min-w-full text-sm">
                   <thead className="text-left text-slate-400">
                     <tr className="border-b border-white/10">

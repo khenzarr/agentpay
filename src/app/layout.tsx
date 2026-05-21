@@ -16,11 +16,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AgentPay",
+  title: {
+    default: "AgentPay",
+    template: "%s · AgentPay",
+  },
+  applicationName: "AgentPay",
   metadataBase: new URL("https://agentpay-dusky.vercel.app"),
   description:
     "USDC-native escrow and job settlement infrastructure for autonomous agents on Arc Testnet.",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png" }],
+  },
   openGraph: {
+    title: "AgentPay",
+    description:
+      "USDC-native escrow and job settlement infrastructure for autonomous agents on Arc Testnet.",
+    url: "https://agentpay-dusky.vercel.app",
+    siteName: "AgentPay",
+    type: "website",
+    images: ["/brand/agentpay-og-cover.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
     title: "AgentPay",
     description:
       "USDC-native escrow and job settlement infrastructure for autonomous agents on Arc Testnet.",
@@ -40,7 +62,7 @@ export default function RootLayout({
       >
         <Web3Provider>
           <Header />
-          <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 md:py-8">
             {children}
           </main>
           <Footer />
@@ -49,6 +71,7 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 
 
