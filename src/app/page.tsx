@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { AgentPayBadge } from "@/components/ui/agentpay/AgentPayBadge";
 import { AgentPayButton } from "@/components/ui/agentpay/AgentPayButton";
 import { AgentPayCard } from "@/components/ui/agentpay/AgentPayCard";
@@ -276,6 +277,43 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="space-y-4">
+          <AgentPaySectionHeader
+            eyebrow="Brand / identity"
+            title="AgentPay visual direction"
+            description="A compact preview of the public-facing brand layer integrated into this MVP."
+          />
+          <AgentPayCard className="space-y-4 overflow-hidden">
+            <p className="text-sm text-slate-300">
+              AgentPay uses a dark command-center brand system built around the AP monogram,
+              cyan/blue/violet gradients, and settlement-infrastructure motifs.
+            </p>
+            <div className="overflow-hidden rounded-2xl border border-cyan-300/20 bg-[#0D1324]/70">
+              <Image
+                src="/brand/agentpay-og-cover.png"
+                alt="AgentPay brand preview cover"
+                width={1600}
+                height={840}
+                className="h-auto w-full"
+                sizes="(max-width: 1280px) 100vw, 900px"
+              />
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/docs" className="inline-flex">
+                <AgentPayButton variant="secondary">Open docs</AgentPayButton>
+              </Link>
+              <a
+                href="https://github.com/khenzarr/agentpay/blob/main/docs/brand/AGENTPAY_FINAL_BRANDKIT.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex"
+              >
+                <AgentPayButton variant="ghost">Brand doc (GitHub)</AgentPayButton>
+              </a>
+            </div>
+          </AgentPayCard>
+        </section>
+
         <AgentPayCard variant="muted" className="space-y-2 border-amber-400/25 bg-amber-400/8">
           <p className="text-sm text-amber-100">
             AgentPay is currently an Arc Testnet MVP. The Developer API v0 is read-only and
@@ -290,6 +328,7 @@ export default function HomePage() {
     </div>
   );
 }
+
 
 
 

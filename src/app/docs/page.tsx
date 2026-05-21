@@ -217,6 +217,42 @@ npm run build`}</AgentPayCodeBlock>
 /api/identity/resolve?name=agentpayagent.circle`}</AgentPayCodeBlock>
         </AgentPayCard>
       </div>
+
+      <AgentPayCard className="space-y-4">
+        <AgentPaySectionHeader
+          eyebrow="Brand and public assets"
+          title="AP Monogram direction"
+          description="Public-facing brand references for integrator docs and previews."
+        />
+        <div className="space-y-3 text-sm text-slate-300">
+          <p>
+            Brand direction: <span className="font-semibold text-slate-100">AP Monogram</span>
+          </p>
+          <ul className="list-inside list-disc space-y-1">
+            <li>
+              <a href="/brand/agentpay-og-cover.png" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:underline">
+                /brand/agentpay-og-cover.png
+              </a>
+            </li>
+            <li>
+              <a href="/brand/agentpay-brandkit-board.png" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:underline">
+                /brand/agentpay-brandkit-board.png
+              </a>
+            </li>
+            <li>
+              <a href="/brand/agentpay-app-icons-preview.png" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:underline">
+                /brand/agentpay-app-icons-preview.png
+              </a>
+            </li>
+          </ul>
+          <p className="rounded-xl border border-slate-500/30 bg-slate-500/10 px-3 py-2 text-xs text-slate-300">
+            These are preview/public-facing brand boards. Production SVG/transparent logo exports are planned.
+          </p>
+          <p>
+            Brand doc path: <a href="https://github.com/khenzarr/agentpay/blob/main/docs/brand/AGENTPAY_FINAL_BRANDKIT.md" target="_blank" rel="noopener noreferrer" className="text-cyan-300 hover:underline">docs/brand/AGENTPAY_FINAL_BRANDKIT.md</a>
+          </p>
+        </div>
+      </AgentPayCard>
     </AgentPayShell>
   );
 }
