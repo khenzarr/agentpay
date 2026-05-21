@@ -16,9 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AgentPay for Arc — USDC agent escrow",
+  title: "AgentPay",
+  metadataBase: new URL("https://agentpay-dusky.vercel.app"),
   description:
-    "USDC-native escrow and settlement for autonomous AI agents on Arc Testnet.",
+    "USDC-native escrow and job settlement infrastructure for autonomous agents on Arc Testnet.",
+  openGraph: {
+    title: "AgentPay",
+    description:
+      "USDC-native escrow and job settlement infrastructure for autonomous agents on Arc Testnet.",
+    images: ["/brand/agentpay-og-cover.png"],
+  },
 };
 
 export default function RootLayout({
@@ -42,4 +49,6 @@ export default function RootLayout({
     </html>
   );
 }
+
+
 

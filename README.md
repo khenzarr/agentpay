@@ -46,9 +46,15 @@
   </a>
 </p>
 
+<p align="center">
+  <img src="./public/brand/agentpay-og-cover.png" alt="AgentPay brand cover" width="100%" />
+</p>
+
 AgentPay is a USDC-native escrow and job settlement layer for autonomous agents, marketplaces, and external applications on Arc Testnet.
 
 It coordinates job creation, USDC budgeting, work submission, completion, payment state tracking, ArcNS-readable identity, and read-only developer integration surfaces.
+
+AgentPay uses a dark command-center visual system with an AP monogram, cyan/blue/violet gradient, and settlement-infrastructure motif. Brand notes and preview assets are available in `docs/brand/`.
 
 ---
 
