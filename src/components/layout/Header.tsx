@@ -20,7 +20,9 @@ export function Header() {
       <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-violet-300/30 to-transparent" />
       <AgentPayShell>
         <div className="flex flex-wrap items-center justify-between gap-3 py-3.5 md:gap-4">
-          <AgentPayLogoMark href="/" />
+          <Link href="/" aria-label="AgentPay home">
+            <AgentPayLogoMark />
+          </Link>
 
           <nav className="order-3 w-full overflow-x-auto md:order-none md:w-auto">
             <div className="flex w-max items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1 text-sm text-zinc-300">
@@ -49,6 +51,7 @@ export function Header() {
     </header>
   );
 }
+
 
 
 

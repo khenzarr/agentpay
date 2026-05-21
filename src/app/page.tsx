@@ -99,14 +99,6 @@ export default function HomePage() {
     { label: "Mainnet readiness", value: "NOT_CLAIMED", tone: "notClaimed" as const },
   ];
 
-  const settlementNodes = [
-    { label: "Client", x: "11%", y: "22%" },
-    { label: "Agent", x: "89%", y: "22%" },
-    { label: "Escrow", x: "14%", y: "77%" },
-    { label: "ArcNS", x: "86%", y: "77%" },
-    { label: "API", x: "50%", y: "9%" },
-  ];
-
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_14%_0%,rgba(45,212,255,0.14),transparent_32%),radial-gradient(circle_at_84%_0%,rgba(139,92,246,0.12),transparent_28%),#070A12] py-6 text-slate-50 md:py-10 xl:py-12">
       <AgentPayShell className="space-y-8 md:space-y-10 xl:space-y-12">
@@ -153,57 +145,49 @@ export default function HomePage() {
             </p>
           </AgentPayCard>
 
-          <AgentPayCard className="overflow-hidden" glow>
-            <p className="mb-4 text-sm text-slate-400">Settlement Grid</p>
-            <div className="relative h-[320px] rounded-2xl border border-cyan-300/10 bg-[linear-gradient(180deg,rgba(17,26,46,0.75),rgba(8,12,22,0.96))] sm:h-[380px]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,255,0.16),transparent_45%)]" />
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(45,212,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(45,212,255,0.06)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.12),transparent_58%)]" />
+          <AgentPayCard className="relative overflow-hidden p-5" glow>
+            <p className="mb-4 text-sm font-medium text-slate-400">Settlement Grid</p>
+            <div className="relative min-h-[310px] overflow-hidden rounded-2xl border border-cyan-300/10 bg-[#050B16]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,255,0.18),transparent_36%),radial-gradient(circle_at_72%_34%,rgba(138,92,255,0.10),transparent_38%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(45,212,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(45,212,255,0.04)_1px,transparent_1px)] bg-[size:42px_42px]" />
 
-              {/* settlement rails */}
-              <svg
-                className="pointer-events-none absolute inset-0 h-full w-full"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
+              <svg className="absolute inset-0 h-full w-full" viewBox="0 0 520 310" fill="none" aria-hidden="true">
                 <defs>
-                  <linearGradient id="railCyan" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="rgba(45,212,255,0.75)" />
-                    <stop offset="55%" stopColor="rgba(59,130,246,0.58)" />
-                    <stop offset="100%" stopColor="rgba(139,92,246,0.48)" />
+                  <linearGradient id="agentpayRail" x1="72" y1="60" x2="448" y2="250" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#00E6FF" stopOpacity="0.05" />
+                    <stop offset="0.5" stopColor="#2DD4FF" stopOpacity="0.72" />
+                    <stop offset="1" stopColor="#8A5CFF" stopOpacity="0.46" />
                   </linearGradient>
+                  <filter id="railGlow">
+                    <feGaussianBlur stdDeviation="2.8" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
                 </defs>
-                <line x1="50" y1="50" x2="19" y2="24" stroke="url(#railCyan)" strokeWidth="0.44" />
-                <line x1="50" y1="50" x2="81" y2="24" stroke="url(#railCyan)" strokeWidth="0.44" />
-                <line x1="50" y1="50" x2="22" y2="74" stroke="url(#railCyan)" strokeWidth="0.44" />
-                <line x1="50" y1="50" x2="78" y2="74" stroke="url(#railCyan)" strokeWidth="0.44" />
-                <line x1="50" y1="50" x2="50" y2="14" stroke="url(#railCyan)" strokeWidth="0.44" />
+                <path d="M260 82V132" stroke="url(#agentpayRail)" strokeWidth="1.6" filter="url(#railGlow)" />
+                <path d="M260 198V248" stroke="url(#agentpayRail)" strokeWidth="1.6" filter="url(#railGlow)" />
+                <path d="M202 154L112 90" stroke="url(#agentpayRail)" strokeWidth="1.6" filter="url(#railGlow)" />
+                <path d="M318 154L408 90" stroke="url(#agentpayRail)" strokeWidth="1.6" filter="url(#railGlow)" />
+                <path d="M202 180L112 236" stroke="url(#agentpayRail)" strokeWidth="1.6" filter="url(#railGlow)" />
+                <path d="M318 180L408 236" stroke="url(#agentpayRail)" strokeWidth="1.6" filter="url(#railGlow)" />
+                {[260, 112, 408, 112, 408].map((x, i) => (
+                  <circle key={i} cx={x} cy={[132, 90, 90, 236, 236][i]} r={3.2} fill={i === 0 ? "#8A5CFF" : "#2DD4FF"} opacity="0.9" />
+                ))}
               </svg>
 
-              <div className="absolute left-1/2 top-1/2 h-36 w-52 -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-cyan-300/45 bg-gradient-to-b from-[#121B35] to-[#0C1326] p-4 shadow-[0_0_80px_rgba(45,212,255,0.30)]">
-                <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">Core Node</p>
-                <p className="mt-1 text-2xl font-semibold">AgentPay</p>
-                <p className="mt-1 text-xs text-slate-400">USDC escrow • ArcNS identity • read-only API v0</p>
+              <div className="absolute left-1/2 top-[44%] z-10 w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-cyan-300/40 bg-[#071225]/95 p-5 shadow-[0_0_42px_rgba(45,212,255,0.18)]">
+                <p className="text-xs font-black uppercase tracking-[0.22em] text-cyan-300">Core Node</p>
+                <p className="mt-2 text-2xl font-black text-white">AgentPay</p>
+                <p className="mt-1 text-xs leading-5 text-slate-400">USDC escrow • ArcNS identity • read-only API v0</p>
               </div>
 
-              {settlementNodes.map((node) => (
-                <div key={node.label}>
-                  <span
-                    aria-hidden="true"
-                    className="absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-100/60 bg-cyan-300/85 shadow-[0_0_14px_rgba(45,212,255,0.7),0_0_24px_rgba(59,130,246,0.45)]"
-                    style={{ left: node.x, top: node.y }}
-                  />
-                <div
-                  className="absolute -translate-x-1/2 -translate-y-1/2 rounded-xl border border-cyan-300/28 bg-[#111A2E]/95 px-3.5 py-2 text-xs text-slate-200 shadow-[0_10px_24px_rgba(3,8,20,0.45)]"
-                  style={{ left: node.x, top: node.y }}
-                >
-                  {node.label}
-                </div>
-                </div>
-              ))}
-
-              <span className="pointer-events-none absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-100/65 bg-cyan-300/90 shadow-[0_0_24px_rgba(45,212,255,0.85),0_0_36px_rgba(139,92,246,0.45)]" />
+              <div className="absolute left-[11%] top-[17%] rounded-xl border border-cyan-300/20 bg-[#0D172B]/90 px-4 py-2 text-xs font-bold text-slate-200">Client</div>
+              <div className="absolute right-[10%] top-[17%] rounded-xl border border-cyan-300/20 bg-[#0D172B]/90 px-4 py-2 text-xs font-bold text-slate-200">Agent</div>
+              <div className="absolute left-[10%] bottom-[15%] rounded-xl border border-cyan-300/20 bg-[#0D172B]/90 px-4 py-2 text-xs font-bold text-slate-200">Escrow</div>
+              <div className="absolute right-[11%] bottom-[15%] rounded-xl border border-cyan-300/20 bg-[#0D172B]/90 px-4 py-2 text-xs font-bold text-slate-200">ArcNS</div>
+              <div className="absolute left-1/2 top-[9%] -translate-x-1/2 rounded-xl border border-cyan-300/20 bg-[#0D172B]/90 px-4 py-2 text-xs font-bold text-slate-200">API</div>
             </div>
           </AgentPayCard>
         </section>
@@ -321,6 +305,7 @@ export default function HomePage() {
     </div>
   );
 }
+
 
 
 
