@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #070a12;
+  --bg: #05070d;
   --card: rgba(255, 255, 255, 0.03);
   --border: rgba(255, 255, 255, 0.08);
   --accent: #0ea5e9;
@@ -33,14 +33,44 @@
 html,
 body {
   background:
-    radial-gradient(1200px 500px at 80% -10%, rgba(45, 212, 255, 0.08), transparent),
-    radial-gradient(900px 400px at -10% 0%, rgba(139, 92, 246, 0.08), transparent),
-    var(--bg);
+    radial-gradient(1200px 580px at 15% -10%, rgba(45, 212, 255, 0.16), transparent 60%),
+    radial-gradient(1000px 520px at 88% 0%, rgba(139, 92, 246, 0.14), transparent 62%),
+    radial-gradient(900px 420px at 50% 100%, rgba(37, 99, 235, 0.14), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 18%),
+    linear-gradient(180deg, #060912 0%, #05070d 45%, #04060b 100%);
   color: #f1f5f9;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   line-height: 1.5;
+  position: relative;
+  isolation: isolate;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04), transparent 35%);
+  background-size: 72px 72px, 72px 72px, 100% 100%;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 92%);
+  opacity: 0.25;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 12%, transparent 0 38%, rgba(2, 6, 23, 0.12) 68%, rgba(2, 6, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.06), rgba(2, 6, 23, 0.22));
+  z-index: -1;
 }
 
 ::selection {

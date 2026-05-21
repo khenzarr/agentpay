@@ -15,7 +15,9 @@ const nav = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#070A12]/80 backdrop-blur-xl">
+    <header className="relative sticky top-0 z-40 border-b border-cyan-200/10 bg-[#060912]/72 backdrop-blur-2xl">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/45 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-violet-300/30 to-transparent" />
       <AgentPayShell>
         <div className="flex flex-wrap items-center justify-between gap-3 py-3.5 md:gap-4">
           <AgentPayLogoMark href="/" />
@@ -47,6 +49,8 @@ export function Header() {
     </header>
   );
 }
+
+
 
 
 

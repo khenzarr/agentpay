@@ -8,15 +8,43 @@ export function AgentPayLogoMark({
   className?: string;
 }) {
   const content = (
-    <span className={`inline-flex items-center gap-3 ${className ?? ""}`.trim()}>
-      <span className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-cyan-300/40 bg-gradient-to-br from-cyan-400/25 via-slate-900 to-violet-500/25 shadow-[0_0_24px_rgba(45,212,255,0.2)]">
-        <span className="pointer-events-none absolute right-1 top-1 h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_8px_rgba(167,139,250,0.9)]" />
-        <span className="pointer-events-none absolute left-1.5 right-1.5 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-cyan-300/60 via-cyan-200/30 to-violet-300/60" />
-        <span className="text-[0.65rem] font-semibold tracking-wide text-slate-100">AP</span>
+    <span className={`inline-flex items-center gap-3.5 ${className ?? ""}`.trim()}>
+      <span className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-[14px] border border-cyan-200/35 bg-gradient-to-br from-cyan-400/20 via-[#0a1128] to-violet-500/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_0_28px_rgba(37,99,255,0.28)]">
+        <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_70%_at_18%_20%,rgba(34,211,238,0.2),transparent_65%)]" />
+        <span className="pointer-events-none absolute -bottom-3 left-1/2 h-5 w-8 -translate-x-1/2 rounded-full bg-cyan-300/25 blur-md" />
+        <svg
+          aria-hidden
+          viewBox="0 0 36 36"
+          className="relative z-10 h-7 w-7"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="agentpay-ap-gradient" x1="4" y1="4" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#67E8F9" />
+              <stop offset="0.5" stopColor="#3B82F6" />
+              <stop offset="1" stopColor="#A78BFA" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M8 28.5V8h11.5c4.25 0 7 2.4 7 6.4s-2.75 6.5-7 6.5h-7"
+            stroke="url(#agentpay-ap-gradient)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M21 28.5V8l8.5 20.5"
+            stroke="url(#agentpay-ap-gradient)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </span>
       <span className="inline-flex flex-col leading-tight">
-        <span className="text-base font-semibold tracking-tight text-slate-50">AgentPay</span>
-        <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-cyan-300/90">
+        <span className="text-[1.02rem] font-semibold tracking-tight text-slate-50">AgentPay</span>
+        <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-cyan-200/90">
           for Arc
         </span>
       </span>
