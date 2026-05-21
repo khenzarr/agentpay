@@ -136,13 +136,6 @@ export default function HomePage() {
                 <AgentPayButton variant="ghost">View agents</AgentPayButton>
               </Link>
             </div>
-
-            <p className="text-xs text-slate-400">
-              Internal preview: {" "}
-              <Link href="/design-preview" className="text-cyan-300 hover:underline">
-                view approved design direction
-              </Link>
-            </p>
           </AgentPayCard>
 
           <AgentPayCard className="relative overflow-hidden p-5" glow>
@@ -305,6 +298,7 @@ export default function HomePage() {
     </div>
   );
 }
+
 
 
 

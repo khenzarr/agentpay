@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "AgentPay Founder Demo",
+    "targetDurationSeconds": 282,
+    "format": "1920x1080",
+    "style": "Founder-level real product walkthrough, claim-safe, Arc Testnet MVP"
+  },
+  "live": {
+    "baseUrl": "https://agentpay-dusky.vercel.app",
+    "githubUrl": "https://github.com/khenzarr/agentpay",
+    "jobId": "35698"
+  },
+  "scenes": [
+    { "id": "01", "title": "Homepage Hero", "duration": 20, "path": "/", "caption": "AgentPay is a USDC-native escrow and job settlement layer for autonomous agents and marketplaces on Arc Testnet.", "subtitle": "Arc Testnet MVP - USDC - ArcNS - Read-only API v0" },
+    { "id": "02", "title": "Settlement Infrastructure", "duration": 25, "path": "/", "caption": "Autonomous work needs trust, escrow, identity, and lifecycle visibility.", "subtitle": "The homepage lifecycle grid makes settlement state explicit." },
+    { "id": "03", "title": "Agents + ArcNS Identity", "duration": 30, "path": "/agents", "caption": "ArcNS adds readable identity, including names like agentpayagent.circle.", "subtitle": "Identity/readability layer for coordination." },
+    { "id": "04", "title": "Create Job Flow", "duration": 35, "path": "/create-job", "caption": "Configured live create flow without submitting a transaction in this recording.", "subtitle": "State changes remain wallet-confirmed by users." },
+    { "id": "05", "title": "Jobs Dashboard", "duration": 35, "path": "/jobs", "caption": "Indexed jobs, statuses, and diagnostics from JobCreated logs plus getJob reads.", "subtitle": "Read/index architecture on Arc Testnet." },
+    { "id": "06", "title": "Job Detail", "duration": 30, "path": "/jobs/35698", "caption": "One real indexed job detail with lifecycle state and participant roles.", "subtitle": "Live read surface for job lifecycle." },
+    { "id": "07", "title": "Payments Derived Ledger", "duration": 30, "path": "/payments", "caption": "Payments are derived from indexed job lifecycle state; a dedicated settlement event API is not claimed.", "subtitle": "Read-only derived settlement activity." },
+    { "id": "08", "title": "Docs + API v0", "duration": 40, "path": "/docs", "caption": "The Developer API v0 is read-only. It does not submit transactions, custody funds, or sign on behalf of users.", "subtitle": "Live API outputs: health, jobs, identity resolve." },
+    { "id": "09", "title": "API Output Proof", "duration": 16, "path": "api-proof-slide", "caption": "Live endpoint outputs are shown in formatted proof panels for technical verification.", "subtitle": "Read surfaces only." },
+    { "id": "10", "title": "Codebase Walkthrough", "duration": 19, "path": "codebase-slide", "caption": "Key modules: CreateJobForm, useAgentPayJobs, events, API jobs route, ArcNS resolver, and UI primitives.", "subtitle": "Implementation transparency for the MVP." },
+    { "id": "11", "title": "Closing", "duration": 20, "path": "/", "caption": "Circle Paymaster/Gasless on Arc Testnet is NOT_CLAIMED until Circle support/deployment is available.", "subtitle": "Claim boundaries remain explicit." }
+  ]
+}

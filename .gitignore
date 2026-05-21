@@ -106,3 +106,9 @@ docs/grant/private/
 # temporary docs scrape folders
 docs/**/_tmp*/
 docs/**/*_tmp*/
+
+# generated demo media outputs
+demo-output/
+*.mp4
+*.wav
+*.webm
